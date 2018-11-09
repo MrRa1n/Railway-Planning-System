@@ -4,9 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Business.Classes
+namespace Business.BookingClasses
 {
-    class SleeperTrain : Train
+    class Booking
     {
+        public String Name { get; set; }
+
     }
 }

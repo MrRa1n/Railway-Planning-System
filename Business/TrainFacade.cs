@@ -1,5 +1,5 @@
 ﻿using System;
-using Business.Classes;
+using Business.TrainClasses;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;

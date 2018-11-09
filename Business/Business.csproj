@@ -41,10 +41,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Classes\ExpressTrain.cs" />
-    <Compile Include="Classes\SleeperTrain.cs" />
-    <Compile Include="Classes\StoppingTrain.cs" />
-    <Compile Include="Classes\Train.cs" />
+    <Compile Include="BookingClasses\Booking.cs" />
+    <Compile Include="TrainClasses\ExpressTrain.cs" />
+    <Compile Include="TrainClasses\SleeperTrain.cs" />
+    <Compile Include="TrainClasses\StoppingTrain.cs" />
+    <Compile Include="TrainClasses\Train.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TrainFacade.cs" />
   </ItemGroup>
