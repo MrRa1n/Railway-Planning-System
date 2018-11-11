@@ -13,3 +13,18 @@ H:\Object Oriented Software Development\RailwayPlanningSystem\RailwayPlanningSys
 H:\Object Oriented Software Development\RailwayPlanningSystem\RailwayPlanningSystem\obj\Debug\Presentation.csproj.CoreCompileInputs.cache
 H:\Object Oriented Software Development\RailwayPlanningSystem\RailwayPlanningSystem\obj\Debug\RailwayPlanningSystem.exe
 H:\Object Oriented Software Development\RailwayPlanningSystem\RailwayPlanningSystem\obj\Debug\RailwayPlanningSystem.pdb
+C:\Users\40316565\source\repos\RailwayPlanningSystem\RailwayPlanningSystem\bin\Debug\RailwayPlanningSystem.exe.config
+C:\Users\40316565\source\repos\RailwayPlanningSystem\RailwayPlanningSystem\bin\Debug\RailwayPlanningSystem.exe
+C:\Users\40316565\source\repos\RailwayPlanningSystem\RailwayPlanningSystem\bin\Debug\RailwayPlanningSystem.pdb
+C:\Users\40316565\source\repos\RailwayPlanningSystem\RailwayPlanningSystem\obj\Debug\Presentation.csprojAssemblyReference.cache
+C:\Users\40316565\source\repos\RailwayPlanningSystem\RailwayPlanningSystem\obj\Debug\MainWindow.g.cs
+C:\Users\40316565\source\repos\RailwayPlanningSystem\RailwayPlanningSystem\obj\Debug\App.g.cs
+C:\Users\40316565\source\repos\RailwayPlanningSystem\RailwayPlanningSystem\obj\Debug\RailwayPlanningSystem_MarkupCompile.cache
+C:\Users\40316565\source\repos\RailwayPlanningSystem\RailwayPlanningSystem\obj\Debug\RailwayPlanningSystem_MarkupCompile.lref
+C:\Users\40316565\source\repos\RailwayPlanningSystem\RailwayPlanningSystem\obj\Debug\MainWindow.baml
+C:\Users\40316565\source\repos\RailwayPlanningSystem\RailwayPlanningSystem\obj\Debug\RailwayPlanningSystem.g.resources
+C:\Users\40316565\source\repos\RailwayPlanningSystem\RailwayPlanningSystem\obj\Debug\RailwayPlanningSystem.Properties.Resources.resources
+C:\Users\40316565\source\repos\RailwayPlanningSystem\RailwayPlanningSystem\obj\Debug\Presentation.csproj.GenerateResource.cache
+C:\Users\40316565\source\repos\RailwayPlanningSystem\RailwayPlanningSystem\obj\Debug\Presentation.csproj.CoreCompileInputs.cache
+C:\Users\40316565\source\repos\RailwayPlanningSystem\RailwayPlanningSystem\obj\Debug\RailwayPlanningSystem.exe
+C:\Users\40316565\source\repos\RailwayPlanningSystem\RailwayPlanningSystem\obj\Debug\RailwayPlanningSystem.pdb

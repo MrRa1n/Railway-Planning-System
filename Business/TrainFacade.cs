@@ -19,5 +19,10 @@ namespace Business
             _expressTrain = new ExpressTrain();
             _sleeperTrain = new SleeperTrain();
         }
+
+        public void CreateNewTrain()
+        {
+
+        }
     }
 }
