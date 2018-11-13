@@ -5,8 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:RailwayPlanningSystem"
         mc:Ignorable="d"
-        Title="MainWindow" Height="540.665" Width="391.083">
-    <Grid Margin="0,0,3.333,1">
+        Title="MainWindow" Height="587.865" Width="391.083" Loaded="Window_Loaded">
+    <Grid Margin="0,0,3.8,0.2">
         <Label Content="Train ID:" HorizontalAlignment="Left" Margin="89,68,0,0" VerticalAlignment="Top"/>
         <Label Content="Departure:" HorizontalAlignment="Left" Margin="75,98,0,0" VerticalAlignment="Top"/>
         <Label Content="Destination:" HorizontalAlignment="Left" Margin="68,129,0,0" VerticalAlignment="Top"/>
@@ -17,17 +17,27 @@
         <Label Content="Sleeper Cabin:" HorizontalAlignment="Left" Margin="56,380,0,0" VerticalAlignment="Top"/>
         <Label Content="First Class:" HorizontalAlignment="Left" Margin="76,428,0,0" VerticalAlignment="Top"/>
         <TextBox x:Name="txtTrainID" HorizontalAlignment="Left" Height="23" Margin="158,68,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="150"/>
-        <ComboBox HorizontalAlignment="Left" Margin="158,102,0,0" VerticalAlignment="Top" Width="150"/>
-        <ComboBox HorizontalAlignment="Left" Margin="158,132,0,0" VerticalAlignment="Top" Width="150"/>
-        <ComboBox HorizontalAlignment="Left" Margin="158,160,0,0" VerticalAlignment="Top" Width="150"/>
-        <StackPanel HorizontalAlignment="Left" Height="102" Margin="158,197,0,0" VerticalAlignment="Top" Width="150">
-            <CheckBox Content="Peterborough" Margin="0,0,5,5"/>
-            <CheckBox Content="Darlington" Margin="0,0,5,5"/>
-            <CheckBox Content="York" Margin="0,0,5,5"/>
-            <CheckBox Content="Newcastle" Margin="0,0,5,5"/>
+        <ComboBox x:Name="comboDeparture" HorizontalAlignment="Left" Margin="158,102,0,0" VerticalAlignment="Top" Width="150" SelectionChanged="comboDeparture_SelectionChanged">
+            <ComboBoxItem Content="Edinburgh (Waverley)"/>
+            <ComboBoxItem Content="London (Kings Cross)"/>
+        </ComboBox>
+        <ComboBox x:Name="comboDestination" HorizontalAlignment="Left" Margin="158,132,0,0" VerticalAlignment="Top" Width="150" SelectionChanged="comboDestination_SelectionChanged">
+            <ComboBoxItem Content="Edinburgh (Waverley)"/>
+            <ComboBoxItem Content="London (Kings Cross)"/>
+        </ComboBox>
+        <ComboBox x:Name="comboType" HorizontalAlignment="Left" Margin="158,160,0,0" VerticalAlignment="Top" Width="150" SelectionChanged="comboType_SelectionChanged">
+            <ComboBoxItem Content="Express"/>
+            <ComboBoxItem Content="Stopping"/>
+            <ComboBoxItem Content="Sleeper"/>
+        </ComboBox>
+        <StackPanel x:Name="stackIntermediates" HorizontalAlignment="Left" Height="88" Margin="158,197,0,0" VerticalAlignment="Top" Width="150">
+            <CheckBox x:Name="chkPeterborough" Content="Peterborough" Margin="0,0,5,5"/>
+            <CheckBox x:Name="chkDarlington" Content="Darlington" Margin="0,0,5,5"/>
+            <CheckBox x:Name="chkYork" Content="York" Margin="0,0,5,5"/>
+            <CheckBox x:Name="chkNewcastle" Content="Newcastle" Margin="0,0,5,5"/>
         </StackPanel>
-        <DatePicker HorizontalAlignment="Left" Margin="158,335,0,0" VerticalAlignment="Top" Width="150"/>
-        <ComboBox HorizontalAlignment="Left" Margin="158,290,0,0" VerticalAlignment="Top" Width="150"/>
+        <DatePicker x:Name="dateDepartureDay" HorizontalAlignment="Left" Margin="158,335,0,0" VerticalAlignment="Top" Width="150"/>
+        <ComboBox x:Name="comboDepartureTime" HorizontalAlignment="Left" Margin="158,290,0,0" VerticalAlignment="Top" Width="150"/>
         <StackPanel HorizontalAlignment="Left" Height="42" Margin="158,387,0,0" VerticalAlignment="Top" Width="150">
             <RadioButton Content="Yes" Margin="0,0,0,5"/>
             <RadioButton Content="No" Margin="0,0,0,5"/>
@@ -36,6 +46,8 @@
             <RadioButton Content="Yes" Margin="0,0,0,5"/>
             <RadioButton Content="No" Margin="0,0,0,5"/>
         </StackPanel>
+        <Button x:Name="btnAddTrain" Content="Add Train" HorizontalAlignment="Left" Height="22" Margin="158,502,0,0" VerticalAlignment="Top" Width="150" Click="btnAddTrain_Click"/>
+        <Label Content="Add Train" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" FontSize="24"/>
 
     </Grid>
 </Window>

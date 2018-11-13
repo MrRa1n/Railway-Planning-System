@@ -28,3 +28,6 @@ C:\Users\40316565\source\repos\RailwayPlanningSystem\RailwayPlanningSystem\obj\D
 C:\Users\40316565\source\repos\RailwayPlanningSystem\RailwayPlanningSystem\obj\Debug\Presentation.csproj.CoreCompileInputs.cache
 C:\Users\40316565\source\repos\RailwayPlanningSystem\RailwayPlanningSystem\obj\Debug\RailwayPlanningSystem.exe
 C:\Users\40316565\source\repos\RailwayPlanningSystem\RailwayPlanningSystem\obj\Debug\RailwayPlanningSystem.pdb
+H:\Object Oriented Software Development\RailwayPlanningSystem\RailwayPlanningSystem\bin\Debug\Business.dll
+H:\Object Oriented Software Development\RailwayPlanningSystem\RailwayPlanningSystem\bin\Debug\Business.pdb
+H:\Object Oriented Software Development\RailwayPlanningSystem\RailwayPlanningSystem\obj\Debug\Presentation.csproj.CopyComplete

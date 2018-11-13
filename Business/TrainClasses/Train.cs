@@ -12,16 +12,9 @@ namespace Business
         public String Departure { get; private set; }
         public String Destination { get; set; }
         public String Type { get; set; }
-        
         public DateTime DepartureTime { get; set; }
         public DateTime DepartureDay { get; set; }
-        
         public bool FirstClass { get; set; }
-
-        public Train()
-        {
-
-        }
 
         public Train(
             String trainId, 
@@ -41,5 +34,7 @@ namespace Business
             DepartureDay = departureDay;
             FirstClass = firstClass;
         }
+
+        public abstract void printTrain();
     }
 }

@@ -8,15 +8,11 @@ namespace Business.TrainClasses
 {
     class SleeperTrain : Train
     {
-        public List<String> intermediate { get; set; }
+        public List<String> Intermediate { get; set; }
         public bool SleeperCabin { get; set; }
 
-        public SleeperTrain()
-        {
-            
-        }
-
-        public SleeperTrain(String trainId,
+        public SleeperTrain(
+            String trainId,
             String departure,
             String destination,
             String type,
@@ -24,11 +20,15 @@ namespace Business.TrainClasses
             DateTime departureDay,
             bool firstClass,
             List<String> intermediate,
-            bool sleeperCabin) 
-            : base(trainId, departure, destination, type, departureTime, departureDay, firstClass)
+            bool sleeperCabin) : base(trainId, departure, destination, type, departureTime, departureDay, firstClass)
         {
-            
+            this.Intermediate = intermediate;
             this.SleeperCabin = sleeperCabin;
+        }
+
+        public override void printTrain()
+        {
+            Console.WriteLine("Sleeper");
         }
     }
 }
