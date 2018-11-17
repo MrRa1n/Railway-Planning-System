@@ -49,8 +49,16 @@ namespace RailwayPlanningSystem
 
         private void btnAddTrain_Click(object sender, RoutedEventArgs e)
         {
+            List<String> intermediates = new List<String>();
 
-            
+            // Add selected stations to List
+            foreach (Control control in stackIntermediates.Children)
+            {
+                if (((CheckBox)control).IsChecked == true)
+                    intermediates.Add(((CheckBox)control).Content.ToString());
+            }
+
+
 
             TrainFactory factory = new TrainFactory();
 
