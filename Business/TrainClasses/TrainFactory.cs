@@ -8,12 +8,18 @@ namespace Business.TrainClasses
 {
     public class TrainFactory
     {
+        private String trainId;
+
+        public void createTrainID()
+        {
+
+        }
+
         public Train CreateTrain(
-            String trainId,
             String departure,
             String destination,
             String type,
-            DateTime departureTime,
+            TimeSpan departureTime,
             DateTime departureDay,
             bool firstClass,
             List<String> intermediate,

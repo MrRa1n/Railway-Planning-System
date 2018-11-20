@@ -22,6 +22,9 @@ namespace RailwayPlanningSystem
     /// </summary>
     public partial class MainWindow : Window
     {
+        private List<String> intermediates = new List<String>();
+        
+
         public MainWindow()
         {
             InitializeComponent();
@@ -31,7 +34,7 @@ namespace RailwayPlanningSystem
         {
             comboDeparture.SelectedIndex = 0;
             comboDestination.SelectedIndex = 1;
-
+            comboType.SelectedIndex = 0;
             int start = 0;
             for (int i = 1; i <= 48; i++)
             {
@@ -49,22 +52,49 @@ namespace RailwayPlanningSystem
 
         private void btnAddTrain_Click(object sender, RoutedEventArgs e)
         {
-            List<String> intermediates = new List<String>();
-
-            // Add selected stations to List
-            foreach (Control control in stackIntermediates.Children)
+            
+            try
             {
-                if (((CheckBox)control).IsChecked == true)
-                    intermediates.Add(((CheckBox)control).Content.ToString());
+                // Validation for Sleeper Cabin train type
+                if (!((ComboBoxItem)comboType.SelectedItem).Content.Equals("Sleeper") && rdoSleeperYes.IsChecked == true)
+                {
+                    throw new Exception("Sleeper Cabin is not available for this train type");
+                }
+                // Add selected stations to List
+                foreach (Control control in stackIntermediates.Children)
+                {
+                    if (((CheckBox)control).IsChecked == true)
+                        intermediates.Add(((CheckBox)control).Content.ToString());
+                }
+
+                TimeSpan time = TimeSpan.Parse(comboDepartureTime.Text);
+                bool firstClass = (rdoFirstClassYes.IsChecked == true) ? true : false;
+                bool sleeperCabin = (rdoSleeperYes.IsChecked == true) ? true : false;
+
+                TrainFactory factory = new TrainFactory();
+
+                Train t = factory.CreateTrain(
+                    comboDeparture.Text,
+                    comboDestination.Text,
+                    ((ComboBoxItem)comboType.SelectedItem).Content.ToString(),
+                    time,
+                    dateDepartureDay.SelectedDate.Value,
+                    firstClass,
+                    intermediates,
+                    sleeperCabin
+                    );
+
+                if (t == null)
+                {
+                    throw new Exception("Couldn't create train!");
+                }
+
+                t.printTrain();
             }
-
-
-
-            TrainFactory factory = new TrainFactory();
-
-            Train t = factory.CreateTrain("","",null,"Express",DateTime.MinValue,DateTime.MinValue,true,null,true);
-
-            t.printTrain();
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
 
         private void comboDeparture_SelectionChanged(object sender, SelectionChangedEventArgs e)

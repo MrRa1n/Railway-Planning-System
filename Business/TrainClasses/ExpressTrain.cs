@@ -13,7 +13,7 @@ namespace Business.TrainClasses
             String departure,
             String destination,
             String type,
-            DateTime departureTime,
+            TimeSpan departureTime,
             DateTime departureDay,
             bool firstClass) : base(trainId, departure, destination, type, departureTime, departureDay, firstClass)
         {

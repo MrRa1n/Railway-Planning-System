@@ -12,7 +12,7 @@ namespace Business
         public String Departure { get; private set; }
         public String Destination { get; set; }
         public String Type { get; set; }
-        public DateTime DepartureTime { get; set; }
+        public TimeSpan DepartureTime { get; set; }
         public DateTime DepartureDay { get; set; }
         public bool FirstClass { get; set; }
 
@@ -21,7 +21,7 @@ namespace Business
             String departure, 
             String destination, 
             String type, 
-            DateTime departureTime, 
+            TimeSpan departureTime, 
             DateTime departureDay, 
             bool firstClass
             )

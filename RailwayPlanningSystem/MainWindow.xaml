@@ -7,7 +7,6 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="587.865" Width="391.083" Loaded="Window_Loaded">
     <Grid Margin="0,0,3.8,0.2">
-        <Label Content="Train ID:" HorizontalAlignment="Left" Margin="89,68,0,0" VerticalAlignment="Top"/>
         <Label Content="Departure:" HorizontalAlignment="Left" Margin="75,98,0,0" VerticalAlignment="Top"/>
         <Label Content="Destination:" HorizontalAlignment="Left" Margin="68,129,0,0" VerticalAlignment="Top"/>
         <Label Content="Type:" HorizontalAlignment="Left" Margin="104,155,0,0" VerticalAlignment="Top"/>
@@ -16,7 +15,6 @@
         <Label Content="Departure Day:" HorizontalAlignment="Left" Margin="47,333,0,0" VerticalAlignment="Top"/>
         <Label Content="Sleeper Cabin:" HorizontalAlignment="Left" Margin="56,380,0,0" VerticalAlignment="Top"/>
         <Label Content="First Class:" HorizontalAlignment="Left" Margin="76,428,0,0" VerticalAlignment="Top"/>
-        <TextBox x:Name="txtTrainID" HorizontalAlignment="Left" Height="23" Margin="158,68,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="150"/>
         <ComboBox x:Name="comboDeparture" HorizontalAlignment="Left" Margin="158,102,0,0" VerticalAlignment="Top" Width="150" SelectionChanged="comboDeparture_SelectionChanged">
             <ComboBoxItem Content="Edinburgh (Waverley)"/>
             <ComboBoxItem Content="London (Kings Cross)"/>
@@ -39,12 +37,12 @@
         <DatePicker x:Name="dateDepartureDay" HorizontalAlignment="Left" Margin="158,335,0,0" VerticalAlignment="Top" Width="150"/>
         <ComboBox x:Name="comboDepartureTime" HorizontalAlignment="Left" Margin="158,290,0,0" VerticalAlignment="Top" Width="150"/>
         <StackPanel HorizontalAlignment="Left" Height="42" Margin="158,387,0,0" VerticalAlignment="Top" Width="150">
-            <RadioButton Content="Yes" Margin="0,0,0,5"/>
-            <RadioButton Content="No" Margin="0,0,0,5"/>
+            <RadioButton x:Name="rdoSleeperYes" Content="Yes" Margin="0,0,0,5"/>
+            <RadioButton x:Name="rdoSleeperNo" Content="No" Margin="0,0,0,5"/>
         </StackPanel>
         <StackPanel HorizontalAlignment="Left" Height="42" Margin="158,435,0,0" VerticalAlignment="Top" Width="150">
-            <RadioButton Content="Yes" Margin="0,0,0,5"/>
-            <RadioButton Content="No" Margin="0,0,0,5"/>
+            <RadioButton x:Name="rdoFirstClassYes" Content="Yes" Margin="0,0,0,5"/>
+            <RadioButton x:Name="rdoFirstClassNo" Content="No" Margin="0,0,0,5"/>
         </StackPanel>
         <Button x:Name="btnAddTrain" Content="Add Train" HorizontalAlignment="Left" Height="22" Margin="158,502,0,0" VerticalAlignment="Top" Width="150" Click="btnAddTrain_Click"/>
         <Label Content="Add Train" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" FontSize="24"/>
