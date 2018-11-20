@@ -8,17 +8,34 @@ namespace Business.TrainClasses
 {
     public class TrainFactory
     {
-        private String trainId = "";
         private Random rnd = new Random();
+        private List<String> trainIds = new List<String>();
 
-        public void createTrainID(String departure)
+        public String createTrainID(String departure)
         {
+            String trainId;
+
             if (departure.Contains("Edinburgh"))
                 trainId = "1E";
-            else
+            else if (departure.Contains("London"))
                 trainId = "1S";
+            else
+                trainId = "1G";
+            
+            trainId += rnd.Next(99).ToString("00");
 
-            trainId += rnd.Next(10,99).ToString();
+
+            foreach (String id in trainIds.ToList())
+            {
+                if (id.Equals(trainId))
+                {
+                    return createTrainID(departure);
+                }
+            }
+
+            trainIds.Add(trainId);
+
+            return trainId;
         }
 
         public Train CreateTrain(
@@ -31,7 +48,8 @@ namespace Business.TrainClasses
             List<String> intermediate,
             bool sleeperCabin)
         {
-            createTrainID(departure);
+            String trainId = createTrainID(departure);
+            
             switch (type)
             {
                 case "Express":

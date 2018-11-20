@@ -25,6 +25,7 @@ namespace RailwayPlanningSystem
     {
         private List<String> intermediates;
         private TrainDAO trainDAO;
+        TrainFactory factory = new TrainFactory();
 
         public AddTrain()
         {
@@ -73,7 +74,7 @@ namespace RailwayPlanningSystem
                 bool firstClass = (rdoFirstClassYes.IsChecked == true) ? true : false;
                 bool sleeperCabin = (rdoSleeperYes.IsChecked == true) ? true : false;
 
-                TrainFactory factory = new TrainFactory();
+                
 
                 Train t = factory.CreateTrain(
                     comboDeparture.Text,
@@ -96,7 +97,6 @@ namespace RailwayPlanningSystem
                 trainDAO.Add(t);
 
                 trainDAO.printTrains();
-                //t.printTrain();
             }
             catch (Exception ex)
             {
