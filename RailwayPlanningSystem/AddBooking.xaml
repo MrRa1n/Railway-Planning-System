@@ -1,0 +1,35 @@
+﻿<Window x:Class="RailwayPlanningSystem.AddBooking"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:RailwayPlanningSystem"
+        mc:Ignorable="d"
+        Title="AddBooking" Height="558.86" Width="390.216">
+    <Grid>
+        <Label x:Name="lblName" Content="Name:" HorizontalAlignment="Left" Margin="98,78,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="lblTrainID" Content="Train:" HorizontalAlignment="Left" Margin="104,109,0,0" VerticalAlignment="Top"/>
+        <Label Content="Add Booking" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" FontSize="24"/>
+        <Label x:Name="lblDeparture" Content="Departure Station:" HorizontalAlignment="Left" Margin="37,189,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="lblArrival" Content="Arrival Station:" HorizontalAlignment="Left" Margin="55,219,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="lblFirstClass" Content="First Class:" HorizontalAlignment="Left" Margin="78,256,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="lblCabin" Content="Cabin:" HorizontalAlignment="Left" Margin="99,308,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="lblCoach" Content="Coach:" HorizontalAlignment="Left" Margin="97,364,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="lblSeat" Content="Seat:" HorizontalAlignment="Left" Margin="106,395,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="txtName" HorizontalAlignment="Left" Height="23" Margin="148,80,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+        <ListBox x:Name="listTrains" HorizontalAlignment="Left" Height="69" Margin="148,114,0,0" VerticalAlignment="Top" Width="120"/>
+        <ComboBox x:Name="comboDeparture" HorizontalAlignment="Left" Margin="148,192,0,0" VerticalAlignment="Top" Width="120"/>
+        <ComboBox x:Name="comboArrival" HorizontalAlignment="Left" Margin="148,222,0,0" VerticalAlignment="Top" Width="120"/>
+        <StackPanel HorizontalAlignment="Left" Height="38" Margin="148,262,0,0" VerticalAlignment="Top" Width="120">
+            <RadioButton x:Name="rdoFirstClassYes" Content="Yes" Margin="0,0,0,5"/>
+            <RadioButton x:Name="rdoFirstClassNo" Content="No" Margin="0,0,0,5"/>
+        </StackPanel>
+        <StackPanel HorizontalAlignment="Left" Height="42" Margin="148,314,0,0" VerticalAlignment="Top" Width="120">
+            <RadioButton x:Name="rdoSleeperYes" Content="Yes" Margin="0,0,0,5"/>
+            <RadioButton x:Name="rdoSleeperNo" Content="No" Margin="0,0,0,5"/>
+        </StackPanel>
+        <ComboBox x:Name="comboCoach" HorizontalAlignment="Left" Margin="148,367,0,0" VerticalAlignment="Top" Width="120"/>
+        <ComboBox x:Name="comboSeat" HorizontalAlignment="Left" Margin="148,398,0,0" VerticalAlignment="Top" Width="120"/>
+
+    </Grid>
+</Window>

@@ -9,7 +9,7 @@ namespace Business.BookingClasses
     class Booking
     {
         public String Name { get; set; }
-        public String TrainID { get; set; }
+        public String TrainID { get; }
         public String DepartureStation { get; set; }
         public String ArrivalStation { get; set; }
         public bool FirstClass { get; set; }

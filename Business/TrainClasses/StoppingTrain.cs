@@ -23,9 +23,24 @@ namespace Business.TrainClasses
             this.Intermediate = intermediate; 
         }
 
+        private String listIntermediates()
+        {
+            return String.Join(", ", Intermediate);
+        }
+
         public override void printTrain()
         {
-            Console.WriteLine("Stopping");
+            Console.WriteLine("--- Stopping Train ---");
+            Console.WriteLine(
+                TrainID + "\n" +
+                Departure + "\n" +
+                Destination + "\n" +
+                Type + "\n" +
+                DepartureTime + "\n" +
+                DepartureDay + "\n" +
+                FirstClass + "\n" +
+                listIntermediates()
+                );
         }
     }
 }

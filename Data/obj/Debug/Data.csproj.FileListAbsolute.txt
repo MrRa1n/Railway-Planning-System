@@ -4,3 +4,6 @@ H:\Object Oriented Software Development\RailwayPlanningSystem\Data\obj\Debug\Dat
 H:\Object Oriented Software Development\RailwayPlanningSystem\Data\obj\Debug\Data.csproj.CoreCompileInputs.cache
 H:\Object Oriented Software Development\RailwayPlanningSystem\Data\obj\Debug\Data.dll
 H:\Object Oriented Software Development\RailwayPlanningSystem\Data\obj\Debug\Data.pdb
+H:\Object Oriented Software Development\RailwayPlanningSystem\Data\bin\Debug\Business.dll
+H:\Object Oriented Software Development\RailwayPlanningSystem\Data\bin\Debug\Business.pdb
+H:\Object Oriented Software Development\RailwayPlanningSystem\Data\obj\Debug\Data.csproj.CopyComplete

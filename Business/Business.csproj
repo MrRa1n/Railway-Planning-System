@@ -42,6 +42,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BookingClasses\Booking.cs" />
+    <Compile Include="TrainClasses\Coach.cs" />
     <Compile Include="TrainClasses\ExpressTrain.cs" />
     <Compile Include="TrainClasses\SleeperTrain.cs" />
     <Compile Include="TrainClasses\StoppingTrain.cs" />

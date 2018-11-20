@@ -13,6 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using Business;
+using Data;
 using Business.TrainClasses;
 
 namespace RailwayPlanningSystem
@@ -20,12 +21,12 @@ namespace RailwayPlanningSystem
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class AddTrain : Window
     {
-        private List<String> intermediates = new List<String>();
-        
+        private List<String> intermediates;
+        private TrainDAO trainDAO;
 
-        public MainWindow()
+        public AddTrain()
         {
             InitializeComponent();
         }
@@ -60,6 +61,7 @@ namespace RailwayPlanningSystem
                 {
                     throw new Exception("Sleeper Cabin is not available for this train type");
                 }
+                intermediates = new List<String>();
                 // Add selected stations to List
                 foreach (Control control in stackIntermediates.Children)
                 {
@@ -89,7 +91,12 @@ namespace RailwayPlanningSystem
                     throw new Exception("Couldn't create train!");
                 }
 
-                t.printTrain();
+
+                trainDAO = new TrainDAO();
+                trainDAO.Add(t);
+
+                trainDAO.printTrains();
+                //t.printTrain();
             }
             catch (Exception ex)
             {

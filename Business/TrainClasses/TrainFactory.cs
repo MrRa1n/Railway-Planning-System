@@ -8,11 +8,17 @@ namespace Business.TrainClasses
 {
     public class TrainFactory
     {
-        private String trainId;
+        private String trainId = "";
+        private Random rnd = new Random();
 
-        public void createTrainID()
+        public void createTrainID(String departure)
         {
+            if (departure.Contains("Edinburgh"))
+                trainId = "1E";
+            else
+                trainId = "1S";
 
+            trainId += rnd.Next(10,99).ToString();
         }
 
         public Train CreateTrain(
@@ -25,6 +31,7 @@ namespace Business.TrainClasses
             List<String> intermediate,
             bool sleeperCabin)
         {
+            createTrainID(departure);
             switch (type)
             {
                 case "Express":

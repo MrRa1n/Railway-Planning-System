@@ -1,0 +1,15 @@
+﻿<Window x:Class="RailwayPlanningSystem.Main"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:RailwayPlanningSystem"
+        mc:Ignorable="d"
+        Title="Main" Height="306.481" Width="365.74">
+    <Grid Margin="0,0,3.6,0.8">
+        <Label x:Name="lblRailwayPlanningSystem" Content="Railway Planning System" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" FontSize="24"/>
+        <Button x:Name="btnAddTrain" Content="Add Train" HorizontalAlignment="Left" Height="40" Margin="86,91,0,0" VerticalAlignment="Top" Width="194" Click="btnAddTrain_Click"/>
+        <Button x:Name="btnAddBooking" Content="Add Booking" HorizontalAlignment="Left" Margin="86,160,0,0" VerticalAlignment="Top" Width="194" Height="40"/>
+
+    </Grid>
+</Window>

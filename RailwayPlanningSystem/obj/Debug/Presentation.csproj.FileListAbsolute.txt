@@ -2,11 +2,9 @@ H:\Object Oriented Software Development\RailwayPlanningSystem\RailwayPlanningSys
 H:\Object Oriented Software Development\RailwayPlanningSystem\RailwayPlanningSystem\bin\Debug\RailwayPlanningSystem.exe
 H:\Object Oriented Software Development\RailwayPlanningSystem\RailwayPlanningSystem\bin\Debug\RailwayPlanningSystem.pdb
 H:\Object Oriented Software Development\RailwayPlanningSystem\RailwayPlanningSystem\obj\Debug\Presentation.csprojAssemblyReference.cache
-H:\Object Oriented Software Development\RailwayPlanningSystem\RailwayPlanningSystem\obj\Debug\MainWindow.g.cs
 H:\Object Oriented Software Development\RailwayPlanningSystem\RailwayPlanningSystem\obj\Debug\App.g.cs
 H:\Object Oriented Software Development\RailwayPlanningSystem\RailwayPlanningSystem\obj\Debug\RailwayPlanningSystem_MarkupCompile.cache
 H:\Object Oriented Software Development\RailwayPlanningSystem\RailwayPlanningSystem\obj\Debug\RailwayPlanningSystem_MarkupCompile.lref
-H:\Object Oriented Software Development\RailwayPlanningSystem\RailwayPlanningSystem\obj\Debug\MainWindow.baml
 H:\Object Oriented Software Development\RailwayPlanningSystem\RailwayPlanningSystem\obj\Debug\RailwayPlanningSystem.g.resources
 H:\Object Oriented Software Development\RailwayPlanningSystem\RailwayPlanningSystem\obj\Debug\RailwayPlanningSystem.Properties.Resources.resources
 H:\Object Oriented Software Development\RailwayPlanningSystem\RailwayPlanningSystem\obj\Debug\Presentation.csproj.GenerateResource.cache
@@ -34,3 +32,11 @@ H:\Object Oriented Software Development\RailwayPlanningSystem\RailwayPlanningSys
 C:\Users\40316565\source\repos\RailwayPlanningSystem\RailwayPlanningSystem\bin\Debug\Business.dll
 C:\Users\40316565\source\repos\RailwayPlanningSystem\RailwayPlanningSystem\bin\Debug\Business.pdb
 C:\Users\40316565\source\repos\RailwayPlanningSystem\RailwayPlanningSystem\obj\Debug\Presentation.csproj.CopyComplete
+H:\Object Oriented Software Development\RailwayPlanningSystem\RailwayPlanningSystem\bin\Debug\Data.dll
+H:\Object Oriented Software Development\RailwayPlanningSystem\RailwayPlanningSystem\bin\Debug\Data.pdb
+H:\Object Oriented Software Development\RailwayPlanningSystem\RailwayPlanningSystem\obj\Debug\AddBooking.g.cs
+H:\Object Oriented Software Development\RailwayPlanningSystem\RailwayPlanningSystem\obj\Debug\Main.g.cs
+H:\Object Oriented Software Development\RailwayPlanningSystem\RailwayPlanningSystem\obj\Debug\AddTrain.g.cs
+H:\Object Oriented Software Development\RailwayPlanningSystem\RailwayPlanningSystem\obj\Debug\AddBooking.baml
+H:\Object Oriented Software Development\RailwayPlanningSystem\RailwayPlanningSystem\obj\Debug\Main.baml
+H:\Object Oriented Software Development\RailwayPlanningSystem\RailwayPlanningSystem\obj\Debug\AddTrain.baml
