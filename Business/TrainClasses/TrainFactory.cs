@@ -17,10 +17,9 @@ namespace Business.TrainClasses
 
             if (departure.Contains("Edinburgh"))
                 trainId = "1E";
-            else if (departure.Contains("London"))
-                trainId = "1S";
             else
-                trainId = "1G";
+                trainId = "1S";
+
             
             trainId += rnd.Next(99).ToString("00");
 

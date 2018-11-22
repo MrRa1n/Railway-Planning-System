@@ -96,6 +96,12 @@ namespace RailwayPlanningSystem
                 trainDAO = new TrainDAO();
                 trainDAO.Add(t);
 
+
+                ObjectLists objectLists = new ObjectLists();
+
+
+                objectLists.Add(t);
+
                 trainDAO.printTrains();
             }
             catch (Exception ex)

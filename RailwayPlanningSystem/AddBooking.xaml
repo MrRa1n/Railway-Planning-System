@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:RailwayPlanningSystem"
         mc:Ignorable="d"
-        Title="AddBooking" Height="558.86" Width="390.216">
+        Title="AddBooking" Height="558.86" Width="390.216" Loaded="Window_Loaded">
     <Grid>
         <Label x:Name="lblName" Content="Name:" HorizontalAlignment="Left" Margin="98,78,0,0" VerticalAlignment="Top"/>
         <Label x:Name="lblTrainID" Content="Train:" HorizontalAlignment="Left" Margin="104,109,0,0" VerticalAlignment="Top"/>
@@ -18,8 +18,22 @@
         <Label x:Name="lblSeat" Content="Seat:" HorizontalAlignment="Left" Margin="106,395,0,0" VerticalAlignment="Top"/>
         <TextBox x:Name="txtName" HorizontalAlignment="Left" Height="23" Margin="148,80,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
         <ListBox x:Name="listTrains" HorizontalAlignment="Left" Height="69" Margin="148,114,0,0" VerticalAlignment="Top" Width="120"/>
-        <ComboBox x:Name="comboDeparture" HorizontalAlignment="Left" Margin="148,192,0,0" VerticalAlignment="Top" Width="120"/>
-        <ComboBox x:Name="comboArrival" HorizontalAlignment="Left" Margin="148,222,0,0" VerticalAlignment="Top" Width="120"/>
+        <ComboBox x:Name="comboDeparture" HorizontalAlignment="Left" Margin="148,192,0,0" VerticalAlignment="Top" Width="120">
+            <ComboBoxItem Content="Edinburgh (Waverley)"/>
+            <ComboBoxItem Cursor=""/>
+            <ComboBoxItem Content="Peterborough"/>
+            <ComboBoxItem Content="Darlington"/>
+            <ComboBoxItem Content="York"/>
+            <ComboBoxItem Content="Newcastle"/>
+        </ComboBox>
+        <ComboBox x:Name="comboArrival" HorizontalAlignment="Left" Margin="148,222,0,0" VerticalAlignment="Top" Width="120">
+            <ComboBoxItem Content="Edinburgh (Waverley)"/>
+            <ComboBoxItem Content="London (Kings Cross)"/>
+            <ComboBoxItem Content="Peterborough"/>
+            <ComboBoxItem Content="Darlington"/>
+            <ComboBoxItem Content="York"/>
+            <ComboBoxItem Content="Newcastle"/>
+        </ComboBox>
         <StackPanel HorizontalAlignment="Left" Height="38" Margin="148,262,0,0" VerticalAlignment="Top" Width="120">
             <RadioButton x:Name="rdoFirstClassYes" Content="Yes" Margin="0,0,0,5"/>
             <RadioButton x:Name="rdoFirstClassNo" Content="No" Margin="0,0,0,5"/>
@@ -30,6 +44,7 @@
         </StackPanel>
         <ComboBox x:Name="comboCoach" HorizontalAlignment="Left" Margin="148,367,0,0" VerticalAlignment="Top" Width="120"/>
         <ComboBox x:Name="comboSeat" HorizontalAlignment="Left" Margin="148,398,0,0" VerticalAlignment="Top" Width="120"/>
+        <Button x:Name="btnAddBooking" Content="Add Booking" HorizontalAlignment="Left" Margin="148,462,0,0" VerticalAlignment="Top" Width="120" Height="30" Click="BtnAddBooking_Click"/>
 
     </Grid>
 </Window>
