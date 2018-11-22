@@ -10,18 +10,18 @@ namespace Business.TrainClasses
     class Coach
     {
         private int numberOfSeats = 60;
-        private char[] coachLetter = { 'A','B','C','D','E','F','G','H'};
+        public char coachLetter { get; set; }
 
-        private List<Booking> listOfBookings;
+        private List<Booking> _listOfBookings;
 
-        public Coach()
+        public Coach(List<Booking> bookings)
         {
-
+            _listOfBookings = bookings;
         }
 
-        private void checkTrainType()
+        public void IsItTaken()
         {
-            
+
         }
     }
 }

@@ -10,7 +10,7 @@ namespace Business
 {
     public class ObjectLists
     {
-        private List<Train> listofTrains = new List<Train>();
+        private List<Train> listOfTrains = new List<Train>();
         private List<Booking> listOfBookings = new List<Booking>();
         private List<Coach> listOfCoaches = new List<Coach>();
 
@@ -22,8 +22,7 @@ namespace Business
             {
                 if (obj is Train)
                 {
-                    listofTrains.Add((Train)obj);
-                    Console.WriteLine("Train Added!!!!");
+                    listOfTrains.Add((Train)obj);
                 }
                 else if (obj is Booking)
                 {
@@ -41,9 +40,42 @@ namespace Business
             }
         }
 
-        public object Find()
+        public Train FindTrain(String trainId)
         {
+            foreach (Train t in listOfTrains)
+            {
+                if (trainId.Equals(t.TrainID))
+                {
+                    return t;
+                }
+            }
+            return null;
+        }
 
+        public bool BookedSeats(char coach, int seat)
+        {
+            foreach (Booking b in listOfBookings)
+            {
+                if (coach == b.Coach)
+                {
+                    // coach match
+                    if (seat == b.Seat)
+                    {
+                        //seat match
+                        return true;
+                    }
+                    return false;
+                }
+            }
+            return false;
+        }
+
+        public void PrintBookings()
+        {
+            foreach (Booking b in listOfBookings)
+            {
+                Console.WriteLine(b.Name);
+            }
         }
     }
 }

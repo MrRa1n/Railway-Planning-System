@@ -29,5 +29,11 @@ namespace RailwayPlanningSystem
             AddTrain frmAddTrain = new AddTrain();
             frmAddTrain.ShowDialog();
         }
+
+        private void btnAddBooking_Click(object sender, RoutedEventArgs e)
+        {
+            AddBooking frmAddBooking = new AddBooking();
+            frmAddBooking.ShowDialog();
+        }
     }
 }

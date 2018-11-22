@@ -13,7 +13,6 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using Business;
-using Data;
 using Business.TrainClasses;
 
 namespace RailwayPlanningSystem
@@ -24,7 +23,7 @@ namespace RailwayPlanningSystem
     public partial class AddTrain : Window
     {
         private List<String> intermediates;
-        private TrainDAO trainDAO;
+        
         TrainFactory factory = new TrainFactory();
 
         public AddTrain()
@@ -62,7 +61,10 @@ namespace RailwayPlanningSystem
                 {
                     throw new Exception("Sleeper Cabin is not available for this train type");
                 }
+
+                // create new list of intermediates here, otherwise list gets appended
                 intermediates = new List<String>();
+
                 // Add selected stations to List
                 foreach (Control control in stackIntermediates.Children)
                 {
@@ -93,16 +95,13 @@ namespace RailwayPlanningSystem
                 }
 
 
-                trainDAO = new TrainDAO();
-                trainDAO.Add(t);
-
 
                 ObjectLists objectLists = new ObjectLists();
 
 
                 objectLists.Add(t);
 
-                trainDAO.printTrains();
+                
             }
             catch (Exception ex)
             {

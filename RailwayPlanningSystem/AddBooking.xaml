@@ -20,7 +20,7 @@
         <ListBox x:Name="listTrains" HorizontalAlignment="Left" Height="69" Margin="148,114,0,0" VerticalAlignment="Top" Width="120"/>
         <ComboBox x:Name="comboDeparture" HorizontalAlignment="Left" Margin="148,192,0,0" VerticalAlignment="Top" Width="120">
             <ComboBoxItem Content="Edinburgh (Waverley)"/>
-            <ComboBoxItem Cursor=""/>
+            <ComboBoxItem Content="London (Kings Cross)"/>
             <ComboBoxItem Content="Peterborough"/>
             <ComboBoxItem Content="Darlington"/>
             <ComboBoxItem Content="York"/>

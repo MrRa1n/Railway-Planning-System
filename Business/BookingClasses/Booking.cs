@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Business.BookingClasses
 {
-    class Booking
+    public class Booking
     {
         public String Name { get; set; }
         public String TrainID { get; }
@@ -16,5 +16,31 @@ namespace Business.BookingClasses
         public bool SleeperCabin { get; set; }
         public char Coach { get; set; }
         public int Seat { get; set; }
+
+        public Booking()
+        {
+
+        }
+
+        public Booking(
+            String name, 
+            String trainId, 
+            String departureStation, 
+            String arrivalStation, 
+            bool firstClass, 
+            bool sleeperCabin, 
+            char coach, 
+            int seat
+            )
+        {
+            Name = name;
+            TrainID = trainId;
+            DepartureStation = departureStation;
+            ArrivalStation = arrivalStation;
+            FirstClass = firstClass;
+            SleeperCabin = sleeperCabin;
+            Coach = coach;
+            Seat = seat;
+        }
     }
 }
