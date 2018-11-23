@@ -70,6 +70,26 @@ namespace Business
             return false;
         }
 
+        public void BookSeat(char coach)
+        {
+            //
+            if (coach > 'h')
+            {
+                throw new Exception();
+            }
+
+            Coach c = new Coach(coach);
+
+            foreach (Booking b in listOfBookings)
+            {
+                if (c.getAvailableSeats() == null)
+                {
+                    throw new Exception("No seat available");
+                }
+
+            }
+        }
+
         public void PrintBookings()
         {
             foreach (Booking b in listOfBookings)

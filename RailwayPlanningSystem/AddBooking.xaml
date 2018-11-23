@@ -42,7 +42,9 @@
             <RadioButton x:Name="rdoSleeperYes" Content="Yes" Margin="0,0,0,5"/>
             <RadioButton x:Name="rdoSleeperNo" Content="No" Margin="0,0,0,5"/>
         </StackPanel>
-        <ComboBox x:Name="comboCoach" HorizontalAlignment="Left" Margin="148,367,0,0" VerticalAlignment="Top" Width="120"/>
+        <ComboBox x:Name="comboCoach" HorizontalAlignment="Left" Margin="148,367,0,0" VerticalAlignment="Top" Width="120" SelectionChanged="ComboCoach_SelectionChanged">
+
+        </ComboBox>
         <ComboBox x:Name="comboSeat" HorizontalAlignment="Left" Margin="148,398,0,0" VerticalAlignment="Top" Width="120"/>
         <Button x:Name="btnAddBooking" Content="Add Booking" HorizontalAlignment="Left" Margin="148,462,0,0" VerticalAlignment="Top" Width="120" Height="30" Click="BtnAddBooking_Click"/>
 

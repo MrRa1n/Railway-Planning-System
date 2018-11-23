@@ -9,19 +9,48 @@ namespace Business.TrainClasses
 {
     class Coach
     {
-        private int numberOfSeats = 60;
-        public char coachLetter { get; set; }
-
+        private const int MAX_CAPACITY = 60;
+        private List<int> listOfAvailableSeats;
         private List<Booking> _listOfBookings;
+        private char coachId { get; set; }
 
-        public Coach(List<Booking> bookings)
+        // make this a singleton?
+
+
+        public Coach(char c)
         {
-            _listOfBookings = bookings;
+            // object gets created and assigned an id
+            coachId = c;
+
+            listOfAvailableSeats = new List<int>();
+
+            for (int i = 1; i <= MAX_CAPACITY; ++i)
+            {
+                listOfAvailableSeats.Add(i);
+            }
+
+
         }
 
-        public void IsItTaken()
+        public void addBookingsToCoach(List<Booking> bookings)
         {
+            _listOfBookings = bookings;
 
+            foreach (Booking b in _listOfBookings)
+            {
+                listOfAvailableSeats.Remove(b.Seat);
+            }
+        }
+
+        public List<int> getAvailableSeats()
+        {
+            return listOfAvailableSeats;
+        }
+
+        public void printCoachBookings()
+        {
+            foreach (Booking b in _listOfBookings)
+                Console.WriteLine(b.Coach + b.Seat);
         }
     }
 }

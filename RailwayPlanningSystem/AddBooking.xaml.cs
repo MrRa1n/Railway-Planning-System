@@ -21,6 +21,8 @@ namespace RailwayPlanningSystem
     /// </summary>
     public partial class AddBooking : Window
     {
+
+        ObjectLists objectLists = new ObjectLists();
         public AddBooking()
         {
             InitializeComponent();
@@ -28,33 +30,46 @@ namespace RailwayPlanningSystem
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            // Add code here to show load available coaches and seats
-            int seatNo;
-            int maxSeats = 60;
-            for (seatNo = 1; seatNo < maxSeats; ++seatNo)
+            //load available coaches
+            for (char i = 'a'; i <= 'h'; ++i)
             {
-                //if ()
+                comboCoach.Items.Add(i);
             }
         }
 
         private void BtnAddBooking_Click(object sender, RoutedEventArgs e)
         {
-            Booking booking = new Booking();
-            booking.Name = "Toby";
-            booking.Coach = 'C';
-            booking.Seat = 4;
 
-            Booking booking1 = new Booking();
-            booking1.Name = "John";
-            booking1.Coach = 'F';
-            booking1.Seat = 26;
+            bool firstClass = (rdoFirstClassYes.IsChecked == true) ? true : false;
+            bool sleeperCabin = (rdoSleeperYes.IsChecked == true) ? true : false;
 
-            ObjectLists objectLists = new ObjectLists();
-            objectLists.Add(booking);
-            objectLists.Add(booking1);
+            Booking booking = new Booking(
+                txtName.Text,
+                "gfhgf",
+                comboDeparture.Text,
+                comboArrival.Text,
+                firstClass,
+                sleeperCabin,
+                char.Parse(comboCoach.Text),
+                int.Parse(comboSeat.Text)
+                );
 
-            objectLists.PrintBookings();
-            //objectLists.BookedSeats();
+            
+
+            if (objectLists.BookedSeats(char.Parse(comboCoach.Text), int.Parse(comboSeat.Text)))
+            {
+                MessageBox.Show("Seat is taken.");
+            }
+            else
+            {
+                objectLists.Add(booking);
+            }
+            
+        }
+
+        private void ComboCoach_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            
         }
     }
 }
