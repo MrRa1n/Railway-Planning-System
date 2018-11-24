@@ -10,9 +10,10 @@ namespace Business
 {
     public class ObjectLists
     {
-        private List<Train> listOfTrains = new List<Train>();
-        private List<Booking> listOfBookings = new List<Booking>();
-        private List<Coach> listOfCoaches = new List<Coach>();
+        private static List<Train> listOfTrains = new List<Train>();
+        private static List<Booking> listOfBookings = new List<Booking>();
+        private static List<Coach> listOfCoaches = new List<Coach>();
+        private Coach coach;
 
         public ObjectLists() { }
 
@@ -23,10 +24,19 @@ namespace Business
                 if (obj is Train)
                 {
                     listOfTrains.Add((Train)obj);
+                    listOfCoaches = ((Train)obj).coachList;
                 }
                 else if (obj is Booking)
                 {
                     listOfBookings.Add((Booking)obj);
+                    // check what coach
+                    foreach (Coach c in listOfCoaches)
+                    {
+                        if (((Booking)obj).Coach == c.coachId)
+                        {
+                            c.addBookingToCoach(((Booking)obj));
+                        }
+                    }
                 }
                 else if (obj is Coach)
                 {
@@ -40,6 +50,18 @@ namespace Business
             }
         }
 
+        public List<Train> getTrains()
+        {
+            return listOfTrains;
+        }
+
+        public List<Coach> getCoaches()
+        {
+            return listOfCoaches;
+        }
+
+
+
         public Train FindTrain(String trainId)
         {
             foreach (Train t in listOfTrains)
@@ -52,43 +74,7 @@ namespace Business
             return null;
         }
 
-        public bool BookedSeats(char coach, int seat)
-        {
-            foreach (Booking b in listOfBookings)
-            {
-                if (coach == b.Coach)
-                {
-                    // coach match
-                    if (seat == b.Seat)
-                    {
-                        //seat match
-                        return true;
-                    }
-                    return false;
-                }
-            }
-            return false;
-        }
 
-        public void BookSeat(char coach)
-        {
-            //
-            if (coach > 'h')
-            {
-                throw new Exception();
-            }
-
-            Coach c = new Coach(coach);
-
-            foreach (Booking b in listOfBookings)
-            {
-                if (c.getAvailableSeats() == null)
-                {
-                    throw new Exception("No seat available");
-                }
-
-            }
-        }
 
         public void PrintBookings()
         {

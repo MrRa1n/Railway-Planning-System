@@ -8,6 +8,8 @@ namespace Business.TrainClasses
 {
     class ExpressTrain : Train
     {
+        
+
         public ExpressTrain(
             String trainId,
             String departure,
@@ -18,8 +20,9 @@ namespace Business.TrainClasses
             bool firstClass) : base(trainId, departure, destination, type, departureTime, departureDay, firstClass)
         {
             
-            
         }
+
+
 
         public override void printTrain()
         {

@@ -7,12 +7,13 @@ using Business.BookingClasses;
 
 namespace Business.TrainClasses
 {
-    class Coach
+    public class Coach
     {
         private const int MAX_CAPACITY = 60;
-        private List<int> listOfAvailableSeats;
+        public List<int> listOfAvailableSeats;
+        private List<int> listOfUnavailableSeats;
         private List<Booking> _listOfBookings;
-        private char coachId { get; set; }
+        public char coachId { get; set; }
 
         // make this a singleton?
 
@@ -23,23 +24,20 @@ namespace Business.TrainClasses
             coachId = c;
 
             listOfAvailableSeats = new List<int>();
+            listOfUnavailableSeats = new List<int>();
+            _listOfBookings = new List<Booking>();
 
             for (int i = 1; i <= MAX_CAPACITY; ++i)
             {
                 listOfAvailableSeats.Add(i);
             }
-
-
         }
 
-        public void addBookingsToCoach(List<Booking> bookings)
+        public void addBookingToCoach(Booking booking)
         {
-            _listOfBookings = bookings;
-
-            foreach (Booking b in _listOfBookings)
-            {
-                listOfAvailableSeats.Remove(b.Seat);
-            }
+            listOfAvailableSeats.Remove(booking.Seat);
+            listOfUnavailableSeats.Add(booking.Seat);
+            _listOfBookings.Add(booking);
         }
 
         public List<int> getAvailableSeats()

@@ -25,6 +25,7 @@ namespace RailwayPlanningSystem
         private List<String> intermediates;
         
         TrainFactory factory = new TrainFactory();
+        ObjectLists objectLists = new ObjectLists();
 
         public AddTrain()
         {
@@ -93,11 +94,6 @@ namespace RailwayPlanningSystem
                 {
                     throw new Exception("Couldn't create train!");
                 }
-
-
-
-                ObjectLists objectLists = new ObjectLists();
-
 
                 objectLists.Add(t);
 

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Business.TrainClasses;
 
 namespace Business
 {
@@ -15,6 +16,8 @@ namespace Business
         public TimeSpan DepartureTime { get; set; }
         public DateTime DepartureDay { get; set; }
         public bool FirstClass { get; set; }
+
+        public List<Coach> coachList { get; set; }
 
         public Train(
             String trainId, 
@@ -33,6 +36,14 @@ namespace Business
             DepartureTime = departureTime;
             DepartureDay = departureDay;
             FirstClass = firstClass;
+
+            coachList = new List<Coach>();
+            // when expresstrain object is created, create objects for coach
+            for (char coachLetter = 'A'; coachLetter <= 'H'; ++coachLetter)
+            {
+                Coach coach = new Coach(coachLetter);
+                coachList.Add(coach);
+            }
         }
 
         public abstract void printTrain();

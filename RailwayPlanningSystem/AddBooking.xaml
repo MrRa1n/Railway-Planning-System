@@ -17,7 +17,7 @@
         <Label x:Name="lblCoach" Content="Coach:" HorizontalAlignment="Left" Margin="97,364,0,0" VerticalAlignment="Top"/>
         <Label x:Name="lblSeat" Content="Seat:" HorizontalAlignment="Left" Margin="106,395,0,0" VerticalAlignment="Top"/>
         <TextBox x:Name="txtName" HorizontalAlignment="Left" Height="23" Margin="148,80,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
-        <ListBox x:Name="listTrains" HorizontalAlignment="Left" Height="69" Margin="148,114,0,0" VerticalAlignment="Top" Width="120"/>
+        <ListBox x:Name="listTrains" HorizontalAlignment="Left" Height="69" Margin="148,114,0,0" VerticalAlignment="Top" Width="120" SelectionChanged="ListTrains_SelectionChanged"/>
         <ComboBox x:Name="comboDeparture" HorizontalAlignment="Left" Margin="148,192,0,0" VerticalAlignment="Top" Width="120">
             <ComboBoxItem Content="Edinburgh (Waverley)"/>
             <ComboBoxItem Content="London (Kings Cross)"/>

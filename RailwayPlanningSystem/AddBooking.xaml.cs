@@ -13,6 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using Business;
 using Business.BookingClasses;
+using Business.TrainClasses;
 
 namespace RailwayPlanningSystem
 {
@@ -23,6 +24,8 @@ namespace RailwayPlanningSystem
     {
 
         ObjectLists objectLists = new ObjectLists();
+        List<Train> availableTrains;
+
         public AddBooking()
         {
             InitializeComponent();
@@ -30,10 +33,12 @@ namespace RailwayPlanningSystem
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            //load available coaches
-            for (char i = 'a'; i <= 'h'; ++i)
+            //load trains
+            availableTrains = objectLists.getTrains();
+
+            foreach (Train t in availableTrains)
             {
-                comboCoach.Items.Add(i);
+                listTrains.Items.Add(t.TrainID);
             }
         }
 
@@ -54,22 +59,41 @@ namespace RailwayPlanningSystem
                 int.Parse(comboSeat.Text)
                 );
 
-            
+            objectLists.Add(booking);
+            GetSeatList();
+        }
 
-            if (objectLists.BookedSeats(char.Parse(comboCoach.Text), int.Parse(comboSeat.Text)))
+        
+
+        private void ListTrains_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            comboCoach.Items.Clear();
+            foreach (Train t in availableTrains)
             {
-                MessageBox.Show("Seat is taken.");
+                if (listTrains.SelectedItem.ToString() == t.TrainID)
+                {
+                    foreach (Coach c in objectLists.getCoaches())
+                    {
+                        comboCoach.Items.Add(c.coachId);
+                    }
+                }
             }
-            else
-            {
-                objectLists.Add(booking);
-            }
-            
         }
 
         private void ComboCoach_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            
+            GetSeatList();
+        }
+
+        private void GetSeatList()
+        {
+            foreach (Coach c in objectLists.getCoaches())
+            {
+                if (char.Parse(comboCoach.SelectedItem.ToString()) == c.coachId)
+                {
+                    comboSeat.ItemsSource = c.getAvailableSeats();
+                }
+            }
         }
     }
 }
