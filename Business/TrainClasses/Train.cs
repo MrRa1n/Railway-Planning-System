@@ -17,7 +17,7 @@ namespace Business
         public DateTime DepartureDay { get; set; }
         public bool FirstClass { get; set; }
 
-        public List<Coach> coachList { get; set; }
+        public List<Coach> CoachList;
 
         public Train(
             String trainId, 
@@ -26,7 +26,8 @@ namespace Business
             String type, 
             TimeSpan departureTime, 
             DateTime departureDay, 
-            bool firstClass
+            bool firstClass,
+            List<Coach> coachList
             )
         {
             TrainID = trainId;
@@ -36,14 +37,7 @@ namespace Business
             DepartureTime = departureTime;
             DepartureDay = departureDay;
             FirstClass = firstClass;
-
-            coachList = new List<Coach>();
-            // when expresstrain object is created, create objects for coach
-            for (char coachLetter = 'A'; coachLetter <= 'H'; ++coachLetter)
-            {
-                Coach coach = new Coach(coachLetter);
-                coachList.Add(coach);
-            }
+            CoachList = coachList;
         }
 
         public abstract void printTrain();

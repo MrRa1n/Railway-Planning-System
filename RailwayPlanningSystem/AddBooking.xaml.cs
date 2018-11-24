@@ -23,18 +23,19 @@ namespace RailwayPlanningSystem
     public partial class AddBooking : Window
     {
 
-        ObjectLists objectLists = new ObjectLists();
+        ObjectLists _objectLists;
         List<Train> availableTrains;
 
-        public AddBooking()
+        public AddBooking(ObjectLists objectLists)
         {
             InitializeComponent();
+            _objectLists = objectLists;
         }
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
             //load trains
-            availableTrains = objectLists.getTrains();
+            availableTrains = _objectLists.getTrains();
 
             foreach (Train t in availableTrains)
             {
@@ -59,8 +60,9 @@ namespace RailwayPlanningSystem
                 int.Parse(comboSeat.Text)
                 );
 
-            objectLists.Add(booking);
-            GetSeatList();
+            _objectLists.Add(booking);
+            comboCoach.Items.Clear();
+            comboSeat.ItemsSource = null;
         }
 
         
@@ -68,11 +70,12 @@ namespace RailwayPlanningSystem
         private void ListTrains_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             comboCoach.Items.Clear();
+            comboSeat.ItemsSource = null;
             foreach (Train t in availableTrains)
             {
                 if (listTrains.SelectedItem.ToString() == t.TrainID)
                 {
-                    foreach (Coach c in objectLists.getCoaches())
+                    foreach (Coach c in _objectLists.getCoaches())
                     {
                         comboCoach.Items.Add(c.coachId);
                     }
@@ -82,12 +85,17 @@ namespace RailwayPlanningSystem
 
         private void ComboCoach_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            GetSeatList();
+            if (comboCoach.Items.Count > 0)
+            {
+                comboSeat.Items.Clear();
+                GetSeatList();
+            }
+                
         }
 
         private void GetSeatList()
         {
-            foreach (Coach c in objectLists.getCoaches())
+            foreach (Coach c in _objectLists.getCoaches())
             {
                 if (char.Parse(comboCoach.SelectedItem.ToString()) == c.coachId)
                 {

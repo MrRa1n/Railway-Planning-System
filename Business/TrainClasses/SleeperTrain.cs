@@ -10,7 +10,7 @@ namespace Business.TrainClasses
     {
         public List<String> Intermediate { get; set; }
         public bool SleeperCabin { get; set; }
-
+        
         public SleeperTrain(
             String trainId,
             String departure,
@@ -20,10 +20,12 @@ namespace Business.TrainClasses
             DateTime departureDay,
             bool firstClass,
             List<String> intermediate,
-            bool sleeperCabin) : base(trainId, departure, destination, type, departureTime, departureDay, firstClass)
+            bool sleeperCabin,
+            List<Coach> coachList) : base(trainId, departure, destination, type, departureTime, departureDay, firstClass, coachList)
         {
             this.Intermediate = intermediate;
             this.SleeperCabin = sleeperCabin;
+            this.CoachList = coachList;
         }
 
         public override void printTrain()

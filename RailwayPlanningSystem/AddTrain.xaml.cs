@@ -25,11 +25,12 @@ namespace RailwayPlanningSystem
         private List<String> intermediates;
         
         TrainFactory factory = new TrainFactory();
-        ObjectLists objectLists = new ObjectLists();
+        ObjectLists _objectLists;
 
-        public AddTrain()
+        public AddTrain(ObjectLists objectLists)
         {
             InitializeComponent();
+            _objectLists = objectLists;
         }
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
@@ -95,7 +96,7 @@ namespace RailwayPlanningSystem
                     throw new Exception("Couldn't create train!");
                 }
 
-                objectLists.Add(t);
+                _objectLists.Add(t);
 
                 
             }

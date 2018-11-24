@@ -17,11 +17,6 @@ namespace Business.BookingClasses
         public char Coach { get; set; }
         public int Seat { get; set; }
 
-        public Booking()
-        {
-
-        }
-
         public Booking(
             String name, 
             String trainId, 

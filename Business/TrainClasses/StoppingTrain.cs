@@ -18,9 +18,11 @@ namespace Business.TrainClasses
             TimeSpan departureTime,
             DateTime departureDay,
             bool firstClass,
-            List<String> intermediate) : base(trainId, departure, destination, type, departureTime, departureDay, firstClass)
+            List<String> intermediate,
+            List<Coach> coachList) : base(trainId, departure, destination, type, departureTime, departureDay, firstClass, coachList)
         {
-            this.Intermediate = intermediate; 
+            this.Intermediate = intermediate;
+            this.CoachList = coachList;
         }
 
         private String listIntermediates()

@@ -10,6 +10,7 @@ namespace Business.TrainClasses
     {
         private Random rnd = new Random();
         private List<String> trainIds = new List<String>();
+        private List<Coach> coachList;
 
         public String createTrainID(String departure)
         {
@@ -48,15 +49,21 @@ namespace Business.TrainClasses
             bool sleeperCabin)
         {
             String trainId = createTrainID(departure);
-            
+            coachList = new List<Coach>();
+            // when expresstrain object is created, create objects for coach
+            for (char coachLetter = 'A'; coachLetter <= 'H'; ++coachLetter)
+            {
+                Coach coach = new Coach(coachLetter);
+                coachList.Add(coach);
+            }
             switch (type)
             {
                 case "Express":
-                    return new ExpressTrain(trainId,departure,destination,type,departureTime,departureDay,firstClass); 
+                    return new ExpressTrain(trainId,departure,destination,type,departureTime,departureDay,firstClass, coachList); 
                 case "Stopping":
-                    return new StoppingTrain(trainId,departure,destination,type,departureTime,departureDay,firstClass,intermediate);
+                    return new StoppingTrain(trainId,departure,destination,type,departureTime,departureDay,firstClass,intermediate, coachList);
                 case "Sleeper":
-                    return new SleeperTrain(trainId,departure,destination,type,departureTime,departureDay,firstClass,intermediate,sleeperCabin);
+                    return new SleeperTrain(trainId,departure,destination,type,departureTime,departureDay,firstClass,intermediate,sleeperCabin, coachList);
                 default:
                     return null;
             }

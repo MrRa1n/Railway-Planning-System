@@ -11,6 +11,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using Business;
 
 namespace RailwayPlanningSystem
 {
@@ -19,6 +20,9 @@ namespace RailwayPlanningSystem
     /// </summary>
     public partial class Main : Window
     {
+
+        private ObjectLists objectLists = new ObjectLists();
+
         public Main()
         {
             InitializeComponent();
@@ -26,13 +30,13 @@ namespace RailwayPlanningSystem
 
         private void btnAddTrain_Click(object sender, RoutedEventArgs e)
         {
-            AddTrain frmAddTrain = new AddTrain();
+            AddTrain frmAddTrain = new AddTrain(objectLists);
             frmAddTrain.ShowDialog();
         }
 
         private void btnAddBooking_Click(object sender, RoutedEventArgs e)
         {
-            AddBooking frmAddBooking = new AddBooking();
+            AddBooking frmAddBooking = new AddBooking(objectLists);
             frmAddBooking.ShowDialog();
         }
     }

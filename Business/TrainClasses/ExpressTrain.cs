@@ -17,9 +17,11 @@ namespace Business.TrainClasses
             String type,
             TimeSpan departureTime,
             DateTime departureDay,
-            bool firstClass) : base(trainId, departure, destination, type, departureTime, departureDay, firstClass)
+            bool firstClass,
+            List<Coach> coachList
+            ) : base(trainId, departure, destination, type, departureTime, departureDay, firstClass, coachList)
         {
-            
+            this.CoachList = coachList;
         }
 
 

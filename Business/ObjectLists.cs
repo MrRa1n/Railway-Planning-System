@@ -12,8 +12,7 @@ namespace Business
     {
         private static List<Train> listOfTrains = new List<Train>();
         private static List<Booking> listOfBookings = new List<Booking>();
-        private static List<Coach> listOfCoaches = new List<Coach>();
-        private Coach coach;
+        private List<Coach> listOfCoaches = new List<Coach>();
 
         public ObjectLists() { }
 
@@ -24,7 +23,7 @@ namespace Business
                 if (obj is Train)
                 {
                     listOfTrains.Add((Train)obj);
-                    listOfCoaches = ((Train)obj).coachList;
+                    listOfCoaches = ((Train)obj).CoachList;
                 }
                 else if (obj is Booking)
                 {
