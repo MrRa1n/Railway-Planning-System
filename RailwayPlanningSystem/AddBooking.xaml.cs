@@ -23,23 +23,25 @@ namespace RailwayPlanningSystem
     public partial class AddBooking : Window
     {
 
-        ObjectLists _objectLists;
+        TrainSingleton trainSingleton = TrainSingleton.Instance;
         List<Train> availableTrains;
+        private string selectedTrainId;
+        private char selectedCoachId;
 
-        public AddBooking(ObjectLists objectLists)
+        public AddBooking()
         {
             InitializeComponent();
-            _objectLists = objectLists;
         }
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
             //load trains
-            availableTrains = _objectLists.getTrains();
+            availableTrains = trainSingleton.getTrains();
 
+            // populate list with each trainID
             foreach (Train t in availableTrains)
             {
-                listTrains.Items.Add(t.TrainID);
+                //listTrains.Items.Add(t.TrainID);
             }
         }
 
@@ -51,7 +53,7 @@ namespace RailwayPlanningSystem
 
             Booking booking = new Booking(
                 txtName.Text,
-                "gfhgf",
+                selectedTrainId,
                 comboDeparture.Text,
                 comboArrival.Text,
                 firstClass,
@@ -60,7 +62,8 @@ namespace RailwayPlanningSystem
                 int.Parse(comboSeat.Text)
                 );
 
-            _objectLists.Add(booking);
+            trainSingleton.Add(booking);
+
             comboCoach.Items.Clear();
             comboSeat.ItemsSource = null;
         }
@@ -71,35 +74,67 @@ namespace RailwayPlanningSystem
         {
             comboCoach.Items.Clear();
             comboSeat.ItemsSource = null;
-            foreach (Train t in availableTrains)
+
+            selectedTrainId = listTrains.SelectedItem.ToString();
+            Train t = trainSingleton.FindTrain(selectedTrainId);
+
+
+            foreach (Coach coach in t.CoachList)
             {
-                if (listTrains.SelectedItem.ToString() == t.TrainID)
-                {
-                    foreach (Coach c in _objectLists.getCoaches())
-                    {
-                        comboCoach.Items.Add(c.coachId);
-                    }
-                }
+                comboCoach.Items.Add(coach.coachId);
             }
+                
+            
         }
 
         private void ComboCoach_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            if (comboCoach.Items.Count > 0)
-            {
-                comboSeat.Items.Clear();
-                GetSeatList();
-            }
+            
+            if (comboCoach.SelectedItem == null)
+                return;
+
+            selectedCoachId = char.Parse(comboCoach.SelectedItem.ToString());
+            Train train = trainSingleton.FindTrain(selectedTrainId);
+            Coach coach = train.FindCoach(selectedCoachId);
+            comboSeat.ItemsSource = coach.getAvailableSeats();
+                    
                 
+            
         }
 
-        private void GetSeatList()
+        // load trains into listbox based on what options are selected
+        private void BtnFindTrains_Click(object sender, RoutedEventArgs e)
         {
-            foreach (Coach c in _objectLists.getCoaches())
+            listTrains.Items.Clear();
+            List<String> inters;
+            foreach (Train t in availableTrains)
             {
-                if (char.Parse(comboCoach.SelectedItem.ToString()) == c.coachId)
+                inters = trainSingleton.getIntermediates(t);
+                if (inters == null)
+                    listTrains.Items.Add(t.TrainID);
+                else if (t.Departure == comboDeparture.Text || inters.Contains(comboDeparture.Text) 
+                    && t.Destination == comboArrival.Text || inters.Contains(comboArrival.Text))
                 {
-                    comboSeat.ItemsSource = c.getAvailableSeats();
+                    if (rdoFirstClassYes.IsChecked == true && t.FirstClass == true)
+                    {
+                        if (rdoSleeperYes.IsChecked == true && t.Type == "Sleeper")
+                        {
+                            listTrains.Items.Add(t.TrainID);
+                            
+                        }
+                        else
+                        {
+                            listTrains.Items.Add(t.TrainID);
+                        }
+                    }
+                    else
+                    {
+                        listTrains.Items.Add(t.TrainID);
+                    }
+                }
+                else
+                {
+                    listTrains.Items.Add(t.TrainID);
                 }
             }
         }

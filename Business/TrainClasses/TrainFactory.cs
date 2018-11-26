@@ -14,16 +14,9 @@ namespace Business.TrainClasses
 
         public String createTrainID(String departure)
         {
-            String trainId;
+            String trainId = (departure.Contains("Edinburgh")) ? "1E" : "1S";
 
-            if (departure.Contains("Edinburgh"))
-                trainId = "1E";
-            else
-                trainId = "1S";
-
-            
             trainId += rnd.Next(99).ToString("00");
-
 
             foreach (String id in trainIds.ToList())
             {

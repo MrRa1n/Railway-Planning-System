@@ -21,7 +21,7 @@ namespace RailwayPlanningSystem
     public partial class Main : Window
     {
 
-        private ObjectLists objectLists = new ObjectLists();
+        private TrainSingleton trainSingleton = TrainSingleton.Instance;
 
         public Main()
         {
@@ -30,13 +30,13 @@ namespace RailwayPlanningSystem
 
         private void btnAddTrain_Click(object sender, RoutedEventArgs e)
         {
-            AddTrain frmAddTrain = new AddTrain(objectLists);
+            AddTrain frmAddTrain = new AddTrain();
             frmAddTrain.ShowDialog();
         }
 
         private void btnAddBooking_Click(object sender, RoutedEventArgs e)
         {
-            AddBooking frmAddBooking = new AddBooking(objectLists);
+            AddBooking frmAddBooking = new AddBooking();
             frmAddBooking.ShowDialog();
         }
     }

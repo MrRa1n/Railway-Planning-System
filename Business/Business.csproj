@@ -42,7 +42,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BookingClasses\Booking.cs" />
-    <Compile Include="ObjectLists.cs" />
+    <Compile Include="TrainSingleton.cs" />
     <Compile Include="TrainClasses\Coach.cs" />
     <Compile Include="TrainClasses\ExpressTrain.cs" />
     <Compile Include="TrainClasses\SleeperTrain.cs" />

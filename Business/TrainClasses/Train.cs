@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Business.TrainClasses;
+using Business.BookingClasses;
 
 namespace Business
 {
@@ -17,7 +18,7 @@ namespace Business
         public DateTime DepartureDay { get; set; }
         public bool FirstClass { get; set; }
 
-        public List<Coach> CoachList;
+        public List<Coach> CoachList { get; set; }
 
         public Train(
             String trainId, 
@@ -38,6 +39,22 @@ namespace Business
             DepartureDay = departureDay;
             FirstClass = firstClass;
             CoachList = coachList;
+        }
+
+        public void Add(Booking booking)
+        {
+            Coach coach = FindCoach(booking.Coach);
+            coach.addBookingToCoach(booking);
+        }
+
+        public Coach FindCoach(char coachId)
+        {
+            foreach (Coach c in CoachList)
+            {
+                if (coachId.Equals(c.coachId))
+                    return c;
+            }
+            return null;
         }
 
         public abstract void printTrain();

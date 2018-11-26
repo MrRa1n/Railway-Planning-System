@@ -47,6 +47,7 @@
         </ComboBox>
         <ComboBox x:Name="comboSeat" HorizontalAlignment="Left" Margin="148,398,0,0" VerticalAlignment="Top" Width="120"/>
         <Button x:Name="btnAddBooking" Content="Add Booking" HorizontalAlignment="Left" Margin="148,462,0,0" VerticalAlignment="Top" Width="120" Height="30" Click="BtnAddBooking_Click"/>
+        <Button x:Name="btnFindTrains" Content="Find Trains" HorizontalAlignment="Left" Margin="283,447,0,0" VerticalAlignment="Top" Width="75" Click="BtnFindTrains_Click"/>
 
     </Grid>
 </Window>

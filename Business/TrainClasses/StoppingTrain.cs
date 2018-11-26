@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Business.TrainClasses
 {
-    class StoppingTrain : Train
+    public class StoppingTrain : Train
     {
         public List<String> Intermediate { get; set; }
 
@@ -29,6 +29,8 @@ namespace Business.TrainClasses
         {
             return String.Join(", ", Intermediate);
         }
+
+        
 
         public override void printTrain()
         {

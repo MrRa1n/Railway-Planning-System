@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Business.TrainClasses
 {
-    class SleeperTrain : Train
+    public class SleeperTrain : Train
     {
         public List<String> Intermediate { get; set; }
         public bool SleeperCabin { get; set; }

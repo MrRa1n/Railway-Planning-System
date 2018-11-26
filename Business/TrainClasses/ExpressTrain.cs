@@ -6,9 +6,8 @@ using System.Threading.Tasks;
 
 namespace Business.TrainClasses
 {
-    class ExpressTrain : Train
+    public class ExpressTrain : Train
     {
-        
 
         public ExpressTrain(
             String trainId,
@@ -19,7 +18,15 @@ namespace Business.TrainClasses
             DateTime departureDay,
             bool firstClass,
             List<Coach> coachList
-            ) : base(trainId, departure, destination, type, departureTime, departureDay, firstClass, coachList)
+            ) : base(
+                trainId, 
+                departure, 
+                destination, 
+                type, 
+                departureTime, 
+                departureDay, 
+                firstClass, 
+                coachList)
         {
             this.CoachList = coachList;
         }
