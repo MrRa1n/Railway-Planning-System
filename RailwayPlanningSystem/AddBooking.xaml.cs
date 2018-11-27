@@ -41,102 +41,75 @@ namespace RailwayPlanningSystem
             // populate list with each trainID
             foreach (Train t in availableTrains)
             {
-                //listTrains.Items.Add(t.TrainID);
+                listTrains.Items.Add(t.TrainID);
             }
         }
 
         private void BtnAddBooking_Click(object sender, RoutedEventArgs e)
         {
+            try
+            {
+                bool firstClass = (rdoFirstClassYes.IsChecked == true) ? true : false;
+                bool sleeperCabin = (rdoSleeperYes.IsChecked == true) ? true : false;
 
-            bool firstClass = (rdoFirstClassYes.IsChecked == true) ? true : false;
-            bool sleeperCabin = (rdoSleeperYes.IsChecked == true) ? true : false;
+                Booking booking = new Booking(
+                    txtName.Text,
+                    selectedTrainId,
+                    comboDeparture.Text,
+                    comboArrival.Text,
+                    firstClass,
+                    sleeperCabin,
+                    char.Parse(comboCoach.Text),
+                    int.Parse(comboSeat.Text)
+                    );
 
-            Booking booking = new Booking(
-                txtName.Text,
-                selectedTrainId,
-                comboDeparture.Text,
-                comboArrival.Text,
-                firstClass,
-                sleeperCabin,
-                char.Parse(comboCoach.Text),
-                int.Parse(comboSeat.Text)
-                );
+                trainSingleton.Add(booking);
 
-            trainSingleton.Add(booking);
+                comboCoach.Items.Clear();
+                comboSeat.ItemsSource = null;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
 
-            comboCoach.Items.Clear();
-            comboSeat.ItemsSource = null;
         }
 
         
 
         private void ListTrains_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+            // clear boxes
             comboCoach.Items.Clear();
             comboSeat.ItemsSource = null;
+            comboDeparture.ItemsSource = null;
+            comboArrival.ItemsSource = null;
 
+            // get id of selected train and return train info
             selectedTrainId = listTrains.SelectedItem.ToString();
             Train t = trainSingleton.FindTrain(selectedTrainId);
 
+            //Fill combobox with stations set in train form
+            comboDeparture.ItemsSource = trainSingleton.getDepartureStations(t);
+            comboArrival.ItemsSource = trainSingleton.getArrivalStations(t);
 
+            // add available coaches to combobox
             foreach (Coach coach in t.CoachList)
             {
                 comboCoach.Items.Add(coach.coachId);
             }
-                
-            
         }
 
         private void ComboCoach_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             
-            if (comboCoach.SelectedItem == null)
-                return;
+            if (comboCoach.SelectedItem == null) return;
 
             selectedCoachId = char.Parse(comboCoach.SelectedItem.ToString());
             Train train = trainSingleton.FindTrain(selectedTrainId);
             Coach coach = train.FindCoach(selectedCoachId);
             comboSeat.ItemsSource = coach.getAvailableSeats();
-                    
-                
-            
-        }
 
-        // load trains into listbox based on what options are selected
-        private void BtnFindTrains_Click(object sender, RoutedEventArgs e)
-        {
-            listTrains.Items.Clear();
-            List<String> inters;
-            foreach (Train t in availableTrains)
-            {
-                inters = trainSingleton.getIntermediates(t);
-                if (inters == null)
-                    listTrains.Items.Add(t.TrainID);
-                else if (t.Departure == comboDeparture.Text || inters.Contains(comboDeparture.Text) 
-                    && t.Destination == comboArrival.Text || inters.Contains(comboArrival.Text))
-                {
-                    if (rdoFirstClassYes.IsChecked == true && t.FirstClass == true)
-                    {
-                        if (rdoSleeperYes.IsChecked == true && t.Type == "Sleeper")
-                        {
-                            listTrains.Items.Add(t.TrainID);
-                            
-                        }
-                        else
-                        {
-                            listTrains.Items.Add(t.TrainID);
-                        }
-                    }
-                    else
-                    {
-                        listTrains.Items.Add(t.TrainID);
-                    }
-                }
-                else
-                {
-                    listTrains.Items.Add(t.TrainID);
-                }
-            }
         }
     }
 }

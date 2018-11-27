@@ -12,36 +12,24 @@ namespace Business.TrainClasses
         private List<String> trainIds = new List<String>();
         private List<Coach> coachList;
 
-        public String createTrainID(String departure)
+        private String createTrainID(String departure)
         {
+            // set TrainID prefix based on departure station
             String trainId = (departure.Contains("Edinburgh")) ? "1E" : "1S";
-
+            // append random number to prefix
             trainId += rnd.Next(99).ToString("00");
-
+            // if TrainID exists in list call function again
             foreach (String id in trainIds.ToList())
             {
-                if (id.Equals(trainId))
-                {
-                    return createTrainID(departure);
-                }
+                if (id.Equals(trainId)) return createTrainID(departure);
             }
-
+            // add TrainID to list and return it
             trainIds.Add(trainId);
-
             return trainId;
         }
 
-        public Train CreateTrain(
-            String departure,
-            String destination,
-            String type,
-            TimeSpan departureTime,
-            DateTime departureDay,
-            bool firstClass,
-            List<String> intermediate,
-            bool sleeperCabin)
+        private List<Coach> buildCoaches(ref List<Coach> coachList)
         {
-            String trainId = createTrainID(departure);
             coachList = new List<Coach>();
             // when expresstrain object is created, create objects for coach
             for (char coachLetter = 'A'; coachLetter <= 'H'; ++coachLetter)
@@ -49,14 +37,20 @@ namespace Business.TrainClasses
                 Coach coach = new Coach(coachLetter);
                 coachList.Add(coach);
             }
+            return coachList;
+        }
+
+        public Train BuildTrain(String departure, String destination, String type, TimeSpan departureTime, DateTime departureDay, bool firstClass, List<String> intermediate, bool sleeperCabin)
+        {
+            
             switch (type)
             {
                 case "Express":
-                    return new ExpressTrain(trainId,departure,destination,type,departureTime,departureDay,firstClass, coachList); 
+                    return new ExpressTrain(createTrainID(departure), departure, destination, type, departureTime, departureDay, firstClass, buildCoaches(ref coachList)); 
                 case "Stopping":
-                    return new StoppingTrain(trainId,departure,destination,type,departureTime,departureDay,firstClass,intermediate, coachList);
+                    return new StoppingTrain(createTrainID(departure), departure, destination, type, departureTime, departureDay, firstClass, buildCoaches(ref coachList), intermediate);
                 case "Sleeper":
-                    return new SleeperTrain(trainId,departure,destination,type,departureTime,departureDay,firstClass,intermediate,sleeperCabin, coachList);
+                    return new SleeperTrain(createTrainID(departure), departure, destination, type, departureTime, departureDay, firstClass, buildCoaches(ref coachList), intermediate, sleeperCabin);
                 default:
                     return null;
             }

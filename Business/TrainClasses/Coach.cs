@@ -15,9 +15,6 @@ namespace Business.TrainClasses
         private List<Booking> _listOfBookings;
         public char coachId { get; set; }
 
-        // make this a singleton?
-
-
         public Coach(char c)
         {
             // object gets created and assigned an id

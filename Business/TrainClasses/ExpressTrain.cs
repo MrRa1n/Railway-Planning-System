@@ -8,34 +8,13 @@ namespace Business.TrainClasses
 {
     public class ExpressTrain : Train
     {
+        // default constructor
+        public ExpressTrain() { }
 
-        public ExpressTrain(
-            String trainId,
-            String departure,
-            String destination,
-            String type,
-            TimeSpan departureTime,
-            DateTime departureDay,
-            bool firstClass,
-            List<Coach> coachList
-            ) : base(
-                trainId, 
-                departure, 
-                destination, 
-                type, 
-                departureTime, 
-                departureDay, 
-                firstClass, 
-                coachList)
+        public ExpressTrain(String trainId,String departure,String destination,String type,TimeSpan departureTime,DateTime departureDay,bool firstClass,List<Coach> coachList)
+            : base(trainId, departure, destination, type, departureTime, departureDay, firstClass, coachList)
         {
-            this.CoachList = coachList;
-        }
-
-
-
-        public override void printTrain()
-        {
-            Console.WriteLine("Express Train Created");
+            CoachList = coachList;
         }
     }
 }

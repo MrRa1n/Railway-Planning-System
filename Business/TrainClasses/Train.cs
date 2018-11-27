@@ -10,26 +10,123 @@ namespace Business
 {
     public abstract class Train
     {
-        public String TrainID { get; private set; }
-        public String Departure { get; private set; }
-        public String Destination { get; set; }
-        public String Type { get; set; }
-        public TimeSpan DepartureTime { get; set; }
-        public DateTime DepartureDay { get; set; }
-        public bool FirstClass { get; set; }
+        // Private variables
+        private String _trainId;
+        private String _departure;
+        private String _destination;
+        private String _type;
+        private TimeSpan _departureTime;
+        private DateTime _departureDay;
+        private bool _firstClass;
+        private List<Coach> _coachList;
 
-        public List<Coach> CoachList { get; set; }
+        // Getters and Setters
+        public String TrainID
+        {
+            get { return _trainId; }
+            set
+            {
+                if (String.IsNullOrWhiteSpace(value))
+                {
+                    throw new ArgumentNullException("Train must have an ID!");
+                }
+                _trainId = value;
+            }
+        }
 
-        public Train(
-            String trainId, 
-            String departure, 
-            String destination, 
-            String type, 
-            TimeSpan departureTime, 
-            DateTime departureDay, 
-            bool firstClass,
-            List<Coach> coachList
-            )
+        public String Departure
+        {
+            get { return _departure; }
+            set
+            {
+                if (String.IsNullOrWhiteSpace(value))
+                {
+                    throw new ArgumentNullException("Please select a departure station!");
+                }
+                _departure = value;
+            }
+        }
+
+        public String Destination
+        {
+            get { return _destination; }
+            set
+            {
+                if (String.IsNullOrWhiteSpace(value))
+                {
+                    throw new ArgumentNullException("Please select a destination!");
+                }
+                _destination = value;
+            }
+        }
+        public String Type
+        {
+            get { return _type; }
+            set
+            {
+                if (String.IsNullOrWhiteSpace(value))
+                {
+                    throw new ArgumentNullException("Please select a train type!");
+                }
+                _type = value;
+            }
+        }
+
+        public TimeSpan DepartureTime
+        {
+            get { return _departureTime; }
+            set
+            {
+                if (value == null)
+                {
+                    throw new ArgumentNullException("Please select a departure time!");
+                }
+                else if (this is SleeperTrain && (value > TimeSpan.Parse("01:00") && value < TimeSpan.Parse("21:00")))
+                {
+                    throw new ArgumentException("This train can only depart between 21:00 and 01:00");
+                }
+                _departureTime = value;
+            }
+        }
+        public DateTime DepartureDay
+        {
+            get { return _departureDay.Date; }
+            set
+            {
+                if (value == null)
+                {
+                    throw new ArgumentNullException("Please select a departure date!");
+                }
+                else if (value <= DateTime.Now)
+                {
+                    throw new ArgumentException("Please select a date in the future!");
+                }
+                _departureDay = value.Date;
+            }
+        }
+
+        public bool FirstClass
+        {
+            get { return _firstClass; }
+            set
+            {
+                _firstClass = value;
+            }
+        }
+
+        public List<Coach> CoachList
+        {
+            get { return _coachList; }
+            set
+            {
+                _coachList = value ?? throw new ArgumentNullException("No coaches available for train!");
+            }
+        }
+
+        // Constructors
+        public Train() { }
+
+        public Train(String trainId, String departure, String destination, String type, TimeSpan departureTime, DateTime departureDay, bool firstClass, List<Coach> coachList)
         {
             TrainID = trainId;
             Departure = departure;
@@ -41,6 +138,7 @@ namespace Business
             CoachList = coachList;
         }
 
+        // Public methods
         public void Add(Booking booking)
         {
             Coach coach = FindCoach(booking.Coach);
@@ -56,7 +154,5 @@ namespace Business
             }
             return null;
         }
-
-        public abstract void printTrain();
     }
 }

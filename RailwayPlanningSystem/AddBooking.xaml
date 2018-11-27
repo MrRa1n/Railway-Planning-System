@@ -19,20 +19,10 @@
         <TextBox x:Name="txtName" HorizontalAlignment="Left" Height="23" Margin="148,80,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
         <ListBox x:Name="listTrains" HorizontalAlignment="Left" Height="69" Margin="148,114,0,0" VerticalAlignment="Top" Width="120" SelectionChanged="ListTrains_SelectionChanged"/>
         <ComboBox x:Name="comboDeparture" HorizontalAlignment="Left" Margin="148,192,0,0" VerticalAlignment="Top" Width="120">
-            <ComboBoxItem Content="Edinburgh (Waverley)"/>
-            <ComboBoxItem Content="London (Kings Cross)"/>
-            <ComboBoxItem Content="Peterborough"/>
-            <ComboBoxItem Content="Darlington"/>
-            <ComboBoxItem Content="York"/>
-            <ComboBoxItem Content="Newcastle"/>
+            
         </ComboBox>
         <ComboBox x:Name="comboArrival" HorizontalAlignment="Left" Margin="148,222,0,0" VerticalAlignment="Top" Width="120">
-            <ComboBoxItem Content="Edinburgh (Waverley)"/>
-            <ComboBoxItem Content="London (Kings Cross)"/>
-            <ComboBoxItem Content="Peterborough"/>
-            <ComboBoxItem Content="Darlington"/>
-            <ComboBoxItem Content="York"/>
-            <ComboBoxItem Content="Newcastle"/>
+           
         </ComboBox>
         <StackPanel HorizontalAlignment="Left" Height="38" Margin="148,262,0,0" VerticalAlignment="Top" Width="120">
             <RadioButton x:Name="rdoFirstClassYes" Content="Yes" Margin="0,0,0,5"/>
@@ -47,7 +37,6 @@
         </ComboBox>
         <ComboBox x:Name="comboSeat" HorizontalAlignment="Left" Margin="148,398,0,0" VerticalAlignment="Top" Width="120"/>
         <Button x:Name="btnAddBooking" Content="Add Booking" HorizontalAlignment="Left" Margin="148,462,0,0" VerticalAlignment="Top" Width="120" Height="30" Click="BtnAddBooking_Click"/>
-        <Button x:Name="btnFindTrains" Content="Find Trains" HorizontalAlignment="Left" Margin="283,447,0,0" VerticalAlignment="Top" Width="75" Click="BtnFindTrains_Click"/>
 
     </Grid>
 </Window>

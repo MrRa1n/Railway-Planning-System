@@ -65,6 +65,45 @@ namespace Business
             return null;
         }
 
+        public List<String> getDepartureStations(Train t)
+        {
+            List<String> st = getAllStations(t);
+            st.Remove(t.Destination);
+            return st;
+        }
+
+        public List<String> getArrivalStations(Train t)
+        {
+            List<String> st = getAllStations(t);
+            st.Remove(t.Departure);
+            return st;
+        }
+
+        public List<String> getAllStations(Train t)
+        {
+            List<String> listOfStations = new List<String>();
+            if (t is StoppingTrain)
+            {
+                listOfStations.Add(t.Departure);
+                listOfStations.AddRange(((StoppingTrain)t).Intermediate);
+                listOfStations.Add(t.Destination);
+                return listOfStations;
+            }   
+            else if (t is SleeperTrain)
+            {
+                listOfStations.Add(t.Departure);
+                listOfStations.AddRange(((SleeperTrain)t).Intermediate);
+                listOfStations.Add(t.Destination);
+                return listOfStations;
+            }
+            else
+            {
+                listOfStations.Add(t.Departure);
+                listOfStations.Add(t.Destination);
+                return listOfStations;
+            }
+        }
+
         public List<String> getIntermediates(Train t)
         {
             if (t is StoppingTrain)

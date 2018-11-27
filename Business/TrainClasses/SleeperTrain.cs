@@ -8,29 +8,39 @@ namespace Business.TrainClasses
 {
     public class SleeperTrain : Train
     {
-        public List<String> Intermediate { get; set; }
-        public bool SleeperCabin { get; set; }
-        
-        public SleeperTrain(
-            String trainId,
-            String departure,
-            String destination,
-            String type,
-            TimeSpan departureTime,
-            DateTime departureDay,
-            bool firstClass,
-            List<String> intermediate,
-            bool sleeperCabin,
-            List<Coach> coachList) : base(trainId, departure, destination, type, departureTime, departureDay, firstClass, coachList)
+        // Private properties
+        private List<String> _intermediate;
+        private bool _sleeperCabin;
+
+        //Public properties
+        public List<String> Intermediate
         {
-            this.Intermediate = intermediate;
-            this.SleeperCabin = sleeperCabin;
-            this.CoachList = coachList;
+            get { return _intermediate; }
+            set
+            {
+                _intermediate = value;
+            }
         }
 
-        public override void printTrain()
+        public bool SleeperCabin
         {
-            Console.WriteLine("Sleeper");
+            get { return _sleeperCabin; }
+            set
+            {
+                _sleeperCabin = value;
+            }
         }
+        
+        // default constructor
+        public SleeperTrain() { }
+
+        public SleeperTrain(String trainId, String departure, String destination, String type, TimeSpan departureTime, DateTime departureDay, bool firstClass, List<Coach> coachList, List<String> intermediate, bool sleeperCabin)
+            : base(trainId, departure, destination, type, departureTime, departureDay, firstClass, coachList)
+        {
+            Intermediate = intermediate;
+            SleeperCabin = sleeperCabin;
+            CoachList = coachList;
+        }
+
     }
 }

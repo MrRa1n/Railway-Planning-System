@@ -77,9 +77,7 @@ namespace RailwayPlanningSystem
                 bool firstClass = (rdoFirstClassYes.IsChecked == true) ? true : false;
                 bool sleeperCabin = (rdoSleeperYes.IsChecked == true) ? true : false;
 
-                
-
-                Train t = factory.CreateTrain(
+                Train t = factory.BuildTrain(
                     comboDeparture.Text,
                     comboDestination.Text,
                     ((ComboBoxItem)comboType.SelectedItem).Content.ToString(),
@@ -96,8 +94,10 @@ namespace RailwayPlanningSystem
                 }
 
                 trainSingleton.Add(t);
-
-                
+            }
+            catch (FormatException)
+            {
+                return;
             }
             catch (Exception ex)
             {

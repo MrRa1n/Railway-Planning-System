@@ -8,43 +8,27 @@ namespace Business.TrainClasses
 {
     public class StoppingTrain : Train
     {
-        public List<String> Intermediate { get; set; }
+        // Private properties
+        private List<String> _intermediate;
 
-        public StoppingTrain(
-            String trainId,
-            String departure,
-            String destination,
-            String type,
-            TimeSpan departureTime,
-            DateTime departureDay,
-            bool firstClass,
-            List<String> intermediate,
-            List<Coach> coachList) : base(trainId, departure, destination, type, departureTime, departureDay, firstClass, coachList)
+        //Public properties
+        public List<String> Intermediate
         {
-            this.Intermediate = intermediate;
-            this.CoachList = coachList;
+            get { return _intermediate; }
+            set
+            {
+                _intermediate = value;
+            }
         }
 
-        private String listIntermediates()
-        {
-            return String.Join(", ", Intermediate);
-        }
+        // default constructor
+        public StoppingTrain() { }
 
-        
-
-        public override void printTrain()
+        public StoppingTrain(String trainId,String departure,String destination,String type,TimeSpan departureTime,DateTime departureDay,bool firstClass,List<Coach> coachList, List<String> intermediate)
+            : base(trainId, departure, destination, type, departureTime, departureDay, firstClass, coachList)
         {
-            Console.WriteLine("--- Stopping Train ---");
-            Console.WriteLine(
-                TrainID + "\n" +
-                Departure + "\n" +
-                Destination + "\n" +
-                Type + "\n" +
-                DepartureTime + "\n" +
-                DepartureDay + "\n" +
-                FirstClass + "\n" +
-                listIntermediates()
-                );
+            Intermediate = intermediate;
+            CoachList = coachList;
         }
     }
 }
