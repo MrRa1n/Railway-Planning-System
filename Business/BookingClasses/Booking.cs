@@ -8,6 +8,7 @@ namespace Business.BookingClasses
 {
     public class Booking
     {
+        private TrainSingleton trainSingleton = TrainSingleton.Instance;
 
         // private properties
         private String _name;
@@ -78,6 +79,10 @@ namespace Business.BookingClasses
             get { return _firstClass; }
             set
             {
+                if (value && !checkIfTrainHasFirstClass())
+                {
+                    throw new ArgumentException("The selected train does not offer First Class!");
+                }
                 _firstClass = value;
             }
         }
@@ -88,6 +93,10 @@ namespace Business.BookingClasses
             get { return _sleeperCabin; }
             set
             {
+                if (value && !checkIfTrainHasSleeperCabin())
+                {
+                    throw new ArgumentException("The selected train does not offer Sleeper Cabin!");
+                }
                 _sleeperCabin = value;
             }
         }
@@ -127,6 +136,22 @@ namespace Business.BookingClasses
             SleeperCabin = sleeperCabin;
             Coach = coach;
             Seat = seat;
+        }
+
+        private bool checkIfTrainHasFirstClass()
+        {
+            if (trainSingleton.FindTrain(_trainId).FirstClass)
+                return true;
+
+            return false;
+        }
+
+        private bool checkIfTrainHasSleeperCabin()
+        {
+            if (trainSingleton.FindTrain(_trainId).Type == "Sleeper")
+                return true;
+
+            return false;
         }
     }
 }

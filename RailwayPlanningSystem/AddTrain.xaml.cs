@@ -22,7 +22,7 @@ namespace RailwayPlanningSystem
     /// </summary>
     public partial class AddTrain : Window
     {
-        private List<String> intermediates;
+        private List<String> intermediates = null;
         
         TrainFactory factory = new TrainFactory();
         TrainSingleton trainSingleton = TrainSingleton.Instance;
@@ -37,6 +37,7 @@ namespace RailwayPlanningSystem
             comboDeparture.SelectedIndex = 0;
             comboDestination.SelectedIndex = 1;
             comboType.SelectedIndex = 0;
+            dateDepartureDay.Text = DateTime.Today.ToString();
             int start = 0;
             for (int i = 1; i <= 48; i++)
             {
@@ -63,26 +64,28 @@ namespace RailwayPlanningSystem
                     throw new Exception("Sleeper Cabin is not available for this train type");
                 }
 
-                // create new list of intermediates here, otherwise list gets appended
-                intermediates = new List<String>();
-
                 // Add selected stations to List
-                foreach (Control control in stackIntermediates.Children)
+                if (stackIntermediates.IsEnabled == true)
                 {
-                    if (((CheckBox)control).IsChecked == true)
-                        intermediates.Add(((CheckBox)control).Content.ToString());
+                    intermediates = new List<String>();
+                    foreach (Control control in stackIntermediates.Children)
+                    {
+                        if (((CheckBox)control).IsChecked == true)
+                            intermediates.Add(((CheckBox)control).Content.ToString());
+                    }
                 }
+                
 
                 TimeSpan time = TimeSpan.Parse(comboDepartureTime.Text);
                 bool firstClass = (rdoFirstClassYes.IsChecked == true) ? true : false;
                 bool sleeperCabin = (rdoSleeperYes.IsChecked == true) ? true : false;
-
+                
                 Train t = factory.BuildTrain(
                     comboDeparture.Text,
                     comboDestination.Text,
-                    ((ComboBoxItem)comboType.SelectedItem).Content.ToString(),
+                    comboType.Text,
                     time,
-                    dateDepartureDay.SelectedDate.Value,
+                    DateTime.Parse(dateDepartureDay.Text),
                     firstClass,
                     intermediates,
                     sleeperCabin

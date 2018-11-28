@@ -34,7 +34,7 @@
             <CheckBox x:Name="chkYork" Content="York" Margin="0,0,5,5"/>
             <CheckBox x:Name="chkNewcastle" Content="Newcastle" Margin="0,0,5,5"/>
         </StackPanel>
-        <DatePicker x:Name="dateDepartureDay" HorizontalAlignment="Left" Margin="128,302,0,0" VerticalAlignment="Top" Width="150"/>
+        <DatePicker x:Name="dateDepartureDay" HorizontalAlignment="Left" Margin="128,302,0,0" VerticalAlignment="Top" Width="150" Text="{Binding DisplayDate, RelativeSource={RelativeSource Self}}"/>
         <ComboBox x:Name="comboDepartureTime" HorizontalAlignment="Left" Margin="128,257,0,0" VerticalAlignment="Top" Width="150"/>
         <StackPanel HorizontalAlignment="Left" Height="42" Margin="128,354,0,0" VerticalAlignment="Top" Width="150">
             <RadioButton x:Name="rdoSleeperYes" Content="Yes" Margin="0,0,0,5"/>
