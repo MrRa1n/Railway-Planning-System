@@ -12,7 +12,6 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using Business;
-
 namespace RailwayPlanningSystem
 {
     /// <summary>
@@ -21,7 +20,7 @@ namespace RailwayPlanningSystem
     public partial class Main : Window
     {
 
-        private TrainSingleton trainSingleton = TrainSingleton.Instance;
+        TrainSingleton trainSingleton = TrainSingleton.Instance;
 
         public Main()
         {
@@ -38,6 +37,16 @@ namespace RailwayPlanningSystem
         {
             AddBooking frmAddBooking = new AddBooking();
             frmAddBooking.ShowDialog();
+        }
+
+        private void BtnSaveTrains_Click(object sender, RoutedEventArgs e)
+        {
+            trainSingleton.serializeTrain();
+        }
+
+        private void BtnLoadTrains_Click(object sender, RoutedEventArgs e)
+        {
+            trainSingleton.deserializeTrain();
         }
     }
 }

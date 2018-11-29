@@ -38,6 +38,7 @@ namespace RailwayPlanningSystem
             comboDestination.SelectedIndex = 1;
             comboType.SelectedIndex = 0;
             dateDepartureDay.Text = DateTime.Today.ToString();
+
             int start = 0;
             for (int i = 1; i <= 48; i++)
             {
@@ -75,8 +76,7 @@ namespace RailwayPlanningSystem
                     }
                 }
                 
-
-                TimeSpan time = TimeSpan.Parse(comboDepartureTime.Text);
+                
                 bool firstClass = (rdoFirstClassYes.IsChecked == true) ? true : false;
                 bool sleeperCabin = (rdoSleeperYes.IsChecked == true) ? true : false;
                 
@@ -84,7 +84,7 @@ namespace RailwayPlanningSystem
                     comboDeparture.Text,
                     comboDestination.Text,
                     comboType.Text,
-                    time,
+                    TimeSpan.Parse(comboDepartureTime.Text),
                     DateTime.Parse(dateDepartureDay.Text),
                     firstClass,
                     intermediates,
@@ -97,14 +97,15 @@ namespace RailwayPlanningSystem
                 }
 
                 trainSingleton.Add(t);
-            }
-            catch (FormatException)
-            {
-                return;
+
+                MessageBox.Show("Train added successfully!");
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message);
+                if (ex is FormatException)
+                    MessageBox.Show("Please select a valid time!");
+                else
+                    MessageBox.Show(ex.Message);
             }
         }
 
@@ -137,6 +138,10 @@ namespace RailwayPlanningSystem
             if (((ComboBoxItem)comboType.SelectedItem).Content.Equals("Express"))
             {
                 stackIntermediates.IsEnabled = false;
+                chkDarlington.IsChecked = false;
+                chkNewcastle.IsChecked = false;
+                chkPeterborough.IsChecked = false;
+                chkYork.IsChecked = false;
             }
             else
             {

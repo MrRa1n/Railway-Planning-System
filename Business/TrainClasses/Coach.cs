@@ -10,9 +10,9 @@ namespace Business.TrainClasses
     public class Coach
     {
         private const int MAX_CAPACITY = 60;
-        public List<int> listOfAvailableSeats;
+        private List<int> listOfAvailableSeats;
         private List<int> listOfUnavailableSeats;
-        private List<Booking> _listOfBookings;
+        public List<Booking> listOfBookings;
         public char coachId { get; set; }
 
         public Coach(char c)
@@ -22,7 +22,7 @@ namespace Business.TrainClasses
 
             listOfAvailableSeats = new List<int>();
             listOfUnavailableSeats = new List<int>();
-            _listOfBookings = new List<Booking>();
+            listOfBookings = new List<Booking>();
 
             for (int i = 1; i <= MAX_CAPACITY; ++i)
             {
@@ -34,7 +34,7 @@ namespace Business.TrainClasses
         {
             listOfAvailableSeats.Remove(booking.Seat);
             listOfUnavailableSeats.Add(booking.Seat);
-            _listOfBookings.Add(booking);
+            listOfBookings.Add(booking);
         }
 
         public List<int> getAvailableSeats()
@@ -44,7 +44,7 @@ namespace Business.TrainClasses
 
         public void printCoachBookings()
         {
-            foreach (Booking b in _listOfBookings)
+            foreach (Booking b in listOfBookings)
                 Console.WriteLine(b.Coach + b.Seat);
         }
     }

@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Newtonsoft.Json;
 using Business.BookingClasses;
 using Business.TrainClasses;
 
@@ -113,5 +115,71 @@ namespace Business
             else
                 return null;
         }
+
+        public double calculateBookingCost(String trainId, String departure, String destination, bool firstClass, bool sleeperCabin)
+        {
+            double bookingCost = 0.00;
+
+            // Check what departure and arrival stations have been selected
+            if (departure.Contains("Edinburgh") && !destination.Contains("London"))
+            {
+                bookingCost = 25;
+            } 
+            else if (!departure.Contains("Edinburgh") && destination.Contains("London"))
+            {
+                bookingCost = 25;
+            }
+            else
+            {
+                bookingCost = 50;
+            }
+            
+            // Add £10 if First Class is selected
+            if (firstClass)
+            {
+                bookingCost += 10;
+            }
+
+            // Add £10 if train type is sleeper, then add £20 if sleeper cabin
+            if (FindTrain(trainId).Type == "Sleeper")
+            {
+                bookingCost += 10;
+                if (sleeperCabin)
+                {
+                    bookingCost += 20;
+                }
+            }
+
+            return bookingCost;
+        }
+
+        public void serializeTrain()
+        {
+            string json = "";
+            json = JsonConvert.SerializeObject(listOfTrains);
+            
+         
+
+            StreamWriter sw = new StreamWriter(@"trains.txt");
+            
+            sw.Write(json);
+
+            sw.Close();
+
+        }
+
+        /*
+         * issue when train is loaded into list - shows there is 1 booking but all seats are still available
+         * 
+         */
+        public void deserializeTrain()
+        {
+            StreamReader sr = new StreamReader(@"trains.txt");
+            string output = sr.ReadToEnd();
+            listOfTrains = JsonConvert.DeserializeObject<List<Train>>(output);
+            
+            Console.WriteLine(listOfTrains);
+        }
     }
+
 }

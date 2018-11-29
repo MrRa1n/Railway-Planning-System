@@ -8,7 +8,7 @@ using Business.BookingClasses;
 
 namespace Business
 {
-    public abstract class Train
+    public class Train
     {
         // Private variables
         private String _trainId;

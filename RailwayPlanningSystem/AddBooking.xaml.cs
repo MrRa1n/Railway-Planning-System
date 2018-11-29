@@ -28,6 +28,8 @@ namespace RailwayPlanningSystem
         private string selectedTrainId;
         private char selectedCoachId;
 
+        double bookingCost = 0.00;
+
         public AddBooking()
         {
             InitializeComponent();
@@ -51,6 +53,15 @@ namespace RailwayPlanningSystem
             {
                 bool firstClass = (rdoFirstClassYes.IsChecked == true) ? true : false;
                 bool sleeperCabin = (rdoSleeperYes.IsChecked == true) ? true : false;
+
+                if (firstClass && !trainSingleton.FindTrain(selectedTrainId).FirstClass)
+                {
+                    throw new ArgumentException("The selected train does not offer First Class!");
+                }
+                if (sleeperCabin && trainSingleton.FindTrain(selectedTrainId).Type != "Sleeper")
+                {
+                    throw new ArgumentException("The selected train does not offer Sleeper Cabin!");
+                }
 
                 Booking booking = new Booking(
                     txtName.Text,
@@ -110,6 +121,13 @@ namespace RailwayPlanningSystem
             Coach coach = train.FindCoach(selectedCoachId);
             comboSeat.ItemsSource = coach.getAvailableSeats();
 
+        }
+
+        private void BtnCalculateFare_Click(object sender, RoutedEventArgs e)
+        {
+            bookingCost = trainSingleton.calculateBookingCost(selectedTrainId, comboDeparture.Text, comboArrival.Text, rdoFirstClassYes.IsChecked.Value, rdoSleeperYes.IsChecked.Value);
+
+            MessageBox.Show("Total ticket price: £" + bookingCost);
         }
     }
 }

@@ -38,11 +38,11 @@
         <ComboBox x:Name="comboDepartureTime" HorizontalAlignment="Left" Margin="128,257,0,0" VerticalAlignment="Top" Width="150"/>
         <StackPanel HorizontalAlignment="Left" Height="42" Margin="128,354,0,0" VerticalAlignment="Top" Width="150">
             <RadioButton x:Name="rdoSleeperYes" Content="Yes" Margin="0,0,0,5"/>
-            <RadioButton x:Name="rdoSleeperNo" Content="No" Margin="0,0,0,5"/>
+            <RadioButton x:Name="rdoSleeperNo" Content="No" Margin="0,0,0,5" IsChecked="True"/>
         </StackPanel>
         <StackPanel HorizontalAlignment="Left" Height="42" Margin="128,402,0,0" VerticalAlignment="Top" Width="150">
             <RadioButton x:Name="rdoFirstClassYes" Content="Yes" Margin="0,0,0,5"/>
-            <RadioButton x:Name="rdoFirstClassNo" Content="No" Margin="0,0,0,5"/>
+            <RadioButton x:Name="rdoFirstClassNo" Content="No" Margin="0,0,0,5" IsChecked="True"/>
         </StackPanel>
         <Button x:Name="btnAddTrain" Content="Add Train" HorizontalAlignment="Left" Height="30" Margin="17,463,0,0" VerticalAlignment="Top" Width="261" Click="btnAddTrain_Click"/>
         <Label Content="Add Train" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" FontSize="24"/>

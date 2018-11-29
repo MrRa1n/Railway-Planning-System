@@ -5,11 +5,13 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:RailwayPlanningSystem"
         mc:Ignorable="d"
-        Title="Main" Height="306.481" Width="365.74">
+        Title="Main" Height="466.181" Width="656.94">
     <Grid Margin="0,0,3.6,0.8">
         <Label x:Name="lblRailwayPlanningSystem" Content="Railway Planning System" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" FontSize="24"/>
-        <Button x:Name="btnAddTrain" Content="Add Train" HorizontalAlignment="Left" Height="40" Margin="86,91,0,0" VerticalAlignment="Top" Width="194" Click="btnAddTrain_Click"/>
-        <Button x:Name="btnAddBooking" Content="Add Booking" HorizontalAlignment="Left" Margin="86,160,0,0" VerticalAlignment="Top" Width="194" Height="40" Click="btnAddBooking_Click"/>
+        <Button x:Name="btnAddTrain" Content="Add Train" HorizontalAlignment="Left" Height="40" Margin="10,57,0,0" VerticalAlignment="Top" Width="194" Click="btnAddTrain_Click"/>
+        <Button x:Name="btnAddBooking" Content="Add Booking" HorizontalAlignment="Left" Margin="237,57,0,0" VerticalAlignment="Top" Width="194" Height="40" Click="btnAddBooking_Click"/>
+        <Button x:Name="btnSaveTrains" Content="Save" HorizontalAlignment="Left" Margin="381,222,0,0" VerticalAlignment="Top" Width="185" Height="50" Click="BtnSaveTrains_Click"/>
+        <Button x:Name="btnLoadTrains" Content="Load" HorizontalAlignment="Left" Margin="400,332,0,0" VerticalAlignment="Top" Width="166" Height="54" Click="BtnLoadTrains_Click"/>
 
     </Grid>
 </Window>
