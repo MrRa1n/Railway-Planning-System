@@ -6,11 +6,27 @@ using System.Threading.Tasks;
 
 namespace Business.TrainClasses
 {
-    public class TrainFactory
+    public class TrainFactorySingleton
     {
         private Random rnd = new Random();
         private List<String> trainIds = new List<String>();
         private List<Coach> coachList;
+
+        private TrainFactorySingleton() { }
+
+        private static TrainFactorySingleton instance;
+
+        public static TrainFactorySingleton Instance
+        {
+            get
+            {
+                if (instance == null)
+                {
+                    instance = new TrainFactorySingleton();
+                }
+                return instance;
+            }
+        }
 
         private String createTrainID(String departure)
         {

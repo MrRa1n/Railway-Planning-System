@@ -22,13 +22,8 @@ namespace RailwayPlanningSystem
     /// </summary>
     public partial class AddBooking : Window
     {
-
-        TrainSingleton trainSingleton = TrainSingleton.Instance;
-        List<Train> availableTrains;
+        private TrainStoreSingleton trainStore = TrainStoreSingleton.Instance;
         private string selectedTrainId;
-        private char selectedCoachId;
-
-        double bookingCost = 0.00;
 
         public AddBooking()
         {
@@ -37,11 +32,8 @@ namespace RailwayPlanningSystem
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            //load trains
-            availableTrains = trainSingleton.getTrains();
-
-            // populate list with each trainID
-            foreach (Train t in availableTrains)
+            // Populate listbox with train IDs when form loads
+            foreach (Train t in trainStore.getTrains())
             {
                 listTrains.Items.Add(t.TrainID);
             }
@@ -51,18 +43,19 @@ namespace RailwayPlanningSystem
         {
             try
             {
+                // Check if FirstClass and Sleeper have been checked and set value
                 bool firstClass = (rdoFirstClassYes.IsChecked == true) ? true : false;
                 bool sleeperCabin = (rdoSleeperYes.IsChecked == true) ? true : false;
 
-                if (firstClass && !trainSingleton.FindTrain(selectedTrainId).FirstClass)
-                {
+                // Throw exception if user tries to book first class on train that doesnt offer it
+                if (firstClass && !trainStore.FindTrain(selectedTrainId).FirstClass)
                     throw new ArgumentException("The selected train does not offer First Class!");
-                }
-                if (sleeperCabin && trainSingleton.FindTrain(selectedTrainId).Type != "Sleeper")
-                {
-                    throw new ArgumentException("The selected train does not offer Sleeper Cabin!");
-                }
 
+                // Throw exception if user tries to book sleeper cabin on train that doesnt offer it
+                if (sleeperCabin && trainStore.FindTrain(selectedTrainId).Type != "Sleeper")
+                    throw new ArgumentException("The selected train does not offer Sleeper Cabin!");
+                
+                // Create new booking
                 Booking booking = new Booking(
                     txtName.Text,
                     selectedTrainId,
@@ -74,14 +67,20 @@ namespace RailwayPlanningSystem
                     int.Parse(comboSeat.Text)
                     );
 
-                trainSingleton.Add(booking);
+                // Store the booking
+                trainStore.Add(booking);
 
-                comboCoach.Items.Clear();
-                comboSeat.ItemsSource = null;
+                // Reset the form fields
+                txtName.Clear();
+                listTrains.SelectedIndex = -1;
+                clearAllFields();
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message);
+                if (ex is ArgumentNullException)
+                    MessageBox.Show("Please select a coach and a seat");
+                else
+                    MessageBox.Show(ex.Message);
             }
 
         }
@@ -90,44 +89,69 @@ namespace RailwayPlanningSystem
 
         private void ListTrains_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            // clear boxes
-            comboCoach.Items.Clear();
-            comboSeat.ItemsSource = null;
-            comboDeparture.ItemsSource = null;
-            comboArrival.ItemsSource = null;
-
-            // get id of selected train and return train info
-            selectedTrainId = listTrains.SelectedItem.ToString();
-            Train t = trainSingleton.FindTrain(selectedTrainId);
-
-            //Fill combobox with stations set in train form
-            comboDeparture.ItemsSource = trainSingleton.getDepartureStations(t);
-            comboArrival.ItemsSource = trainSingleton.getArrivalStations(t);
-
-            // add available coaches to combobox
-            foreach (Coach coach in t.CoachList)
+            try
             {
-                comboCoach.Items.Add(coach.coachId);
+                if (listTrains.SelectedItem == null) return;
+                clearAllFields();
+
+                // Get id of selected train and return train info
+                selectedTrainId = listTrains.SelectedItem.ToString();
+                Train t = trainStore.FindTrain(selectedTrainId);
+
+                // Fill combo box with stations set in train form
+                comboDeparture.ItemsSource = trainStore.getDepartureStations(t);
+                comboArrival.ItemsSource = trainStore.getArrivalStations(t);
+
+                // Add available coaches to combo box
+                foreach (Coach coach in t.CoachList)
+                {
+                    comboCoach.Items.Add(coach.coachId);
+                }
             }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+
         }
 
         private void ComboCoach_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            
-            if (comboCoach.SelectedItem == null) return;
+            try
+            {
+                if (comboCoach.SelectedItem == null) return;
 
-            selectedCoachId = char.Parse(comboCoach.SelectedItem.ToString());
-            Train train = trainSingleton.FindTrain(selectedTrainId);
-            Coach coach = train.FindCoach(selectedCoachId);
-            comboSeat.ItemsSource = coach.getAvailableSeats();
+                // Get the selected coach id
+                char selectedCoachId = char.Parse(comboCoach.SelectedItem.ToString());
 
+                // Get the train information for the selected train id
+                Train train = trainStore.FindTrain(selectedTrainId);
+
+                // Find the coach within the train by its id
+                Coach coach = train.FindCoach(selectedCoachId);
+
+                // Set the item source for combo box to the list of available seats
+                comboSeat.ItemsSource = coach.ListOfAvailableSeats;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
 
         private void BtnCalculateFare_Click(object sender, RoutedEventArgs e)
         {
-            bookingCost = trainSingleton.calculateBookingCost(selectedTrainId, comboDeparture.Text, comboArrival.Text, rdoFirstClassYes.IsChecked.Value, rdoSleeperYes.IsChecked.Value);
+            double bookingCost = trainStore.calculateBookingCost(selectedTrainId, comboDeparture.Text, comboArrival.Text, rdoFirstClassYes.IsChecked.Value, rdoSleeperYes.IsChecked.Value);
 
             MessageBox.Show("Total ticket price: £" + bookingCost);
+        }
+
+        private void clearAllFields()
+        {
+            comboCoach.Items.Clear();
+            comboSeat.ItemsSource = null;
+            comboDeparture.ItemsSource = null;
+            comboArrival.ItemsSource = null;
         }
     }
 }

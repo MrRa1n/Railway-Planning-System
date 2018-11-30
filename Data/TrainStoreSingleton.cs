@@ -10,21 +10,21 @@ using Business.TrainClasses;
 
 namespace Business
 {
-    public class TrainSingleton
+    public class TrainStoreSingleton
     {
         private static List<Train> listOfTrains = new List<Train>();
         
-        private TrainSingleton() {}
+        private TrainStoreSingleton() {}
 
-        private static TrainSingleton instance;
+        private static TrainStoreSingleton instance;
 
-        public static TrainSingleton Instance
+        public static TrainStoreSingleton Instance
         {
             get
             {
                 if (instance == null)
                 {
-                    instance = new TrainSingleton();
+                    instance = new TrainStoreSingleton();
                 }
                 return instance;
             }
@@ -33,7 +33,6 @@ namespace Business
         public void Add(Train t)
         {
             listOfTrains.Add(t);
-            
         }
 
         public void Add(Booking b)
@@ -46,11 +45,12 @@ namespace Business
             return listOfTrains;
         }
 
-        public List<Coach> getCoaches()
+        public List<Coach> getCoaches(String trainId)
         {
-            foreach (Train t in getTrains())
+            foreach (Train t in listOfTrains)
             {
-                return t.CoachList;
+                if (t.TrainID.Equals(trainId))
+                    return t.CoachList;
             }
             return null;
         }
@@ -60,9 +60,7 @@ namespace Business
             foreach (Train t in listOfTrains)
             {
                 if (trainId.Equals(t.TrainID))
-                {
                     return t;
-                }
             }
             return null;
         }
@@ -106,18 +104,24 @@ namespace Business
             }
         }
 
-        public List<String> getIntermediates(Train t)
+        public String IntermediateList(Train t)
         {
             if (t is StoppingTrain)
-                return ((StoppingTrain)t).Intermediate;
-            else if (t is SleeperTrain)
-                return ((SleeperTrain)t).Intermediate;
-            else
-                return null;
+            {
+                return String.Join(", ", ((StoppingTrain)t).Intermediate);
+            }
+            if (t is SleeperTrain)
+            {
+                return String.Join(", ", ((SleeperTrain)t).Intermediate);
+            }
+            return "None";
         }
 
         public double calculateBookingCost(String trainId, String departure, String destination, bool firstClass, bool sleeperCabin)
         {
+            if (trainId == null)
+                throw new ArgumentException("Please provide a Train ID to calculate fare!");
+
             double bookingCost = 0.00;
 
             // Check what departure and arrival stations have been selected
@@ -152,11 +156,12 @@ namespace Business
 
             return bookingCost;
         }
+        JsonSerializerSettings jsonSerializerSettings = new JsonSerializerSettings { TypeNameHandling = TypeNameHandling.All };
 
         public void serializeTrain()
         {
             string json = "";
-            json = JsonConvert.SerializeObject(listOfTrains);
+            json = JsonConvert.SerializeObject(listOfTrains, jsonSerializerSettings);
             
          
 
@@ -176,7 +181,9 @@ namespace Business
         {
             StreamReader sr = new StreamReader(@"trains.txt");
             string output = sr.ReadToEnd();
-            listOfTrains = JsonConvert.DeserializeObject<List<Train>>(output);
+
+            
+            listOfTrains = JsonConvert.DeserializeObject<List<Train>>(output, jsonSerializerSettings);
             
             Console.WriteLine(listOfTrains);
         }
