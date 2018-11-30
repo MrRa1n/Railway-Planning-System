@@ -26,11 +26,11 @@
         </ComboBox>
         <StackPanel HorizontalAlignment="Left" Height="38" Margin="124,248,0,0" VerticalAlignment="Top" Width="120">
             <RadioButton x:Name="rdoFirstClassYes" Content="Yes" Margin="0,0,0,5"/>
-            <RadioButton x:Name="rdoFirstClassNo" Content="No" Margin="0,0,0,5"/>
+            <RadioButton x:Name="rdoFirstClassNo" Content="No" Margin="0,0,0,5" IsChecked="True"/>
         </StackPanel>
         <StackPanel HorizontalAlignment="Left" Height="42" Margin="124,300,0,0" VerticalAlignment="Top" Width="120">
             <RadioButton x:Name="rdoSleeperYes" Content="Yes" Margin="0,0,0,5"/>
-            <RadioButton x:Name="rdoSleeperNo" Content="No" Margin="0,0,0,5"/>
+            <RadioButton x:Name="rdoSleeperNo" Content="No" Margin="0,0,0,5" IsChecked="True"/>
         </StackPanel>
         <ComboBox x:Name="comboCoach" HorizontalAlignment="Left" Margin="124,353,0,0" VerticalAlignment="Top" Width="152" SelectionChanged="ComboCoach_SelectionChanged">
 

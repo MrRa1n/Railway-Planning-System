@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -22,10 +23,8 @@ namespace RailwayPlanningSystem
     /// </summary>
     public partial class AddTrain : Window
     {
-        private List<String> intermediates = null;
-        
-        TrainFactory factory = new TrainFactory();
-        TrainSingleton trainSingleton = TrainSingleton.Instance;
+        private TrainFactorySingleton trainFactory = TrainFactorySingleton.Instance;
+        private TrainStoreSingleton trainStore = TrainStoreSingleton.Instance;
 
         public AddTrain()
         {
@@ -34,38 +33,38 @@ namespace RailwayPlanningSystem
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
+            // Set field values upon form loading
             comboDeparture.SelectedIndex = 0;
             comboDestination.SelectedIndex = 1;
             comboType.SelectedIndex = 0;
             dateDepartureDay.Text = DateTime.Today.ToString();
 
-            int start = 0;
+            // Populate combo box with train times
+            int hours = 0;
             for (int i = 1; i <= 48; i++)
             {
                 if (i % 2 == 0)
                 {
-                    comboDepartureTime.Items.Add(start + ":30");
-                    start++;
+                    comboDepartureTime.Items.Add(hours + ":30");
+                    hours++;
                 }
                 else
                 {
-                    comboDepartureTime.Items.Add(start + ":00");
+                    comboDepartureTime.Items.Add(hours + ":00");
                 }
             }
         }
 
         private void btnAddTrain_Click(object sender, RoutedEventArgs e)
         {
-            
             try
             {
                 // Validation for Sleeper Cabin train type
                 if (!((ComboBoxItem)comboType.SelectedItem).Content.Equals("Sleeper") && rdoSleeperYes.IsChecked == true)
-                {
-                    throw new Exception("Sleeper Cabin is not available for this train type");
-                }
-
-                // Add selected stations to List
+                    throw new Exception("Sleeper cabin is not available for this train type");
+                
+                // Loop over each checkbox item and add to intermediates if checked
+                List<String> intermediates = null;
                 if (stackIntermediates.IsEnabled == true)
                 {
                     intermediates = new List<String>();
@@ -76,11 +75,12 @@ namespace RailwayPlanningSystem
                     }
                 }
                 
-                
+                // Check if FirstClass and Sleeper have been checked and set value
                 bool firstClass = (rdoFirstClassYes.IsChecked == true) ? true : false;
                 bool sleeperCabin = (rdoSleeperYes.IsChecked == true) ? true : false;
-                
-                Train t = factory.BuildTrain(
+
+                // Build the train using our factory
+                Train t = trainFactory.BuildTrain(
                     comboDeparture.Text,
                     comboDestination.Text,
                     comboType.Text,
@@ -91,50 +91,35 @@ namespace RailwayPlanningSystem
                     sleeperCabin
                     );
 
-                if (t == null)
-                {
-                    throw new Exception("Couldn't create train!");
-                }
+                if (t == null) throw new Exception("Train failed to create");
 
-                trainSingleton.Add(t);
-
-                MessageBox.Show("Train added successfully!");
+                // If train has been created sucessfully, store it and prompt user
+                trainStore.Add(t);
+                MessageBox.Show("Train has been added successfully");
             }
             catch (Exception ex)
             {
                 if (ex is FormatException)
-                    MessageBox.Show("Please select a valid time!");
+                    MessageBox.Show("Please select a valid time");
                 else
                     MessageBox.Show(ex.Message);
             }
         }
 
+        // If the departure is the same as the destination, change it
         private void comboDeparture_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            if (comboDeparture.SelectedIndex == 1)
-            {
-                comboDestination.SelectedIndex = 0;
-            }
-            else
-            {
-                comboDestination.SelectedIndex = 1;
-            }
+            comboDestination.SelectedIndex = (comboDeparture.SelectedIndex == 1) ? 0 : 1;
         }
-
+        // If the destination is the same as the departure, change it
         private void comboDestination_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            if (comboDestination.SelectedIndex == 1)
-            {
-                comboDeparture.SelectedIndex = 0;
-            }
-            else
-            {
-                comboDeparture.SelectedIndex = 1;
-            }
+            comboDeparture.SelectedIndex = (comboDestination.SelectedIndex == 1) ? 0 : 1;
         }
 
         private void comboType_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+            // Uncheck and disable all checkboxes if train is Express
             if (((ComboBoxItem)comboType.SelectedItem).Content.Equals("Express"))
             {
                 stackIntermediates.IsEnabled = false;
@@ -147,8 +132,6 @@ namespace RailwayPlanningSystem
             {
                 stackIntermediates.IsEnabled = true;
             }
-            
-     
         }
     }
 }
