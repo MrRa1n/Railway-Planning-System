@@ -1,18 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Business.TrainClasses
 {
     public class SleeperTrain : Train
     {
-        // Private properties
         private List<String> _intermediate;
         private bool _sleeperCabin;
 
-        //Public properties
+        /// <summary>
+        /// Intermediate property to store a list of selected stations
+        /// </summary>
         public List<String> Intermediate
         {
             get { return _intermediate; }
@@ -22,6 +20,9 @@ namespace Business.TrainClasses
             }
         }
 
+        /// <summary>
+        /// Sleeper Cabin property to store whether train offers sleeper cabin
+        /// </summary>
         public bool SleeperCabin
         {
             get { return _sleeperCabin; }
@@ -31,15 +32,19 @@ namespace Business.TrainClasses
             }
         }
         
-        // default constructor
+        /// <summary>
+        /// Default constructor for SleeperTrain required for serialization
+        /// </summary>
         public SleeperTrain() { }
 
+        /// <summary>
+        /// Constructor for SleeperTrain with parameters
+        /// </summary>
         public SleeperTrain(String trainId, String departure, String destination, String type, TimeSpan departureTime, DateTime departureDay, bool firstClass, List<Coach> coachList, List<String> intermediate, bool sleeperCabin)
             : base(trainId, departure, destination, type, departureTime, departureDay, firstClass, coachList)
         {
             Intermediate = intermediate;
             SleeperCabin = sleeperCabin;
-            CoachList = coachList;
         }
 
     }

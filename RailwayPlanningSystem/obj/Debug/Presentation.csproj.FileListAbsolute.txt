@@ -2,11 +2,9 @@ C:\Users\40316565\source\repos\RailwayPlanningSystem\RailwayPlanningSystem\bin\D
 C:\Users\40316565\source\repos\RailwayPlanningSystem\RailwayPlanningSystem\bin\Debug\RailwayPlanningSystem.exe
 C:\Users\40316565\source\repos\RailwayPlanningSystem\RailwayPlanningSystem\bin\Debug\RailwayPlanningSystem.pdb
 C:\Users\40316565\source\repos\RailwayPlanningSystem\RailwayPlanningSystem\obj\Debug\Presentation.csprojAssemblyReference.cache
-C:\Users\40316565\source\repos\RailwayPlanningSystem\RailwayPlanningSystem\obj\Debug\MainWindow.g.cs
 C:\Users\40316565\source\repos\RailwayPlanningSystem\RailwayPlanningSystem\obj\Debug\App.g.cs
 C:\Users\40316565\source\repos\RailwayPlanningSystem\RailwayPlanningSystem\obj\Debug\RailwayPlanningSystem_MarkupCompile.cache
 C:\Users\40316565\source\repos\RailwayPlanningSystem\RailwayPlanningSystem\obj\Debug\RailwayPlanningSystem_MarkupCompile.lref
-C:\Users\40316565\source\repos\RailwayPlanningSystem\RailwayPlanningSystem\obj\Debug\MainWindow.baml
 C:\Users\40316565\source\repos\RailwayPlanningSystem\RailwayPlanningSystem\obj\Debug\RailwayPlanningSystem.g.resources
 C:\Users\40316565\source\repos\RailwayPlanningSystem\RailwayPlanningSystem\obj\Debug\RailwayPlanningSystem.Properties.Resources.resources
 C:\Users\40316565\source\repos\RailwayPlanningSystem\RailwayPlanningSystem\obj\Debug\Presentation.csproj.GenerateResource.cache
@@ -43,3 +41,14 @@ H:\Object Oriented Software Development\RailwayPlanningSystem\RailwayPlanningSys
 H:\Object Oriented Software Development\RailwayPlanningSystem\RailwayPlanningSystem\obj\Debug\Presentation.csproj.CopyComplete
 H:\Object Oriented Software Development\RailwayPlanningSystem\RailwayPlanningSystem\obj\Debug\RailwayPlanningSystem.exe
 H:\Object Oriented Software Development\RailwayPlanningSystem\RailwayPlanningSystem\obj\Debug\RailwayPlanningSystem.pdb
+C:\Users\40316565\source\repos\RailwayPlanningSystem\RailwayPlanningSystem\bin\Debug\Data.dll
+C:\Users\40316565\source\repos\RailwayPlanningSystem\RailwayPlanningSystem\bin\Debug\Newtonsoft.Json.dll
+C:\Users\40316565\source\repos\RailwayPlanningSystem\RailwayPlanningSystem\bin\Debug\Data.pdb
+C:\Users\40316565\source\repos\RailwayPlanningSystem\RailwayPlanningSystem\bin\Debug\Newtonsoft.Json.pdb
+C:\Users\40316565\source\repos\RailwayPlanningSystem\RailwayPlanningSystem\bin\Debug\Newtonsoft.Json.xml
+C:\Users\40316565\source\repos\RailwayPlanningSystem\RailwayPlanningSystem\obj\Debug\AddBooking.g.cs
+C:\Users\40316565\source\repos\RailwayPlanningSystem\RailwayPlanningSystem\obj\Debug\Main.g.cs
+C:\Users\40316565\source\repos\RailwayPlanningSystem\RailwayPlanningSystem\obj\Debug\AddTrain.g.cs
+C:\Users\40316565\source\repos\RailwayPlanningSystem\RailwayPlanningSystem\obj\Debug\AddBooking.baml
+C:\Users\40316565\source\repos\RailwayPlanningSystem\RailwayPlanningSystem\obj\Debug\Main.baml
+C:\Users\40316565\source\repos\RailwayPlanningSystem\RailwayPlanningSystem\obj\Debug\AddTrain.baml

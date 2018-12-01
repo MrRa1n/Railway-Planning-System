@@ -1,18 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
 
 namespace Business.BookingClasses
 {
     public class Booking
     {
-        
-        
-
-        // private properties
         private String _name;
         private String _trainId;
         private String _departureStation;
@@ -22,7 +13,10 @@ namespace Business.BookingClasses
         private char _coach;
         private int _seat;
 
-
+        /// <summary>
+        /// Name property
+        /// - throws ArgumentNullException if no name provided
+        /// </summary>
         public String Name
         {
             get { return _name; }
@@ -36,6 +30,10 @@ namespace Business.BookingClasses
             }
         }
 
+        /// <summary>
+        /// Train ID property for Booking
+        /// - throws ArgumentNullException if no Train has been selected
+        /// </summary>
         public String TrainID
         {
             get { return _trainId; }
@@ -49,6 +47,10 @@ namespace Business.BookingClasses
             }
         }
 
+        /// <summary>
+        /// Departure station property
+        /// - throws ArgumentException if match with the Arrival station
+        /// </summary>
         public String DepartureStation
         {
             get { return _departureStation; }
@@ -62,6 +64,10 @@ namespace Business.BookingClasses
             }
         }
 
+        /// <summary>
+        /// Arrival Station property
+        /// - throws ArgumentException if match with Departure station
+        /// </summary>
         public String ArrivalStation
         {
             get { return _arrivalStation; }
@@ -75,7 +81,9 @@ namespace Business.BookingClasses
             }
         }
 
-        // perform check if train offers first class
+        /// <summary>
+        /// First Class property for Booking
+        /// </summary>
         public bool FirstClass
         {
             get { return _firstClass; }
@@ -85,7 +93,9 @@ namespace Business.BookingClasses
             }
         }
 
-        // perform check if train offers sleeper cabin
+        /// <summary>
+        /// Sleeper Cabin property
+        /// </summary>
         public bool SleeperCabin
         {
             get { return _sleeperCabin; }
@@ -95,6 +105,10 @@ namespace Business.BookingClasses
             }
         }
 
+        /// <summary>
+        /// Coach property
+        /// - throws ArgumentNullException if no Coach has been selected
+        /// </summary>
         public char Coach
         {
             get { return _coach; }
@@ -107,6 +121,11 @@ namespace Business.BookingClasses
                 _coach = value;
             }
         }
+
+        /// <summary>
+        /// Seat property
+        /// - throws ArgumentNullException if no seat has been selected
+        /// </summary>
         public int Seat
         {
             get { return _seat; }
@@ -120,6 +139,9 @@ namespace Business.BookingClasses
             }
         }
 
+        /// <summary>
+        /// Constructor for Booking with parameters
+        /// </summary>
         public Booking(String name, String trainId, String departureStation, String arrivalStation, bool firstClass, bool sleeperCabin, char coach, int seat)
         {
             Name = name;

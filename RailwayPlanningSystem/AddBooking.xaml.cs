@@ -1,16 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 using Business;
 using Business.BookingClasses;
 using Business.TrainClasses;
@@ -103,7 +93,7 @@ namespace RailwayPlanningSystem
                 // Add available coaches to combo box
                 foreach (Coach coach in t.CoachList)
                 {
-                    comboCoach.Items.Add(coach.coachId);
+                    comboCoach.Items.Add(coach._coachId);
                 }
             }
             catch (Exception ex)
@@ -139,9 +129,18 @@ namespace RailwayPlanningSystem
 
         private void BtnCalculateFare_Click(object sender, RoutedEventArgs e)
         {
-            double bookingCost = trainStore.calculateBookingCost(selectedTrainId, comboDeparture.Text, comboArrival.Text, rdoFirstClassYes.IsChecked.Value, rdoSleeperYes.IsChecked.Value);
-
-            MessageBox.Show("Total ticket price: £" + bookingCost);
+            try
+            {
+                // Pass the selected fields to calculate the cost
+                double bookingCost = trainStore.calculateBookingCost(selectedTrainId, comboDeparture.Text, comboArrival.Text, rdoFirstClassYes.IsChecked.Value, rdoSleeperYes.IsChecked.Value);
+                // Display the cost to the user
+                MessageBox.Show("Total ticket price: £" + bookingCost);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+            
         }
 
         private void clearAllFields()

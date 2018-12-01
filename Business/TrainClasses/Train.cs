@@ -8,10 +8,8 @@ using Business.BookingClasses;
 
 namespace Business
 {
-    [Serializable()]
     public abstract class Train
     {
-        // Private variables
         private String _trainId;
         private String _departure;
         private String _destination;
@@ -21,7 +19,11 @@ namespace Business
         private bool _firstClass;
         private List<Coach> _coachList;
 
-        // Getters and Setters
+        /// <summary>
+        /// Train ID property
+        /// - throws ArgumentNullException if null
+        /// - throws ArgumentException if more than 4 characters
+        /// </summary>
         public String TrainID
         {
             get { return _trainId; }
@@ -31,10 +33,18 @@ namespace Business
                 {
                     throw new ArgumentNullException("Train must have an ID!");
                 }
+                if (value.Length > 4)
+                {
+                    throw new ArgumentException("Train ID must not exceed 4 characters");
+                }
                 _trainId = value;
             }
         }
 
+        /// <summary>
+        /// Departure station property
+        /// - throws ArgumentNullException if null
+        /// </summary>
         public String Departure
         {
             get { return _departure; }
@@ -42,12 +52,20 @@ namespace Business
             {
                 if (String.IsNullOrWhiteSpace(value))
                 {
-                    throw new ArgumentNullException("Please select a departure station!");
+                    throw new ArgumentNullException("Please select a departure station");
+                }
+                if (value.Equals(_destination))
+                {
+                    throw new ArgumentException("Departure station can't be the same as destination");
                 }
                 _departure = value;
             }
         }
 
+        /// <summary>
+        /// Destination property
+        /// - throws ArgumentNullException if null
+        /// </summary>
         public String Destination
         {
             get { return _destination; }
@@ -55,11 +73,20 @@ namespace Business
             {
                 if (String.IsNullOrWhiteSpace(value))
                 {
-                    throw new ArgumentNullException("Please select a destination!");
+                    throw new ArgumentNullException("Please select a destination");
+                }
+                if (value.Equals(_departure))
+                {
+                    throw new ArgumentException("Destination can't be the same as departure station");
                 }
                 _destination = value;
             }
         }
+
+        /// <summary>
+        /// Train Type property
+        /// - throws ArgumentNullException if null
+        /// </summary>
         public String Type
         {
             get { return _type; }
@@ -73,6 +100,11 @@ namespace Business
             }
         }
 
+        /// <summary>
+        /// Departure Time property
+        /// - throws ArgumentNullException if null
+        /// - throws ArgumentException if selected time is out of range 21:00 and 01:00
+        /// </summary>
         public TimeSpan DepartureTime
         {
             get { return _departureTime; }
@@ -89,6 +121,12 @@ namespace Business
                 _departureTime = value;
             }
         }
+
+        /// <summary>
+        /// Departure Day property
+        /// - throws ArgumentNullException if null
+        /// - throws ArgumentException if departure day is before or on the current day
+        /// </summary>
         public DateTime DepartureDay
         {
             get { return _departureDay.Date; }
@@ -106,6 +144,9 @@ namespace Business
             }
         }
 
+        /// <summary>
+        /// First Class property
+        /// </summary>
         public bool FirstClass
         {
             get { return _firstClass; }
@@ -115,6 +156,10 @@ namespace Business
             }
         }
 
+        /// <summary>
+        /// Coach List property
+        /// - throws ArgumentNullException if value is null
+        /// </summary>
         public List<Coach> CoachList
         {
             get { return _coachList; }
@@ -124,9 +169,14 @@ namespace Business
             }
         }
 
-        // Constructors
+        /// <summary>
+        /// Default constructor for Train - required for serialization
+        /// </summary>
         public Train() { }
 
+        /// <summary>
+        /// Constructor for train with parameters
+        /// </summary>
         public Train(String trainId, String departure, String destination, String type, TimeSpan departureTime, DateTime departureDay, bool firstClass, List<Coach> coachList)
         {
             TrainID = trainId;
@@ -139,18 +189,26 @@ namespace Business
             CoachList = coachList;
         }
 
-        // Public methods
+        /// <summary>
+        /// Calls FindCoach method to assign Booking to coach based on Coach ID
+        /// </summary>
+        /// <param name="booking">Takes booking object and adds it to Coach</param>
         public void Add(Booking booking)
         {
             Coach coach = FindCoach(booking.Coach);
             coach.addBookingToCoach(booking);
         }
 
+        /// <summary>
+        /// Method for finding a Coach in order to add a Booking to it
+        /// </summary>
+        /// <param name="coachId">Takes coachId and checks if it matches Coach in list</param>
+        /// <returns>Returns Coach that matches the input coachId, if no coach is found it returns null</returns>
         public Coach FindCoach(char coachId)
         {
             foreach (Coach c in CoachList)
             {
-                if (coachId.Equals(c.coachId))
+                if (coachId.Equals(c._coachId))
                     return c;
             }
             return null;

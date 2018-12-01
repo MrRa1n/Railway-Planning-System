@@ -1,17 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Business.TrainClasses
 {
     public class StoppingTrain : Train
     {
-        // Private properties
         private List<String> _intermediate;
 
-        //Public properties
+        /// <summary>
+        /// Intermediate property to store list of stations
+        /// - can be null
+        /// </summary>
         public List<String> Intermediate
         {
             get { return _intermediate; }
@@ -21,14 +20,18 @@ namespace Business.TrainClasses
             }
         }
 
-        // default constructor
+        /// <summary>
+        /// Default StoppingTrain constructor required for serialization
+        /// </summary>
         public StoppingTrain() { }
 
+        /// <summary>
+        /// Constructor for StoppingTrain with parameters
+        /// </summary>
         public StoppingTrain(String trainId,String departure,String destination,String type,TimeSpan departureTime,DateTime departureDay,bool firstClass,List<Coach> coachList, List<String> intermediate)
             : base(trainId, departure, destination, type, departureTime, departureDay, firstClass, coachList)
         {
             Intermediate = intermediate;
-            CoachList = coachList;
         }
     }
 }

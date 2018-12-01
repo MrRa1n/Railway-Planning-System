@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 using Business.BookingClasses;
 
 namespace Business.TrainClasses
@@ -10,24 +6,33 @@ namespace Business.TrainClasses
     public class Coach
     {
         private const int MAX_CAPACITY = 60;
-        public List<int> ListOfAvailableSeats { get; set; }
-        public List<Booking> ListOfBookings { get; set; }
-        public char coachId { get; set; }
+        public List<int> ListOfAvailableSeats { get; private set; }
+        public List<Booking> ListOfBookings { get; private set; }
+        public char _coachId { get; private set; }
 
-        public Coach(char c)
+        /// <summary>
+        /// Constructor for Coach class that assigns each coachId and creates list
+        /// of available seats and list of bookings
+        /// </summary>
+        /// <param name="coachId">Takes a coachId from TrainFactory</param>
+        public Coach(char coachId)
         {
-            // object gets created and assigned an id
-            coachId = c;
+            _coachId = coachId;
 
             ListOfAvailableSeats = new List<int>();
             ListOfBookings = new List<Booking>();
 
+            // Add values 1-60 to ListOfAvailableSeats
             for (int i = 1; i <= MAX_CAPACITY; ++i)
             {
                 ListOfAvailableSeats.Add(i);
             }
         }
 
+        /// <summary>
+        /// Removes seat number from list of available seats and adds booking to list
+        /// </summary>
+        /// <param name="booking">Takes Booking object and adds to ListOfBookings</param>
         public void addBookingToCoach(Booking booking)
         {
             ListOfAvailableSeats.Remove(booking.Seat);

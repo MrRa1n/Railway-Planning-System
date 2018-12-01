@@ -1,9 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Newtonsoft.Json;
 using Business.BookingClasses;
 using Business.TrainClasses;
@@ -13,10 +10,8 @@ namespace Business
     public class TrainStoreSingleton
     {
         private TrainStoreSingleton() { }
-
         private static List<Train> listOfTrains;
         private static TrainStoreSingleton instance;
-
         // Singleton - checks if there isnt existing instance then creates 
         // new instance of TrainStoreSingleton and Train list
         public static TrainStoreSingleton Instance
@@ -97,20 +92,17 @@ namespace Business
                 train.Departure,
                 train.Destination
             };
-
             // If train is either a stopping or sleeper, insert intermediates and return list
             if (train is StoppingTrain)
             {
                 listOfStations.InsertRange(1, ((StoppingTrain)train).Intermediate);
                 return listOfStations;
             }
-
             if (train is SleeperTrain)
             {
                 listOfStations.InsertRange(1, ((SleeperTrain)train).Intermediate);
                 return listOfStations;
             }
-
             // If train is express, just return departure and arrival stations
             return listOfStations;
             
@@ -132,8 +124,9 @@ namespace Business
 
         public double calculateBookingCost(String trainId, String departure, String destination, bool firstClass, bool sleeperCabin)
         {
-            if (trainId == null)
-                throw new ArgumentException("Please provide a Train ID to calculate fare!");
+            // Check that a minimum of trainId, departure and destination have been provided
+            if (trainId == null || String.IsNullOrWhiteSpace(departure) || String.IsNullOrWhiteSpace(destination))
+                throw new ArgumentException("Please provide at least a Train ID, Departure and Destination");
 
             // Set price to £50 if Edinburgh-London or London-Edinburgh have been selected, otherwise set price to £25
             double bookingCost = (departure.Contains("Edinburgh") && destination.Contains("London") 
@@ -146,6 +139,7 @@ namespace Business
             }
             else
             {
+                // Add £10 if seat is first class
                 if (firstClass)
                 {
                     bookingCost += 10;
@@ -157,9 +151,12 @@ namespace Business
             {
                 throw new Exception("This train does not offer Sleeper Cabin");
             }
-            else
+
+            if (findTrain(trainId).Type == "Sleeper")
             {
+                // if train is a sleeper add £10
                 bookingCost += 10;
+                // If sleeper train has a cabin add £20
                 if (sleeperCabin)
                 {
                     bookingCost += 20;
@@ -176,16 +173,12 @@ namespace Business
             // Throw exception if the list of trains is empty
             if (listOfTrains.Count == 0)
                 throw new Exception("There are no trains to save");
-
             // Serialize the list of trains to JSON
             String jsonTrainList = JsonConvert.SerializeObject(listOfTrains, jsonSerializerSettings);
-
             // Create new JSON file to store our train objects
             StreamWriter streamWriter = new StreamWriter(fileName);
-            
             // Write the output of our serializer to file
             streamWriter.Write("TRAINS" + jsonTrainList);
-            
             streamWriter.Close();
         }
 
@@ -193,20 +186,15 @@ namespace Business
         {
             // Create new instance of StreamReader with file name
             StreamReader streamReader = new StreamReader(fileName);
-
             // Read contents of file
             string output = streamReader.ReadToEnd();
-
             // Throw exception if file does not contain prefix
             if (!output.StartsWith("TRAINS"))
                 throw new Exception("Please select a valid train list");
-
             // Remove the prefix
             output = output.Remove(0,6);
-
             //Deserialize the file and store in our list of trains
             listOfTrains = JsonConvert.DeserializeObject<List<Train>>(output, jsonSerializerSettings);
-
             streamReader.Close();
         }
     }
