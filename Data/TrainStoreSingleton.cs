@@ -12,12 +12,13 @@ namespace Business
 {
     public class TrainStoreSingleton
     {
-        private static List<Train> listOfTrains = new List<Train>();
-        
-        private TrainStoreSingleton() {}
+        private TrainStoreSingleton() { }
 
+        private static List<Train> listOfTrains;
         private static TrainStoreSingleton instance;
 
+        // Singleton - checks if there isnt existing instance then creates 
+        // new instance of TrainStoreSingleton and Train list
         public static TrainStoreSingleton Instance
         {
             get
@@ -25,26 +26,31 @@ namespace Business
                 if (instance == null)
                 {
                     instance = new TrainStoreSingleton();
+                    listOfTrains = new List<Train>();
                 }
                 return instance;
             }
         }
 
+        // Add Train object to listOfTrains
         public void Add(Train t)
         {
             listOfTrains.Add(t);
         }
 
+        // Pass Booking to our Train object
         public void Add(Booking b)
         {
-            FindTrain(b.TrainID).Add(b);
+            findTrain(b.TrainID).Add(b);
         }
 
+        // Get all Trains currently stored
         public List<Train> getTrains()
         {
             return listOfTrains;
         }
 
+        // Return the list of coaches based on the Train ID provided
         public List<Coach> getCoaches(String trainId)
         {
             foreach (Train t in listOfTrains)
@@ -55,7 +61,8 @@ namespace Business
             return null;
         }
 
-        public Train FindTrain(String trainId)
+        // Return single Train from list based on Train ID provided
+        public Train findTrain(String trainId)
         {
             foreach (Train t in listOfTrains)
             {
@@ -65,56 +72,62 @@ namespace Business
             return null;
         }
 
-        public List<String> getDepartureStations(Train t)
+        // Return a list of all possible departure stations for a provided Train
+        public List<String> getDepartureStations(Train train)
         {
-            List<String> st = getAllStations(t);
-            st.Remove(t.Destination);
+            List<String> st = getAllStations(train);
+            st.Remove(train.Destination);
             return st;
         }
 
-        public List<String> getArrivalStations(Train t)
+        // Return a list of all possible arrival stations for a provided Train
+        public List<String> getArrivalStations(Train train)
         {
-            List<String> st = getAllStations(t);
-            st.Remove(t.Departure);
+            List<String> st = getAllStations(train);
+            st.Remove(train.Departure);
             return st;
         }
 
-        public List<String> getAllStations(Train t)
+        // Return all stations for a given train
+        public List<String> getAllStations(Train train)
         {
-            List<String> listOfStations = new List<String>();
-            if (t is StoppingTrain)
+            // Store departure station and departure in list
+            List<String> listOfStations = new List<String>()
             {
-                listOfStations.Add(t.Departure);
-                listOfStations.AddRange(((StoppingTrain)t).Intermediate);
-                listOfStations.Add(t.Destination);
-                return listOfStations;
-            }   
-            else if (t is SleeperTrain)
+                train.Departure,
+                train.Destination
+            };
+
+            // If train is either a stopping or sleeper, insert intermediates and return list
+            if (train is StoppingTrain)
             {
-                listOfStations.Add(t.Departure);
-                listOfStations.AddRange(((SleeperTrain)t).Intermediate);
-                listOfStations.Add(t.Destination);
+                listOfStations.InsertRange(1, ((StoppingTrain)train).Intermediate);
                 return listOfStations;
             }
-            else
+
+            if (train is SleeperTrain)
             {
-                listOfStations.Add(t.Departure);
-                listOfStations.Add(t.Destination);
+                listOfStations.InsertRange(1, ((SleeperTrain)train).Intermediate);
                 return listOfStations;
             }
+
+            // If train is express, just return departure and arrival stations
+            return listOfStations;
+            
         }
 
-        public String IntermediateList(Train t)
+        // Produce a comma-separated list of a Train's intermediate stations
+        public String intermediateList(Train train)
         {
-            if (t is StoppingTrain)
+            if (train is StoppingTrain)
             {
-                return String.Join(", ", ((StoppingTrain)t).Intermediate);
+                return String.Join(", ", ((StoppingTrain)train).Intermediate);
             }
-            if (t is SleeperTrain)
+            if (train is SleeperTrain)
             {
-                return String.Join(", ", ((SleeperTrain)t).Intermediate);
+                return String.Join(", ", ((SleeperTrain)train).Intermediate);
             }
-            return "None";
+            return String.Empty;
         }
 
         public double calculateBookingCost(String trainId, String departure, String destination, bool firstClass, bool sleeperCabin)
@@ -122,30 +135,29 @@ namespace Business
             if (trainId == null)
                 throw new ArgumentException("Please provide a Train ID to calculate fare!");
 
-            double bookingCost = 0.00;
+            // Set price to £50 if Edinburgh-London or London-Edinburgh have been selected, otherwise set price to £25
+            double bookingCost = (departure.Contains("Edinburgh") && destination.Contains("London") 
+                || destination.Contains("Edinburgh") && departure.Contains("London")) ? 50 : 25;
 
-            // Check what departure and arrival stations have been selected
-            if (departure.Contains("Edinburgh") && !destination.Contains("London"))
+            // Add £10 if First Class is selected
+            if (findTrain(trainId).FirstClass == false && firstClass)
             {
-                bookingCost = 25;
-            } 
-            else if (!departure.Contains("Edinburgh") && destination.Contains("London"))
-            {
-                bookingCost = 25;
+                throw new Exception("This train does not offer First Class");
             }
             else
             {
-                bookingCost = 50;
-            }
-            
-            // Add £10 if First Class is selected
-            if (firstClass)
-            {
-                bookingCost += 10;
+                if (firstClass)
+                {
+                    bookingCost += 10;
+                }
             }
 
             // Add £10 if train type is sleeper, then add £20 if sleeper cabin
-            if (FindTrain(trainId).Type == "Sleeper")
+            if (findTrain(trainId).Type != "Sleeper" && sleeperCabin)
+            {
+                throw new Exception("This train does not offer Sleeper Cabin");
+            }
+            else
             {
                 bookingCost += 10;
                 if (sleeperCabin)
@@ -153,39 +165,49 @@ namespace Business
                     bookingCost += 20;
                 }
             }
-
             return bookingCost;
         }
+
+        // Enable TypeNameHandling to determine if Train is ExpressTrain, StoppingTrain or SleeperTrain
         JsonSerializerSettings jsonSerializerSettings = new JsonSerializerSettings { TypeNameHandling = TypeNameHandling.All };
 
-        public void serializeTrain()
+        public void serializeTrain(String fileName)
         {
-            string json = "";
-            json = JsonConvert.SerializeObject(listOfTrains, jsonSerializerSettings);
+            // Throw exception if the list of trains is empty
+            if (listOfTrains.Count == 0)
+                throw new Exception("There are no trains to save");
+
+            // Serialize the list of trains to JSON
+            String jsonTrainList = JsonConvert.SerializeObject(listOfTrains, jsonSerializerSettings);
+
+            // Create new JSON file to store our train objects
+            StreamWriter streamWriter = new StreamWriter(fileName);
             
-         
-
-            StreamWriter sw = new StreamWriter(@"trains.txt");
+            // Write the output of our serializer to file
+            streamWriter.Write("TRAINS" + jsonTrainList);
             
-            sw.Write(json);
-
-            sw.Close();
-
+            streamWriter.Close();
         }
 
-        /*
-         * issue when train is loaded into list - shows there is 1 booking but all seats are still available
-         * 
-         */
-        public void deserializeTrain()
+        public void deserializeTrain(String fileName)
         {
-            StreamReader sr = new StreamReader(@"trains.txt");
-            string output = sr.ReadToEnd();
+            // Create new instance of StreamReader with file name
+            StreamReader streamReader = new StreamReader(fileName);
 
-            
+            // Read contents of file
+            string output = streamReader.ReadToEnd();
+
+            // Throw exception if file does not contain prefix
+            if (!output.StartsWith("TRAINS"))
+                throw new Exception("Please select a valid train list");
+
+            // Remove the prefix
+            output = output.Remove(0,6);
+
+            //Deserialize the file and store in our list of trains
             listOfTrains = JsonConvert.DeserializeObject<List<Train>>(output, jsonSerializerSettings);
-            
-            Console.WriteLine(listOfTrains);
+
+            streamReader.Close();
         }
     }
 

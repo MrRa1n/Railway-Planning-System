@@ -22,7 +22,7 @@ namespace RailwayPlanningSystem
     /// </summary>
     public partial class AddBooking : Window
     {
-        private TrainStoreSingleton trainStore = TrainStoreSingleton.Instance;
+        TrainStoreSingleton trainStore = TrainStoreSingleton.Instance;
         private string selectedTrainId;
 
         public AddBooking()
@@ -48,11 +48,11 @@ namespace RailwayPlanningSystem
                 bool sleeperCabin = (rdoSleeperYes.IsChecked == true) ? true : false;
 
                 // Throw exception if user tries to book first class on train that doesnt offer it
-                if (firstClass && !trainStore.FindTrain(selectedTrainId).FirstClass)
+                if (firstClass && !trainStore.findTrain(selectedTrainId).FirstClass)
                     throw new ArgumentException("The selected train does not offer First Class!");
 
                 // Throw exception if user tries to book sleeper cabin on train that doesnt offer it
-                if (sleeperCabin && trainStore.FindTrain(selectedTrainId).Type != "Sleeper")
+                if (sleeperCabin && trainStore.findTrain(selectedTrainId).Type != "Sleeper")
                     throw new ArgumentException("The selected train does not offer Sleeper Cabin!");
                 
                 // Create new booking
@@ -85,8 +85,6 @@ namespace RailwayPlanningSystem
 
         }
 
-        
-
         private void ListTrains_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             try
@@ -96,7 +94,7 @@ namespace RailwayPlanningSystem
 
                 // Get id of selected train and return train info
                 selectedTrainId = listTrains.SelectedItem.ToString();
-                Train t = trainStore.FindTrain(selectedTrainId);
+                Train t = trainStore.findTrain(selectedTrainId);
 
                 // Fill combo box with stations set in train form
                 comboDeparture.ItemsSource = trainStore.getDepartureStations(t);
@@ -125,7 +123,7 @@ namespace RailwayPlanningSystem
                 char selectedCoachId = char.Parse(comboCoach.SelectedItem.ToString());
 
                 // Get the train information for the selected train id
-                Train train = trainStore.FindTrain(selectedTrainId);
+                Train train = trainStore.findTrain(selectedTrainId);
 
                 // Find the coach within the train by its id
                 Coach coach = train.FindCoach(selectedCoachId);

@@ -1,18 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 using Business;
 using Business.TrainClasses;
 
@@ -23,8 +12,8 @@ namespace RailwayPlanningSystem
     /// </summary>
     public partial class AddTrain : Window
     {
-        private TrainFactorySingleton trainFactory = TrainFactorySingleton.Instance;
-        private TrainStoreSingleton trainStore = TrainStoreSingleton.Instance;
+        TrainStoreSingleton trainStore = TrainStoreSingleton.Instance;
+        TrainFactorySingleton trainFactory = TrainFactorySingleton.Instance;
 
         public AddTrain()
         {
@@ -56,7 +45,7 @@ namespace RailwayPlanningSystem
         }
 
         private void btnAddTrain_Click(object sender, RoutedEventArgs e)
-        {
+        { 
             try
             {
                 // Validation for Sleeper Cabin train type
@@ -111,6 +100,7 @@ namespace RailwayPlanningSystem
         {
             comboDestination.SelectedIndex = (comboDeparture.SelectedIndex == 1) ? 0 : 1;
         }
+
         // If the destination is the same as the departure, change it
         private void comboDestination_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {

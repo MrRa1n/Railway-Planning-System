@@ -1,4 +1,4 @@
-﻿<Window x:Class="RailwayPlanningSystem.AddTrain"
+﻿<Window x:Name="AddTrain1" x:Class="RailwayPlanningSystem.AddTrain"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -34,7 +34,7 @@
             <CheckBox x:Name="chkYork" Content="York" Margin="0,0,5,5"/>
             <CheckBox x:Name="chkNewcastle" Content="Newcastle" Margin="0,0,5,5"/>
         </StackPanel>
-        <DatePicker x:Name="dateDepartureDay" HorizontalAlignment="Left" Margin="128,302,0,0" VerticalAlignment="Top" Width="150" Text="{Binding DisplayDate, RelativeSource={RelativeSource Self}}"/>
+        <DatePicker x:Name="dateDepartureDay" HorizontalAlignment="Left" Margin="128,302,0,0" VerticalAlignment="Top" Width="150"/>
         <ComboBox x:Name="comboDepartureTime" HorizontalAlignment="Left" Margin="128,257,0,0" VerticalAlignment="Top" Width="150"/>
         <StackPanel HorizontalAlignment="Left" Height="42" Margin="128,354,0,0" VerticalAlignment="Top" Width="150">
             <RadioButton x:Name="rdoSleeperYes" Content="Yes" Margin="0,0,0,5"/>

@@ -1,21 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
-
 using Business;
 using Business.BookingClasses;
 using Business.TrainClasses;
+using Microsoft.Win32;
 
 namespace RailwayPlanningSystem
 {
@@ -24,15 +15,14 @@ namespace RailwayPlanningSystem
     /// </summary>
     public partial class Main : Window
     {
-        
-        private TrainStoreSingleton trainSingleton = TrainStoreSingleton.Instance;
+        TrainStoreSingleton trainStore = TrainStoreSingleton.Instance;
 
         public Main()
         {
             InitializeComponent();
         }
 
-        private void BtnViewTrains_Loaded(object sender, RoutedEventArgs e)
+        private void FrmMain_Loaded(object sender, RoutedEventArgs e)
         {
             List<String> stations = new List<String>() { "Edinburgh (Waverley)", "Newcastle", "Darlington", "York", "Peterborough", "London (Kings Cross)" };
 
@@ -45,7 +35,7 @@ namespace RailwayPlanningSystem
         private void btnAddTrain_Click(object sender, RoutedEventArgs e)
         {
             AddTrain frmAddTrain = new AddTrain();
-            frmAddTrain.Show();
+            frmAddTrain.ShowDialog();
         }
 
         // Button event handler fpr opening Add Booking form
@@ -55,15 +45,53 @@ namespace RailwayPlanningSystem
             frmAddBooking.ShowDialog();
         }
 
-        // Button event handler
+        
         private void BtnSaveTrains_Click(object sender, RoutedEventArgs e)
         {
-            trainSingleton.serializeTrain();
+            try
+            {
+                String fileName = "";
+
+                // Create new SaveFileDialog instance and set filter to JSON files
+                SaveFileDialog saveFileDialog = new SaveFileDialog();
+                saveFileDialog.Filter = "JSON Files (*.json) | *.json";
+
+                // Set the file name of the selected file
+                if (saveFileDialog.ShowDialog() == true)
+                {
+                    fileName = saveFileDialog.FileName;
+                }
+                // Perform serialization
+                trainStore.serializeTrain(fileName);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
 
         private void BtnLoadTrains_Click(object sender, RoutedEventArgs e)
         {
-            trainSingleton.deserializeTrain();
+            try
+            {
+                String fileName = "";
+
+                // Create new OpenFileDialog instance and set filter to JSON files
+                OpenFileDialog openFileDialog = new OpenFileDialog();
+                openFileDialog.Filter = "JSON Files (*.json) | *.json";
+
+                // Set the file name of the selected file
+                if (openFileDialog.ShowDialog() == true)
+                {
+                    fileName = openFileDialog.FileName;
+                }
+                // Perform deserialization
+                trainStore.deserializeTrain(fileName);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
 
         // View each train by the selected date
@@ -86,7 +114,7 @@ namespace RailwayPlanningSystem
                 trainDataTable.Columns.Add("First Class");
 
                 // Loop over the list of stored trains returned from getTrains() method
-                foreach (Train t in trainSingleton.getTrains())
+                foreach (Train t in trainStore.getTrains())
                 {
                     bool sleeperValue = false;
 
@@ -105,7 +133,7 @@ namespace RailwayPlanningSystem
                         t.Type,
                         t.Departure,
                         t.Destination,
-                        trainSingleton.IntermediateList(t),
+                        trainStore.intermediateList(t),
                         t.DepartureTime,
                         formattedDate[0],
                         sleeperValue,
@@ -139,11 +167,11 @@ namespace RailwayPlanningSystem
                 trainDataTable.Columns.Add("Departure Time");
 
                 // Loop over the list of stored trains returned from getTrains() method
-                foreach (Train t in trainSingleton.getTrains())
+                foreach (Train t in trainStore.getTrains())
                 {
                     // Compare the destination and arrival values selected to those stored in the train
-                    if (trainSingleton.getDepartureStations(t).Contains(comboDeparture.Text)
-                        && trainSingleton.getArrivalStations(t).Contains(comboArrival.Text))
+                    if (trainStore.getDepartureStations(t).Contains(comboDeparture.Text)
+                        && trainStore.getArrivalStations(t).Contains(comboArrival.Text))
                     {
                         // Remove trailing time from DateTime
                         String[] formattedDate = t.DepartureDay.ToString().Split(' ');
@@ -168,7 +196,7 @@ namespace RailwayPlanningSystem
             if (row == null) return;
 
             // Call FrindTrain method and pass it the Train ID from our DataRowView
-            Train t = trainSingleton.FindTrain(row[0].ToString());
+            Train t = trainStore.findTrain(row[0].ToString());
 
             // Create new instance of data table for bookings
             DataTable bookingDataTable = new DataTable();
@@ -179,7 +207,7 @@ namespace RailwayPlanningSystem
             bookingDataTable.Columns.Add("Seat");
 
             // Loop over each coach and booking within that coach and add to our data table
-            foreach (Coach c in trainSingleton.getCoaches(t.TrainID))
+            foreach (Coach c in trainStore.getCoaches(t.TrainID))
             {
                 foreach (Booking b in c.ListOfBookings)
                 {

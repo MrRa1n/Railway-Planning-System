@@ -13,9 +13,10 @@ namespace Business.TrainClasses
         private List<Coach> coachList;
 
         private TrainFactorySingleton() { }
-
         private static TrainFactorySingleton instance;
 
+        // Singleton - checks if there isnt existing instance then creates 
+        // new instance of TrainFactorySingleton
         public static TrainFactorySingleton Instance
         {
             get
@@ -27,7 +28,6 @@ namespace Business.TrainClasses
                 return instance;
             }
         }
-
         private String createTrainID(String departure)
         {
             // set TrainID prefix based on departure station

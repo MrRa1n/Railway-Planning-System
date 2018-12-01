@@ -1,11 +1,11 @@
-﻿<Window x:Name="btnViewTrains" x:Class="RailwayPlanningSystem.Main"
+﻿<Window x:Name="frmMain" x:Class="RailwayPlanningSystem.Main"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:RailwayPlanningSystem"
         mc:Ignorable="d"
-        Title="Main" Height="681.951" Width="950" MaxWidth="950" MaxHeight="700" MinWidth="950" MinHeight="660" HorizontalAlignment="Left" VerticalAlignment="Top" Loaded="BtnViewTrains_Loaded">
+        Title="Main" Height="681.951" Width="950" MaxWidth="950" MaxHeight="700" MinWidth="950" MinHeight="660" HorizontalAlignment="Left" VerticalAlignment="Top" Loaded="FrmMain_Loaded">
     <Grid Margin="0,0,10,0">
         <Label x:Name="lblRailwayPlanningSystem" Content="Railway Planning System" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" FontSize="24"/>
         <Button x:Name="btnAddTrain" Content="Add Train" HorizontalAlignment="Left" Height="32" Margin="10,599,0,10" VerticalAlignment="Top" Width="112" Click="btnAddTrain_Click"/>
