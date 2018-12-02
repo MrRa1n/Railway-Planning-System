@@ -26,6 +26,7 @@ namespace TrainsTest
             exampleBooking.TrainID = null;
         }
 
+        // comment
         [TestMethod]
         [ExpectedException(typeof(ArgumentNullException))]
         public void DepartureStation_WhenDepartureIsNull_ShouldThrowArgumentNull()
