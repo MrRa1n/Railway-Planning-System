@@ -10,6 +10,9 @@ namespace Business
 {
     public abstract class Train
     {
+        public const String SelectedDepartureTimeOutOfRange = "This train can only depart between 21:00 and 01:00";
+        public const String SelectedDateMustBeInFuture = "Please select a date in the future!";
+
         private String _trainId;
         private String _departure;
         private String _destination;
@@ -33,9 +36,9 @@ namespace Business
                 {
                     throw new ArgumentNullException("Train must have an ID!");
                 }
-                if (value.Length > 4)
+                if (value.Length != 4)
                 {
-                    throw new ArgumentException("Train ID must not exceed 4 characters");
+                    throw new ArgumentOutOfRangeException("Train ID must be 4 characters");
                 }
                 _trainId = value;
             }
@@ -114,9 +117,9 @@ namespace Business
                 {
                     throw new ArgumentNullException("Please select a departure time!");
                 }
-                else if (this is SleeperTrain && (value > TimeSpan.Parse("01:00") && value < TimeSpan.Parse("21:00")))
+                if (this is SleeperTrain && (value > TimeSpan.Parse("01:00") && value < TimeSpan.Parse("21:00")))
                 {
-                    throw new ArgumentException("This train can only depart between 21:00 and 01:00");
+                    throw new ArgumentOutOfRangeException("Departure Time", value, SelectedDepartureTimeOutOfRange);
                 }
                 _departureTime = value;
             }
@@ -125,7 +128,7 @@ namespace Business
         /// <summary>
         /// Departure Day property
         /// - throws ArgumentNullException if null
-        /// - throws ArgumentException if departure day is before or on the current day
+        /// - throws ArgumentOutOfRangeException if departure day is before or on the current day
         /// </summary>
         public DateTime DepartureDay
         {
@@ -138,7 +141,7 @@ namespace Business
                 }
                 else if (value <= DateTime.Now)
                 {
-                    throw new ArgumentException("Please select a date in the future!");
+                    throw new ArgumentOutOfRangeException("Departure Day", value, SelectedDateMustBeInFuture);
                 }
                 _departureDay = value.Date;
             }
@@ -158,14 +161,18 @@ namespace Business
 
         /// <summary>
         /// Coach List property
-        /// - throws ArgumentNullException if value is null
+        /// - throws ArgumentNullException if Coach List is null or empty
         /// </summary>
         public List<Coach> CoachList
         {
             get { return _coachList; }
             set
             {
-                _coachList = value ?? throw new ArgumentNullException("No coaches available for train!");
+                if (value == null || !value.Any())
+                {
+                    throw new ArgumentNullException("No coaches available for train!");
+                }
+                _coachList = value;
             }
         }
 
@@ -195,6 +202,9 @@ namespace Business
         /// <param name="booking">Takes booking object and adds it to Coach</param>
         public void Add(Booking booking)
         {
+            if (booking == null)
+                throw new ArgumentNullException(nameof(booking));
+
             Coach coach = FindCoach(booking.Coach);
             coach.addBookingToCoach(booking);
         }
@@ -206,10 +216,10 @@ namespace Business
         /// <returns>Returns Coach that matches the input coachId, if no coach is found it returns null</returns>
         public Coach FindCoach(char coachId)
         {
-            foreach (Coach c in CoachList)
+            foreach (Coach coach in CoachList)
             {
-                if (coachId.Equals(c._coachId))
-                    return c;
+                if (coachId.Equals(coach.CoachID))
+                    return coach;
             }
             return null;
         }

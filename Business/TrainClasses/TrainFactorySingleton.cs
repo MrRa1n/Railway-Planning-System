@@ -9,7 +9,9 @@ namespace Business.TrainClasses
 
         private static TrainFactorySingleton instance;
 
-        // Check if instance of class exists and return that instance, otherwise create new one
+        /// <summary>
+        /// Check if instance of class exists and return that instance, otherwise create new one
+        /// </summary>
         public static TrainFactorySingleton Instance
         {
             get
@@ -22,7 +24,11 @@ namespace Business.TrainClasses
             }
         }
 
-        // Creates a new train ID depending on the departures station
+        /// <summary>
+        /// Creates a new train ID depending on the departures station
+        /// </summary>
+        /// <param name="departure">Take in departure station as String</param>
+        /// <returns>Returns random train ID</returns>
         private String createTrainID(String departure)
         {
             Random random = new Random();
@@ -41,6 +47,11 @@ namespace Business.TrainClasses
             return trainId;
         }
 
+        /// <summary>
+        /// Creates a new List of Coaches and loops from A-H,
+        /// creating a new coach with each letter as its ID
+        /// </summary>
+        /// <returns>Returns Coach List</returns>
         private List<Coach> buildCoaches()
         {
             List<Coach> coachList = new List<Coach>();
@@ -53,7 +64,10 @@ namespace Business.TrainClasses
             return coachList;
         }
 
-        // Builds a specific Train object based on the Type value passed as an argument
+        /// <summary>
+        /// Builds a specific Train object based on the Type value passed as an argument
+        /// </summary>
+        /// <returns>Returns new ExpressTrain, StoppingTrain or SleeperTrain instance</returns>
         public Train BuildTrain(String departure, String destination, String type, TimeSpan departureTime, DateTime departureDay, bool firstClass, List<String> intermediate, bool sleeperCabin)
         {
             switch (type)

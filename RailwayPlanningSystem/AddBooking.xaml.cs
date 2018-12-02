@@ -93,7 +93,7 @@ namespace RailwayPlanningSystem
                 // Add available coaches to combo box
                 foreach (Coach coach in t.CoachList)
                 {
-                    comboCoach.Items.Add(coach._coachId);
+                    comboCoach.Items.Add(coach.CoachID);
                 }
             }
             catch (Exception ex)

@@ -12,8 +12,10 @@ namespace Business
         private TrainStoreSingleton() { }
         private static List<Train> listOfTrains;
         private static TrainStoreSingleton instance;
-        // Singleton - checks if there isnt existing instance then creates 
-        // new instance of TrainStoreSingleton and Train list
+
+        /// <summary>
+        /// Singleton - checks if there isnt existing instance then creates new instance of TrainStoreSingleton and Train list
+        /// </summary>
         public static TrainStoreSingleton Instance
         {
             get
@@ -27,63 +29,92 @@ namespace Business
             }
         }
 
-        // Add Train object to listOfTrains
-        public void Add(Train t)
+        /// <summary>
+        /// Add Train object to listOfTrains
+        /// </summary>
+        /// <param name="train">Takes Train object and adds to list</param>
+        public void Add(Train train)
         {
-            listOfTrains.Add(t);
+            listOfTrains.Add(train);
         }
 
-        // Pass Booking to our Train object
-        public void Add(Booking b)
+        /// <summary>
+        /// Find the Train using TrainID from Booking and add the booking to the Train
+        /// </summary>
+        /// <param name="booking">Takes Booking object as parameter and adds to Train</param>
+        public void Add(Booking booking)
         {
-            findTrain(b.TrainID).Add(b);
+            findTrain(booking.TrainID).Add(booking);
         }
 
-        // Get all Trains currently stored
+        /// <summary>
+        /// Get all Trains currently stored
+        /// </summary>
+        /// <returns>List of stored trains</returns>
         public List<Train> getTrains()
         {
             return listOfTrains;
         }
 
-        // Return the list of coaches based on the Train ID provided
+        /// <summary>
+        /// Return the list of coaches based on the Train ID provided
+        /// </summary>
+        /// <param name="trainId">Takes trainID as String and searches listOfTrains</param>
+        /// <returns>Returns list of coaches for that train</returns>
         public List<Coach> getCoaches(String trainId)
         {
-            foreach (Train t in listOfTrains)
+            foreach (Train train in listOfTrains)
             {
-                if (t.TrainID.Equals(trainId))
-                    return t.CoachList;
+                if (train.TrainID.Equals(trainId))
+                    return train.CoachList;
             }
             return null;
         }
 
-        // Return single Train from list based on Train ID provided
+        /// <summary>
+        /// Return single Train from list based on Train ID provided
+        /// </summary>
+        /// <param name="trainId">Takes trainID as String and searches listOfTrains</param>
+        /// <returns>Returns Train object based on Train ID provided</returns>
         public Train findTrain(String trainId)
         {
-            foreach (Train t in listOfTrains)
+            foreach (Train train in listOfTrains)
             {
-                if (trainId.Equals(t.TrainID))
-                    return t;
+                if (trainId.Equals(train.TrainID))
+                    return train;
             }
             return null;
         }
 
-        // Return a list of all possible departure stations for a provided Train
+        /// <summary>
+        /// Method used to get a list of departure stations that doesn't include the arrival station
+        /// </summary>
+        /// <param name="train">Takes Train object to search list of all stations</param>
+        /// <returns>Returns a list of all possible departure stations for a provided Train</returns>
         public List<String> getDepartureStations(Train train)
         {
-            List<String> st = getAllStations(train);
-            st.Remove(train.Destination);
-            return st;
+            List<String> listOfDepartures = getAllStations(train);
+            listOfDepartures.Remove(train.Destination);
+            return listOfDepartures;
         }
 
-        // Return a list of all possible arrival stations for a provided Train
+        /// <summary>
+        /// Method used to get a list of arrival stations that doesn't include the departure station
+        /// </summary>
+        /// <param name="train">Takes Train object to search list of all stations</param>
+        /// <returns>Returns a list of all possible arrival stations for a provided Train</returns>
         public List<String> getArrivalStations(Train train)
         {
-            List<String> st = getAllStations(train);
-            st.Remove(train.Departure);
-            return st;
+            List<String> listOfArrivals = getAllStations(train);
+            listOfArrivals.Remove(train.Departure);
+            return listOfArrivals;
         }
 
-        // Return all stations for a given train
+        /// <summary>
+        /// Return all stations for a given train
+        /// </summary>
+        /// <param name="train">Takes Train object to retrieve all stations stored</param>
+        /// <returns>Returns a combined list of all stations Train will stop at</returns>
         public List<String> getAllStations(Train train)
         {
             // Store departure station and departure in list
@@ -108,7 +139,11 @@ namespace Business
             
         }
 
-        // Produce a comma-separated list of a Train's intermediate stations
+        /// <summary>
+        /// Produce a comma-separated list of a Train's intermediate stations
+        /// </summary>
+        /// <param name="train">Takes Train object to retrieve any intermediates it may have</param>
+        /// <returns>Returns a string of each intermediate station, separated by commas</returns>
         public String intermediateList(Train train)
         {
             if (train is StoppingTrain)
@@ -122,6 +157,15 @@ namespace Business
             return String.Empty;
         }
 
+        /// <summary>
+        /// Calculate the total cost of a booking based off what options the user selects
+        /// </summary>
+        /// <param name="trainId">The ID of the train the user has selected</param>
+        /// <param name="departure">The name of the departure station for the booking</param>
+        /// <param name="destination">The name of the destination for the booking</param>
+        /// <param name="firstClass">Whether the booking will have first class (True or False)</param>
+        /// <param name="sleeperCabin">Whether the booking will have a sleeper cabin (True or False)</param>
+        /// <returns>Returns a double value for the total cost of the booking</returns>
         public double calculateBookingCost(String trainId, String departure, String destination, bool firstClass, bool sleeperCabin)
         {
             // Check that a minimum of trainId, departure and destination have been provided
@@ -168,6 +212,10 @@ namespace Business
         // Enable TypeNameHandling to determine if Train is ExpressTrain, StoppingTrain or SleeperTrain
         JsonSerializerSettings jsonSerializerSettings = new JsonSerializerSettings { TypeNameHandling = TypeNameHandling.All };
 
+        /// <summary>
+        /// Serializes Train and Booking objects and writes them to a JSON file
+        /// </summary>
+        /// <param name="fileName">The name and path of the file to save the Trains and Bookings</param>
         public void serializeTrain(String fileName)
         {
             // Throw exception if the list of trains is empty
@@ -182,8 +230,13 @@ namespace Business
             streamWriter.Close();
         }
 
+        /// <summary>
+        /// Reads JSON file and deserializes Trains and Bookings
+        /// </summary>
+        /// <param name="fileName">The name and path of the file to open</param>
         public void deserializeTrain(String fileName)
         {
+            if (fileName == String.Empty) return;
             // Create new instance of StreamReader with file name
             StreamReader streamReader = new StreamReader(fileName);
             // Read contents of file

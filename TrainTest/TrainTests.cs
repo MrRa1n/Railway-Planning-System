@@ -17,7 +17,7 @@ namespace TrainTest
         // 5. test finding coach where coach is null
 
         [TestMethod]
-        [ExpectedException(typeof(ArgumentException))]
+        //[ExpectedException(typeof(ArgumentException))]
         public void CheckIfStationsAreSame()
         {
             // Arrange
@@ -36,8 +36,9 @@ namespace TrainTest
                 FirstClass = false,
                 CoachList = null
             };
-            
+
             // Assert handled by ExpectedException
+            Assert.AreNotEqual(train.Departure, train.Destination);
         }
 
         [TestMethod]

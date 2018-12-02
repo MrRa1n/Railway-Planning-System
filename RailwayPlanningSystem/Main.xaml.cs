@@ -75,7 +75,6 @@ namespace RailwayPlanningSystem
             try
             {
                 String fileName = "";
-
                 // Create new OpenFileDialog instance and set filter to JSON files
                 OpenFileDialog openFileDialog = new OpenFileDialog();
                 openFileDialog.Filter = "JSON Files (*.json) | *.json";
@@ -122,8 +121,8 @@ namespace RailwayPlanningSystem
                     if (t is SleeperTrain)
                         sleeperValue = ((SleeperTrain)t).SleeperCabin;
 
-                    // Remove trailing time from DateTime
-                    String[] formattedDate = t.DepartureDay.ToString().Split(' ');
+                    // Format the date to remove trailing time
+                    String formattedDate = t.DepartureDay.ToString("dd/MM/yy");
 
                     // Only add trains to DataGrid that match the selected time
                     if (t.DepartureDay.Equals(dateViewTrains.SelectedDate))
@@ -134,8 +133,8 @@ namespace RailwayPlanningSystem
                         t.Departure,
                         t.Destination,
                         trainStore.intermediateList(t),
-                        t.DepartureTime,
-                        formattedDate[0],
+                        t.DepartureTime.ToString(@"hh\:mm"),
+                        formattedDate,
                         sleeperValue,
                         t.FirstClass
                         );
@@ -173,10 +172,10 @@ namespace RailwayPlanningSystem
                     if (trainStore.getDepartureStations(t).Contains(comboDeparture.Text)
                         && trainStore.getArrivalStations(t).Contains(comboArrival.Text))
                     {
-                        // Remove trailing time from DateTime
-                        String[] formattedDate = t.DepartureDay.ToString().Split(' ');
+                        // Format the date to remove the time
+                        String formattedDate = t.DepartureDay.ToString("dd/MM/yy");
                         // Add trains to data table if they travel between selected stations
-                        trainDataTable.Rows.Add(t.TrainID, formattedDate[0], t.DepartureTime);
+                        trainDataTable.Rows.Add(t.TrainID, formattedDate, t.DepartureTime.ToString(@"hh\:mm"));
                     }
                 }
                 // Bind DataGrid to our data table to display trains in our form

@@ -5,6 +5,8 @@ namespace Business.TrainClasses
 {
     public class SleeperTrain : Train
     {
+        public const String MaxNumberOfIntermediatesExceeded = "";
+
         private List<String> _intermediate;
         private bool _sleeperCabin;
 
@@ -16,6 +18,10 @@ namespace Business.TrainClasses
             get { return _intermediate; }
             set
             {
+                if (value.Count > 4)
+                {
+                    throw new ArgumentOutOfRangeException();
+                }
                 _intermediate = value;
             }
         }

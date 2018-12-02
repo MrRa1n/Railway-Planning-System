@@ -8,7 +8,7 @@ namespace Business.TrainClasses
         private const int MAX_CAPACITY = 60;
         public List<int> ListOfAvailableSeats { get; private set; }
         public List<Booking> ListOfBookings { get; private set; }
-        public char _coachId { get; private set; }
+        public char CoachID { get; private set; }
 
         /// <summary>
         /// Constructor for Coach class that assigns each coachId and creates list
@@ -17,7 +17,7 @@ namespace Business.TrainClasses
         /// <param name="coachId">Takes a coachId from TrainFactory</param>
         public Coach(char coachId)
         {
-            _coachId = coachId;
+            CoachID = coachId;
 
             ListOfAvailableSeats = new List<int>();
             ListOfBookings = new List<Booking>();
