@@ -7,14 +7,14 @@ using Business.TrainClasses;
 namespace TrainsTest
 {
     [TestClass]
-    public class SleeperTrainTest
+    public class StoppingTrainTest
     {
-        SleeperTrain exampleTrain = new SleeperTrain();
+        StoppingTrain exampleTrain = new StoppingTrain();
 
         [TestMethod]
         public void Intermediate_WhenMaxIntermediatesExceeded_ShouldThrowArgumentOutOfRange()
         {
-            List<String> stations = new List<String>() { "Station1","Station2","Station3","Station4","Station5" };
+            List<String> stations = new List<String>() { "Station1", "Station2", "Station3", "Station4", "Station5" };
 
             try
             {
@@ -22,7 +22,7 @@ namespace TrainsTest
             }
             catch (ArgumentOutOfRangeException ex)
             {
-                StringAssert.Contains(ex.Message, SleeperTrain.MaxNumberOfIntermediatesExceeded);
+                StringAssert.Contains(ex.Message, StoppingTrain.MaxNumberOfIntermediatesExceeded);
                 return;
             }
             Assert.Fail("The expected exception was not thrown.");

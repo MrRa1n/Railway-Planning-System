@@ -5,7 +5,7 @@ namespace Business.TrainClasses
 {
     public class SleeperTrain : Train
     {
-        public const String MaxNumberOfIntermediatesExceeded = "";
+        public const String MaxNumberOfIntermediatesExceeded = "There cannot be more than 4 intermediate stations";
 
         private List<String> _intermediate;
         private bool _sleeperCabin;
@@ -20,7 +20,7 @@ namespace Business.TrainClasses
             {
                 if (value.Count > 4)
                 {
-                    throw new ArgumentOutOfRangeException();
+                    throw new ArgumentOutOfRangeException("Intermediate Stations Exceeded", value, MaxNumberOfIntermediatesExceeded);
                 }
                 _intermediate = value;
             }

@@ -24,7 +24,7 @@ namespace Business.BookingClasses
             {
                 if (String.IsNullOrWhiteSpace(value))
                 {
-                    throw new ArgumentNullException("Please enter a name!");
+                    throw new ArgumentNullException(value, "Please enter a name!");
                 }
                 _name = value;
             }
@@ -138,6 +138,8 @@ namespace Business.BookingClasses
                 _seat = value;
             }
         }
+
+        public Booking() { }
 
         /// <summary>
         /// Constructor for Booking with parameters

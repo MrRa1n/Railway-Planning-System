@@ -5859,11 +5859,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "H:\\Object Oriented Software Development\\RailwayPlanningSystem\\TrainsTest\\TrainsTest.csproj",
+      "projectUniqueName": "C:\\Users\\40316565\\source\\repos\\RailwayPlanningSystem\\TrainsTest\\TrainsTest.csproj",
       "projectName": "TrainsTest",
-      "projectPath": "H:\\Object Oriented Software Development\\RailwayPlanningSystem\\TrainsTest\\TrainsTest.csproj",
+      "projectPath": "C:\\Users\\40316565\\source\\repos\\RailwayPlanningSystem\\TrainsTest\\TrainsTest.csproj",
       "packagesPath": "C:\\Users\\40316565\\.nuget\\packages\\",
-      "outputPath": "H:\\Object Oriented Software Development\\RailwayPlanningSystem\\TrainsTest\\obj\\",
+      "outputPath": "C:\\Users\\40316565\\source\\repos\\RailwayPlanningSystem\\TrainsTest\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
@@ -5882,11 +5882,11 @@
       "frameworks": {
         "netcoreapp2.1": {
           "projectReferences": {
-            "H:\\Object Oriented Software Development\\RailwayPlanningSystem\\Business\\Business.csproj": {
-              "projectPath": "H:\\Object Oriented Software Development\\RailwayPlanningSystem\\Business\\Business.csproj"
+            "C:\\Users\\40316565\\source\\repos\\RailwayPlanningSystem\\Business\\Business.csproj": {
+              "projectPath": "C:\\Users\\40316565\\source\\repos\\RailwayPlanningSystem\\Business\\Business.csproj"
             },
-            "H:\\Object Oriented Software Development\\RailwayPlanningSystem\\Data\\Data.csproj": {
-              "projectPath": "H:\\Object Oriented Software Development\\RailwayPlanningSystem\\Data\\Data.csproj"
+            "C:\\Users\\40316565\\source\\repos\\RailwayPlanningSystem\\Data\\Data.csproj": {
+              "projectPath": "C:\\Users\\40316565\\source\\repos\\RailwayPlanningSystem\\Data\\Data.csproj"
             }
           }
         }

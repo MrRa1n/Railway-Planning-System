@@ -67,9 +67,7 @@ namespace RailwayPlanningSystem
             }
             catch (Exception ex)
             {
-                if (ex is ArgumentNullException)
-                    MessageBox.Show("Please select a coach and a seat");
-                else
+
                     MessageBox.Show(ex.Message);
             }
 

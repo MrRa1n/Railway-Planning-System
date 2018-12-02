@@ -5,6 +5,8 @@ namespace Business.TrainClasses
 {
     public class StoppingTrain : Train
     {
+        public const String MaxNumberOfIntermediatesExceeded = "There cannot be more than 4 intermediate stations";
+
         private List<String> _intermediate;
 
         /// <summary>
@@ -16,6 +18,10 @@ namespace Business.TrainClasses
             get { return _intermediate; }
             set
             {
+                if (value.Count > 4)
+                {
+                    throw new ArgumentOutOfRangeException("Intermediate Stations Exceeded", value, MaxNumberOfIntermediatesExceeded);
+                }
                 _intermediate = value;
             }
         }
