@@ -24,7 +24,7 @@ namespace Business.BookingClasses
             {
                 if (String.IsNullOrWhiteSpace(value))
                 {
-                    throw new ArgumentNullException(value, "Please enter a name!");
+                    throw new ArgumentNullException(nameof(value), "Please provide a name");
                 }
                 _name = value;
             }
@@ -41,7 +41,7 @@ namespace Business.BookingClasses
             {
                 if (String.IsNullOrWhiteSpace(value))
                 {
-                    throw new ArgumentNullException("Please select a train!");
+                    throw new ArgumentNullException(nameof(value), "Please provide a train ID");
                 }
                 _trainId = value;
             }
@@ -56,9 +56,13 @@ namespace Business.BookingClasses
             get { return _departureStation; }
             set
             {
-                if (value.Equals(_arrivalStation))
+                if (value == null)
                 {
-                    throw new ArgumentException("Departure station can't be the same as arrival station!");
+                    throw new ArgumentNullException(nameof(value), "Please provide a departure station");
+                }
+                if (_arrivalStation != null && value.Equals(_arrivalStation))
+                {
+                    throw new ArgumentException("Departure station can't be the same as arrival station");
                 }
                 _departureStation = value;
             }
@@ -73,9 +77,13 @@ namespace Business.BookingClasses
             get { return _arrivalStation; }
             set
             {
-                if (value.Equals(_departureStation))
+                if (value == null)
                 {
-                    throw new ArgumentException("Arrival station can't be the same as departure station!");
+                    throw new ArgumentNullException(nameof(value), "Please provide an arrival station");
+                }
+                if (_departureStation != null && value.Equals(_departureStation))
+                {
+                    throw new ArgumentException("Arrival station can't be the same as departure station");
                 }
                 _arrivalStation = value;
             }
@@ -116,7 +124,7 @@ namespace Business.BookingClasses
             {
                 if (String.IsNullOrWhiteSpace(value.ToString()))
                 {
-                    throw new ArgumentNullException("Please select a coach!");
+                    throw new ArgumentNullException(nameof(value), "Please provide a coach ID");
                 }
                 _coach = value;
             }
@@ -130,10 +138,10 @@ namespace Business.BookingClasses
         {
             get { return _seat; }
             set
-            {
+            { 
                 if (String.IsNullOrWhiteSpace(value.ToString()))
                 {
-                    throw new ArgumentNullException("Please select a seat!");
+                    throw new ArgumentNullException(nameof(value), "Please provide a seat number");
                 }
                 _seat = value;
             }

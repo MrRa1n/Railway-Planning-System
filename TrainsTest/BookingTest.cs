@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 using Business.BookingClasses;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
@@ -26,7 +24,7 @@ namespace TrainsTest
             exampleBooking.TrainID = null;
         }
 
-        // comment
+        
         [TestMethod]
         [ExpectedException(typeof(ArgumentNullException))]
         public void DepartureStation_WhenDepartureIsNull_ShouldThrowArgumentNull()
@@ -35,9 +33,13 @@ namespace TrainsTest
         }
 
         [TestMethod]
+        [ExpectedException(typeof(ArgumentException))]
         public void DepartureStation_WhenDepartureIsSameAsArrival_ShouldThrowArgumentException()
         {
+            String station = "Edinburgh (Waverley)";
 
+            exampleBooking.DepartureStation = station;
+            exampleBooking.ArrivalStation = station;
         }
 
         [TestMethod]
@@ -48,9 +50,13 @@ namespace TrainsTest
         }
 
         [TestMethod]
+        [ExpectedException(typeof(ArgumentException))]
         public void ArrivalStation_WhenArrivalIsSameAsDeparture_ShouldThrowArgumentException()
         {
+            String station = "Edinburgh (Waverley)";
 
+            exampleBooking.DepartureStation = station;
+            exampleBooking.ArrivalStation = station;
         }
 
         [TestMethod]
@@ -58,13 +64,6 @@ namespace TrainsTest
         public void Coach_WhenCoachIsNull_ShouldThrowArgumentNull()
         {
             exampleBooking.Coach = ' ';
-        }
-
-        [TestMethod]
-        [ExpectedException(typeof(ArgumentNullException))]
-        public void Seat_WhenSeatIsNull_ShouldThrowArgumentNull()
-        {
-            exampleBooking.Seat = int.Parse(" ");
         }
 
     }

@@ -21,7 +21,7 @@ namespace Business.TrainClasses
         {
             if (coachId < 'A' || coachId > 'H')
             {
-                throw new ArgumentOutOfRangeException("Invalid Coach ID", coachId, CoachLetterIsNotValid);
+                throw new ArgumentOutOfRangeException("Invalid coach ID", coachId, CoachLetterIsNotValid);
             }
 
             CoachID = coachId;
@@ -44,7 +44,7 @@ namespace Business.TrainClasses
         {
             if (booking == null)
             {
-                throw new ArgumentNullException("No coaches available to add Booking");
+                throw new ArgumentNullException(nameof(booking), "Please provide a valid booking");
             }
             if (ListOfAvailableSeats.Count == 0)
             {

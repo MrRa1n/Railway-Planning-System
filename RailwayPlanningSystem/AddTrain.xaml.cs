@@ -4,6 +4,7 @@ using System.Windows;
 using System.Windows.Controls;
 using Business;
 using Business.TrainClasses;
+using Data;
 
 namespace RailwayPlanningSystem
 {
@@ -13,7 +14,7 @@ namespace RailwayPlanningSystem
     public partial class AddTrain : Window
     {
         TrainStoreSingleton trainStore = TrainStoreSingleton.Instance;
-        TrainFactorySingleton trainFactory = TrainFactorySingleton.Instance;
+        TrainFactory trainFactory = new TrainFactory();
 
         public AddTrain()
         {

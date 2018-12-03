@@ -34,7 +34,7 @@ namespace Business
             {
                 if (String.IsNullOrWhiteSpace(value))
                 {
-                    throw new ArgumentNullException("Train must have an ID!");
+                    throw new ArgumentNullException(nameof(value), "Please provide a train ID");
                 }
                 if (value.Length != 4)
                 {
@@ -55,7 +55,7 @@ namespace Business
             {
                 if (String.IsNullOrWhiteSpace(value))
                 {
-                    throw new ArgumentNullException("Please select a departure station");
+                    throw new ArgumentNullException(nameof(value), "Please provide a departure station");
                 }
                 if (value.Equals(_destination))
                 {
@@ -76,7 +76,7 @@ namespace Business
             {
                 if (String.IsNullOrWhiteSpace(value))
                 {
-                    throw new ArgumentNullException("Please select a destination");
+                    throw new ArgumentNullException(nameof(value), "Please provide a destination");
                 }
                 if (value.Equals(_departure))
                 {
@@ -97,7 +97,7 @@ namespace Business
             {
                 if (String.IsNullOrWhiteSpace(value))
                 {
-                    throw new ArgumentNullException("Please select a train type!");
+                    throw new ArgumentNullException(nameof(value), "Please provide a train type");
                 }
                 _type = value;
             }
@@ -115,7 +115,7 @@ namespace Business
             {
                 if (value == null)
                 {
-                    throw new ArgumentNullException("Please select a departure time!");
+                    throw new ArgumentNullException(nameof(value), "Please provide a departure time");
                 }
                 if (this is SleeperTrain && (value > TimeSpan.Parse("01:00") && value < TimeSpan.Parse("21:00")))
                 {
@@ -132,18 +132,18 @@ namespace Business
         /// </summary>
         public DateTime DepartureDay
         {
-            get { return _departureDay.Date; }
+            get { return _departureDay; }
             set
             {
                 if (value == null)
                 {
-                    throw new ArgumentNullException("Please select a departure date!");
+                    throw new ArgumentNullException(nameof(value), "Please provide a departure date");
                 }
                 else if (value <= DateTime.Now)
                 {
-                    throw new ArgumentOutOfRangeException("Departure Day", value, SelectedDateMustBeInFuture);
+                    throw new ArgumentOutOfRangeException("Departure Day", value.ToString("dd/MM/yy"), SelectedDateMustBeInFuture);
                 }
-                _departureDay = value.Date;
+                _departureDay = value;
             }
         }
 
@@ -170,7 +170,7 @@ namespace Business
             {
                 if (value == null || !value.Any())
                 {
-                    throw new ArgumentNullException("No coaches available for train!");
+                    throw new ArgumentNullException(nameof(value), "No coaches available for train");
                 }
                 _coachList = value;
             }
@@ -179,7 +179,7 @@ namespace Business
         /// <summary>
         /// Default constructor for Train - required for serialization
         /// </summary>
-        public Train() { }
+        protected Train() { }
 
         /// <summary>
         /// Constructor for train with parameters
@@ -203,7 +203,7 @@ namespace Business
         public void Add(Booking booking)
         {
             if (booking == null)
-                throw new ArgumentNullException(nameof(booking));
+                throw new ArgumentNullException(nameof(booking), "Please provide a valid booking");
 
             Coach coach = FindCoach(booking.Coach);
             coach.addBookingToCoach(booking);

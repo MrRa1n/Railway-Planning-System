@@ -4,8 +4,9 @@ using System.IO;
 using Newtonsoft.Json;
 using Business.BookingClasses;
 using Business.TrainClasses;
+using Business;
 
-namespace Business
+namespace Data
 {
     public class TrainStoreSingleton
     {

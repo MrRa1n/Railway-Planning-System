@@ -9,13 +9,6 @@ namespace TrainsTest
     [TestClass]
     public class TrainsTest
     {
-
-        // 1. test with data type
-        // 2. test with station that doesn't exist
-        // 3. test with invalid train id
-        // 4. test with adding null booking
-        // 5. test finding coach where coach is null
-
         Train exampleTrain = new ExpressTrain();
         
         [TestMethod]

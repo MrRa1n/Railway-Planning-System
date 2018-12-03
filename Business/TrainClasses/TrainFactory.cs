@@ -3,26 +3,9 @@ using System.Collections.Generic;
 
 namespace Business.TrainClasses
 {
-    public class TrainFactorySingleton
+    public class TrainFactory
     {
-        private TrainFactorySingleton() { }
-
-        private static TrainFactorySingleton instance;
-
-        /// <summary>
-        /// Check if instance of class exists and return that instance, otherwise create new one
-        /// </summary>
-        public static TrainFactorySingleton Instance
-        {
-            get
-            {
-                if (instance == null)
-                {
-                    instance = new TrainFactorySingleton();
-                }
-                return instance;
-            }
-        }
+        public TrainFactory() { }
 
         /// <summary>
         /// Creates a new train ID depending on the departures station
@@ -31,6 +14,9 @@ namespace Business.TrainClasses
         /// <returns>Returns random train ID</returns>
         private String createTrainID(String departure)
         {
+            if (String.IsNullOrWhiteSpace(departure))
+                throw new ArgumentNullException(nameof(departure), "Please provide a departure station");
+
             Random random = new Random();
             List<String> trainIds = new List<String>();
             // set TrainID prefix based on departure station
@@ -70,14 +56,15 @@ namespace Business.TrainClasses
         /// <returns>Returns new ExpressTrain, StoppingTrain or SleeperTrain instance</returns>
         public Train BuildTrain(String departure, String destination, String type, TimeSpan departureTime, DateTime departureDay, bool firstClass, List<String> intermediate, bool sleeperCabin)
         {
+            String trainId = createTrainID(departure);
             switch (type)
             {
                 case "Express":
-                    return new ExpressTrain(createTrainID(departure), departure, destination, type, departureTime, departureDay, firstClass, buildCoaches()); 
+                    return new ExpressTrain(trainId, departure, destination, type, departureTime, departureDay, firstClass, buildCoaches()); 
                 case "Stopping":
-                    return new StoppingTrain(createTrainID(departure), departure, destination, type, departureTime, departureDay, firstClass, buildCoaches(), intermediate);
+                    return new StoppingTrain(trainId, departure, destination, type, departureTime, departureDay, firstClass, buildCoaches(), intermediate);
                 case "Sleeper":
-                    return new SleeperTrain(createTrainID(departure), departure, destination, type, departureTime, departureDay, firstClass, buildCoaches(), intermediate, sleeperCabin);
+                    return new SleeperTrain(trainId, departure, destination, type, departureTime, departureDay, firstClass, buildCoaches(), intermediate, sleeperCabin);
                 default:
                     return null;
             }
