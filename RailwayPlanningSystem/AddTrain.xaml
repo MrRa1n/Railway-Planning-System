@@ -29,10 +29,10 @@
             <ComboBoxItem Content="Sleeper"/>
         </ComboBox>
         <StackPanel x:Name="stackIntermediates" HorizontalAlignment="Left" Height="88" Margin="128,164,0,0" VerticalAlignment="Top" Width="150">
-            <CheckBox x:Name="chkPeterborough" Content="Peterborough" Margin="0,0,5,5"/>
+            <CheckBox x:Name="chkNewcastle" Content="Newcastle" Margin="0,0,5.4,5"/>
             <CheckBox x:Name="chkDarlington" Content="Darlington" Margin="0,0,5,5"/>
             <CheckBox x:Name="chkYork" Content="York" Margin="0,0,5,5"/>
-            <CheckBox x:Name="chkNewcastle" Content="Newcastle" Margin="0,0,5,5"/>
+            <CheckBox x:Name="chkPeterborough" Content="Peterborough" Margin="0,0,5.4,5"/>
         </StackPanel>
         <DatePicker x:Name="dateDepartureDay" HorizontalAlignment="Left" Margin="128,302,0,0" VerticalAlignment="Top" Width="150"/>
         <ComboBox x:Name="comboDepartureTime" HorizontalAlignment="Left" Margin="128,257,0,0" VerticalAlignment="Top" Width="150"/>

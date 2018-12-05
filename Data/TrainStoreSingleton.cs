@@ -210,6 +210,36 @@ namespace Data
             return bookingCost;
         }
 
+        /// <summary>
+        /// Checks the order of the stations depending on the departure and arrival set on the train
+        /// </summary>
+        /// <param name="trainId">The ID of the train to get the stations from</param>
+        /// <param name="departure">The selected departure station by the user</param>
+        /// <param name="arrival">The selected arrival station by the user</param>
+        public void checkStationOrder(String trainId, String departure, String arrival)
+        {
+            // Find train by Train ID and get all the stations of that train
+            Train train = findTrain(trainId);
+            List<String> stations = getAllStations(train);
+
+            // Get the index of the departure of the departure and arrival stations selected
+            int departureIndex = stations.IndexOf(departure);
+            int arrivalIndex = stations.IndexOf(arrival);
+
+            // Check if selected departure station is after the arrival in the list
+            // if the train's departure station is Edinburgh
+            if (train.Departure.Contains("Edinburgh") && departureIndex > arrivalIndex)
+            {
+                throw new ArgumentException("Train doesn't go in that direction");
+            }
+            // Check if selected arrival station is before the departure in the list
+            // if the train's departure station is London
+            if (train.Departure.Contains("London") && departureIndex < arrivalIndex)
+            {
+                throw new ArgumentException("Train doesn't go in that direction");
+            }
+        }
+
         // Enable TypeNameHandling to determine if Train is ExpressTrain, StoppingTrain or SleeperTrain
         JsonSerializerSettings jsonSerializerSettings = new JsonSerializerSettings { TypeNameHandling = TypeNameHandling.All };
 

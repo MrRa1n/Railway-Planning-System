@@ -147,6 +147,8 @@ namespace Business.BookingClasses
             }
         }
 
+        
+
         public Booking() { }
 
         /// <summary>

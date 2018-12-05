@@ -85,6 +85,8 @@ namespace RailwayPlanningSystem
                 {
                     fileName = openFileDialog.FileName;
                 }
+                dataAllTrains.DataContext = null;
+                dataPassengerList.DataContext = null;
                 // Perform deserialization
                 trainStore.deserializeTrain(fileName);
             }

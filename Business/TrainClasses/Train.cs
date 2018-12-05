@@ -139,10 +139,10 @@ namespace Business
                 {
                     throw new ArgumentNullException(nameof(value), "Please provide a departure date");
                 }
-                else if (value <= DateTime.Now)
-                {
-                    throw new ArgumentOutOfRangeException("Departure Day", value.ToString("dd/MM/yy"), SelectedDateMustBeInFuture);
-                }
+                //else if (value <= DateTime.Now)
+                //{
+                //    throw new ArgumentOutOfRangeException("Departure Day", value.ToString("dd/MM/yy"), SelectedDateMustBeInFuture);
+                //}
                 _departureDay = value;
             }
         }

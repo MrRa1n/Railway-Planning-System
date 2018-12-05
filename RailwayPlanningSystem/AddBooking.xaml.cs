@@ -34,6 +34,8 @@ namespace RailwayPlanningSystem
         {
             try
             {
+                trainStore.checkStationOrder(selectedTrainId, comboDeparture.Text, comboArrival.Text);
+
                 // Check if FirstClass and Sleeper have been checked and set value
                 bool firstClass = (rdoFirstClassYes.IsChecked == true) ? true : false;
                 bool sleeperCabin = (rdoSleeperYes.IsChecked == true) ? true : false;
@@ -61,15 +63,13 @@ namespace RailwayPlanningSystem
                 // Store the booking
                 trainStore.Add(booking);
 
-                // Reset the form fields
-                txtName.Clear();
-                listTrains.SelectedIndex = -1;
-                clearAllFields();
+                MessageBox.Show("Booking added successfully");
+
+                this.Close();
             }
             catch (Exception ex)
             {
-
-                    MessageBox.Show(ex.Message);
+                MessageBox.Show(ex.Message);
             }
 
         }
@@ -134,6 +134,7 @@ namespace RailwayPlanningSystem
                 double bookingCost = trainStore.calculateBookingCost(selectedTrainId, comboDeparture.Text, comboArrival.Text, rdoFirstClassYes.IsChecked.Value, rdoSleeperYes.IsChecked.Value);
                 // Display the cost to the user
                 MessageBox.Show("Total ticket price: £" + bookingCost);
+                btnAddBooking.IsEnabled = true;
             }
             catch (Exception ex)
             {

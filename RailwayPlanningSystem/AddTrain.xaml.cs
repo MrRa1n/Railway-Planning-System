@@ -63,6 +63,10 @@ namespace RailwayPlanningSystem
                         if (((CheckBox)control).IsChecked == true)
                             intermediates.Add(((CheckBox)control).Content.ToString());
                     }
+                    if (comboDeparture.Text.Equals("London (Kings Cross)"))
+                    {
+                        intermediates.Reverse();
+                    }
                 }
                 
                 // Check if FirstClass and Sleeper have been checked and set value
@@ -86,6 +90,8 @@ namespace RailwayPlanningSystem
                 // If train has been created sucessfully, store it and prompt user
                 trainStore.Add(t);
                 MessageBox.Show("Train has been added successfully");
+
+                this.Close();
             }
             catch (Exception ex)
             {

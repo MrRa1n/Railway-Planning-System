@@ -36,7 +36,7 @@
 
         </ComboBox>
         <ComboBox x:Name="comboSeat" HorizontalAlignment="Left" Margin="124,384,0,0" VerticalAlignment="Top" Width="152"/>
-        <Button x:Name="btnAddBooking" Content="Add Booking" HorizontalAlignment="Left" Margin="13,476,0,0" VerticalAlignment="Top" Width="281" Height="30" Click="BtnAddBooking_Click"/>
+        <Button x:Name="btnAddBooking" Content="Add Booking" HorizontalAlignment="Left" Margin="13,476,0,0" VerticalAlignment="Top" Width="281" Height="30" Click="BtnAddBooking_Click" IsEnabled="False"/>
         <Button x:Name="btnCalculateFare" Content="Calculate Fare" HorizontalAlignment="Left" Margin="13,443,0,0" VerticalAlignment="Top" Width="281" Height="28" Click="BtnCalculateFare_Click"/>
 
     </Grid>
