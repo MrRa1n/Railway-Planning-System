@@ -82,11 +82,9 @@ namespace TrainsTest
         [ExpectedException(typeof(ArgumentNullException))]
         public void DepartureTime_WhenDepartureTimeIsNull_ShouldThrowArgumentNull()
         {
-            // FormatException thrown for TimeSpan.Parse("")
             exampleTrain.DepartureTime = TimeSpan.Parse(null);
         }
 
-        // Only works on sleepertrain
         [TestMethod]
         public void DepartureTime_WhenTimeIsOutOfRange_ShouldThrowArgumentOutOfRange()
         {
@@ -113,23 +111,6 @@ namespace TrainsTest
             exampleTrain.DepartureDay = DateTime.Parse(null);
         }
 
-        [TestMethod]
-        public void DepartureDay_WhenDateIsNotInFuture_ShouldThrowArgumentException()
-        {
-            DateTime selectedDepartureDay = DateTime.Today;
-
-            try
-            {
-                exampleTrain.DepartureDay = selectedDepartureDay;
-            }
-            catch (ArgumentOutOfRangeException ex)
-            {
-                StringAssert.Contains(ex.Message, Train.SelectedDateMustBeInFuture);
-                return;
-            }
-
-            Assert.Fail("The expected exception was not thrown.");
-        }
 
         [TestMethod]
         [ExpectedException(typeof(ArgumentNullException))]

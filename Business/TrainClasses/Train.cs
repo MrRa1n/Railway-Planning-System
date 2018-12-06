@@ -128,7 +128,6 @@ namespace Business
         /// <summary>
         /// Departure Day property
         /// - throws ArgumentNullException if null
-        /// - throws ArgumentOutOfRangeException if departure day is before or on the current day
         /// </summary>
         public DateTime DepartureDay
         {
@@ -139,10 +138,6 @@ namespace Business
                 {
                     throw new ArgumentNullException(nameof(value), "Please provide a departure date");
                 }
-                //else if (value <= DateTime.Now)
-                //{
-                //    throw new ArgumentOutOfRangeException("Departure Day", value.ToString("dd/MM/yy"), SelectedDateMustBeInFuture);
-                //}
                 _departureDay = value;
             }
         }

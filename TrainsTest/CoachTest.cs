@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 using Business.BookingClasses;
 using Business.TrainClasses;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -12,11 +10,13 @@ namespace TrainsTest
     {
         Coach exampleCoach;
 
+        /// <summary>
+        /// Tests to see if the coach throws exception when ID is not between A and H
+        /// </summary>
         [TestMethod]
         public void Coach_CreateCoachWithInvalidID_ShouldThrowArgumentOutOfRange()
         {
             char invalidCoachId = '5';
-            
             try
             {
                 exampleCoach = new Coach(invalidCoachId);
@@ -26,10 +26,12 @@ namespace TrainsTest
                 StringAssert.Contains(ex.Message, Coach.CoachLetterIsNotValid);
                 return;
             }
-
             Assert.Fail("The expected exception was not thrown.");
         }
 
+        /// <summary>
+        /// Tests if a booking can be added to a coach if it is null
+        /// </summary>
         [TestMethod]
         [ExpectedException(typeof(ArgumentNullException))]
         public void AddBookingToCoach_WhenBookingIsNull_ShouldThrowArgumentNull()
@@ -40,6 +42,9 @@ namespace TrainsTest
             exampleCoach.addBookingToCoach(booking);
         }
 
+        /// <summary>
+        /// Tests if a booking can be added to a coach when the maximum number of seats have been taken
+        /// </summary>
         [TestMethod]
         [ExpectedException(typeof(ArgumentException))]
         public void AddBookingToCoach_WhenNoAvailableSeats_ShowThrowArgumentException()

@@ -36,6 +36,8 @@ namespace Data
         /// <param name="train">Takes Train object and adds to list</param>
         public void Add(Train train)
         {
+            if (train == null)
+                throw new ArgumentNullException(nameof(train), "The train provided is null");
             listOfTrains.Add(train);
         }
 
@@ -45,6 +47,11 @@ namespace Data
         /// <param name="booking">Takes Booking object as parameter and adds to Train</param>
         public void Add(Booking booking)
         {
+            if (booking == null)
+                throw new ArgumentNullException(nameof(booking), "The booking provided is null");
+            if (String.IsNullOrWhiteSpace(booking.TrainID))
+                throw new ArgumentNullException(nameof(booking), "The booking provided is has no Train ID");
+
             findTrain(booking.TrainID).Add(booking);
         }
 
@@ -69,7 +76,7 @@ namespace Data
                 if (train.TrainID.Equals(trainId))
                     return train.CoachList;
             }
-            return null;
+            throw new ArgumentNullException(nameof(trainId), "Could not find coaches from Train ID provided");
         }
 
         /// <summary>
@@ -84,7 +91,7 @@ namespace Data
                 if (trainId.Equals(train.TrainID))
                     return train;
             }
-            return null;
+            throw new ArgumentNullException(nameof(trainId), "Could not find train from Train ID provided");
         }
 
         /// <summary>
@@ -94,6 +101,8 @@ namespace Data
         /// <returns>Returns a list of all possible departure stations for a provided Train</returns>
         public List<String> getDepartureStations(Train train)
         {
+            if (train == null)
+                throw new ArgumentNullException(nameof(train), "The train provided is null");
             List<String> listOfDepartures = getAllStations(train);
             listOfDepartures.Remove(train.Destination);
             return listOfDepartures;
@@ -106,6 +115,8 @@ namespace Data
         /// <returns>Returns a list of all possible arrival stations for a provided Train</returns>
         public List<String> getArrivalStations(Train train)
         {
+            if (train == null)
+                throw new ArgumentNullException(nameof(train), "The train provided is null");
             List<String> listOfArrivals = getAllStations(train);
             listOfArrivals.Remove(train.Departure);
             return listOfArrivals;
@@ -118,6 +129,8 @@ namespace Data
         /// <returns>Returns a combined list of all stations Train will stop at</returns>
         public List<String> getAllStations(Train train)
         {
+            if (train == null)
+                throw new ArgumentNullException(nameof(train), "The train provided is null");
             // Store departure station and departure in list
             List<String> listOfStations = new List<String>()
             {
@@ -180,7 +193,7 @@ namespace Data
             // Add £10 if First Class is selected
             if (findTrain(trainId).FirstClass == false && firstClass)
             {
-                throw new Exception("This train does not offer First Class");
+                throw new ArgumentException("This train does not offer First Class");
             }
             else
             {
@@ -194,7 +207,7 @@ namespace Data
             // Add £10 if train type is sleeper, then add £20 if sleeper cabin
             if (findTrain(trainId).Type != "Sleeper" && sleeperCabin)
             {
-                throw new Exception("This train does not offer Sleeper Cabin");
+                throw new ArgumentException("This train does not offer Sleeper Cabin");
             }
 
             if (findTrain(trainId).Type == "Sleeper")
@@ -228,13 +241,13 @@ namespace Data
 
             // Check if selected departure station is after the arrival in the list
             // if the train's departure station is Edinburgh
-            if (train.Departure.Contains("Edinburgh") && departureIndex > arrivalIndex)
+            if (train.Departure.Contains("Edinburgh") && departureIndex >= arrivalIndex)
             {
                 throw new ArgumentException("Train doesn't go in that direction");
             }
             // Check if selected arrival station is before the departure in the list
             // if the train's departure station is London
-            if (train.Departure.Contains("London") && departureIndex < arrivalIndex)
+            if (train.Departure.Contains("London") && departureIndex <= arrivalIndex)
             {
                 throw new ArgumentException("Train doesn't go in that direction");
             }
@@ -249,6 +262,8 @@ namespace Data
         /// <param name="fileName">The name and path of the file to save the Trains and Bookings</param>
         public void serializeTrain(String fileName)
         {
+            if (String.IsNullOrWhiteSpace(fileName))
+                throw new ArgumentNullException(nameof(fileName), "No file name provided");
             // Throw exception if the list of trains is empty
             if (listOfTrains.Count == 0)
                 throw new Exception("There are no trains to save");
@@ -267,7 +282,8 @@ namespace Data
         /// <param name="fileName">The name and path of the file to open</param>
         public void deserializeTrain(String fileName)
         {
-            if (fileName == String.Empty) return;
+            if (String.IsNullOrWhiteSpace(fileName))
+                throw new ArgumentNullException(nameof(fileName), "No file name provided");
             // Create new instance of StreamReader with file name
             StreamReader streamReader = new StreamReader(fileName);
             // Read contents of file

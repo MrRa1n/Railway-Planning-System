@@ -34,6 +34,7 @@ namespace RailwayPlanningSystem
         {
             try
             {
+                // Check that the order of the stations is correct
                 trainStore.checkStationOrder(selectedTrainId, comboDeparture.Text, comboArrival.Text);
 
                 // Check if FirstClass and Sleeper have been checked and set value

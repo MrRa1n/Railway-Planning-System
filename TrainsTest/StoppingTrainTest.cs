@@ -11,6 +11,9 @@ namespace TrainsTest
     {
         StoppingTrain exampleTrain = new StoppingTrain();
 
+        /// <summary>
+        /// Tests if there are more than the standard number of intermediates and throws and exception if true
+        /// </summary>
         [TestMethod]
         public void Intermediate_WhenMaxIntermediatesExceeded_ShouldThrowArgumentOutOfRange()
         {
