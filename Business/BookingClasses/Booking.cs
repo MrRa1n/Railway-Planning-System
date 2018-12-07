@@ -1,4 +1,13 @@
-﻿using System;
+﻿/**
+ *  Author:             Toby Cook
+ *  Description:        This class provide properties for Bookings that can be added to each Train coach.
+ *                      Bookings can only be added once a Train has been created.
+ *  Last modified:      07/12/18
+ *  Design patterns:    
+ */
+
+
+using System;
 
 namespace Business.BookingClasses
 {

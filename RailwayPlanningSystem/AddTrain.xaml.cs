@@ -1,4 +1,12 @@
-﻿using System;
+﻿/**
+ *  Author:             Toby Cook
+ *  Description:        This is the code behind the Add Train form for the Railway Planning System.
+ *                      It contains all event handlers that control the user input and how trains are added.
+ *  Last modified:      07/12/18
+ *  Design patterns:    This class uses an instance of the TrainStoreSingleton class and TrainFactory for creating and storing trains.
+ */
+
+using System;
 using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Controls;
@@ -13,8 +21,8 @@ namespace RailwayPlanningSystem
     /// </summary>
     public partial class AddTrain : Window
     {
-        TrainStoreSingleton trainStore = TrainStoreSingleton.Instance;
-        TrainFactory trainFactory = new TrainFactory();
+        private TrainStoreSingleton trainStore = TrainStoreSingleton.Instance;
+        private TrainFactory trainFactory = new TrainFactory();
 
         public AddTrain()
         {

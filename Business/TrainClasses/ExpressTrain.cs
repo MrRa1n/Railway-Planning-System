@@ -1,4 +1,12 @@
-﻿using System;
+﻿/**
+ *  Author:             Toby Cook
+ *  Description:        This class is a child class to Train and is a more specified implementation
+ *                      of the Train class.
+ *  Last modified:      07/12/18
+ *  Design patterns:    This class is a part of the Factory design pattern.
+ */
+
+using System;
 using System.Collections.Generic;
 
 namespace Business.TrainClasses

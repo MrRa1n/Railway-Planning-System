@@ -1,4 +1,13 @@
-﻿using System;
+﻿/**
+ *  Author:             Toby Cook
+ *  Description:        This class outlines the specific properties of a Coach. When a Train is created, 
+ *                      six coach objects are created that each have 60 seats. Bookings can then be added 
+ *                      to the Coach.
+ *  Last modified:      07/12/18
+ *  Design patterns:    This class is a part of the Factory design pattern.
+ */
+
+using System;
 using System.Collections.Generic;
 using Business.BookingClasses;
 

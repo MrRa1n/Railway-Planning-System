@@ -1,4 +1,12 @@
-﻿using System;
+﻿/**
+ *  Author:             Toby Cook
+ *  Description:        This class makes use of a Facotry pattern to generate Train IDs and build trains based off 
+ *                      the context provided by the user.
+ *  Last modified:      07/12/18
+ *  Design patterns:    This class uses Factory pattern to build coaches and trains
+ */
+
+using System;
 using System.Collections.Generic;
 
 namespace Business.TrainClasses

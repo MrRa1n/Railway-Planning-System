@@ -1,4 +1,13 @@
-﻿using System;
+﻿/**
+ *  Author:             Toby Cook
+ *  Description:        This is the code behind the Main form for the Railway Planning System.
+ *                      It contains all event handlers that control the user input and how Trains and Bookings
+ *                      are displayed and queried by the user.
+ *  Last modified:      07/12/18
+ *  Design patterns:    This class uses an instance of the TrainStoreSingleton class.
+ */
+
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Windows;
@@ -16,7 +25,7 @@ namespace RailwayPlanningSystem
     /// </summary>
     public partial class Main : Window
     {
-        TrainStoreSingleton trainStore = TrainStoreSingleton.Instance;
+        private TrainStoreSingleton trainStore = TrainStoreSingleton.Instance;
 
         public Main()
         {

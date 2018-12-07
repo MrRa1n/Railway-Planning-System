@@ -1,4 +1,12 @@
-﻿using System;
+﻿/**
+ *  Author:             Toby Cook
+ *  Description:        This class is a child class to Train and is a more specified implementation
+ *                      of the Train class.
+ *  Last modified:      07/12/18
+ *  Design patterns:    This class is a part of the Factory design pattern.
+ */
+
+using System;
 using System.Collections.Generic;
 
 namespace Business.TrainClasses
@@ -7,7 +15,7 @@ namespace Business.TrainClasses
     {
         public const String MaxNumberOfIntermediatesExceeded = "There cannot be more than 4 intermediate stations";
 
-        private List<String> _intermediate;
+        private List<String> intermediate;
 
         /// <summary>
         /// Intermediate property to store list of stations
@@ -15,14 +23,14 @@ namespace Business.TrainClasses
         /// </summary>
         public List<String> Intermediate
         {
-            get { return _intermediate; }
+            get { return intermediate; }
             set
             {
                 if (value.Count > 4)
                 {
                     throw new ArgumentOutOfRangeException("Intermediate Stations Exceeded", value, MaxNumberOfIntermediatesExceeded);
                 }
-                _intermediate = value;
+                intermediate = value;
             }
         }
 

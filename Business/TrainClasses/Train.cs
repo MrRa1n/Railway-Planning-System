@@ -1,4 +1,13 @@
-﻿using System;
+﻿/**
+ *  Author:             Toby Cook
+ *  Description:        This is the parent class Train which child classes inherit general properties from.
+ *                      This outlines the base properties a train must have and the child classes can add more specific
+ *                      properties
+ *  Last modified:      07/12/18
+ *  Design patterns:    This class is a part of the Factory pattern
+ */
+
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;

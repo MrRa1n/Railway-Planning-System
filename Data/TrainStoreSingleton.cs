@@ -1,4 +1,13 @@
-﻿using System;
+﻿/**
+ *  Author:             Toby Cook
+ *  Description:        This class controls all the interaction between the Presentation layer and Business layer for 
+ *                      adding trains and bookings. It also contains methods that return information on trains and 
+ *                      storing them as JSON files.
+ *  Last modified:      07/12/18
+ *  Design patterns:    Implements Singleton design pattern so that only one instance of this class can be created.
+ */
+
+using System;
 using System.Collections.Generic;
 using System.IO;
 using Newtonsoft.Json;
@@ -13,6 +22,8 @@ namespace Data
         private TrainStoreSingleton() { }
         private static List<Train> listOfTrains;
         private static TrainStoreSingleton instance;
+        // Enable TypeNameHandling to determine if Train is ExpressTrain, StoppingTrain or SleeperTrain
+        private JsonSerializerSettings jsonSerializerSettings = new JsonSerializerSettings { TypeNameHandling = TypeNameHandling.All };
 
         /// <summary>
         /// Singleton - checks if there isnt existing instance then creates new instance of TrainStoreSingleton and Train list
@@ -253,8 +264,7 @@ namespace Data
             }
         }
 
-        // Enable TypeNameHandling to determine if Train is ExpressTrain, StoppingTrain or SleeperTrain
-        JsonSerializerSettings jsonSerializerSettings = new JsonSerializerSettings { TypeNameHandling = TypeNameHandling.All };
+        
 
         /// <summary>
         /// Serializes Train and Booking objects and writes them to a JSON file

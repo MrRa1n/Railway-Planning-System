@@ -1,4 +1,12 @@
-﻿using System;
+﻿/**
+ *  Author:             Toby Cook
+ *  Description:        This class is a child class to Train and is a more specified implementation
+ *                      of the Train class. It addes two more specific properties; intermediates and sleeper cabin
+ *  Last modified:      07/12/18
+ *  Design patterns:    This class is a part of the Factory design pattern.
+ */
+
+using System;
 using System.Collections.Generic;
 
 namespace Business.TrainClasses
@@ -7,22 +15,22 @@ namespace Business.TrainClasses
     {
         public const String MaxNumberOfIntermediatesExceeded = "There cannot be more than 4 intermediate stations";
 
-        private List<String> _intermediate;
-        private bool _sleeperCabin;
+        private List<String> intermediate;
+        private bool sleeperCabin;
 
         /// <summary>
         /// Intermediate property to store a list of selected stations
         /// </summary>
         public List<String> Intermediate
         {
-            get { return _intermediate; }
+            get { return intermediate; }
             set
             {
                 if (value.Count > 4)
                 {
                     throw new ArgumentOutOfRangeException("Intermediate Stations Exceeded", value, MaxNumberOfIntermediatesExceeded);
                 }
-                _intermediate = value;
+                intermediate = value;
             }
         }
 
@@ -31,10 +39,10 @@ namespace Business.TrainClasses
         /// </summary>
         public bool SleeperCabin
         {
-            get { return _sleeperCabin; }
+            get { return sleeperCabin; }
             set
             {
-                _sleeperCabin = value;
+                sleeperCabin = value;
             }
         }
         

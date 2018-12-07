@@ -1,4 +1,13 @@
-﻿using System;
+﻿/**
+ *  Author:             Toby Cook
+ *  Description:        This is the code behind the Add Booking form for the Railway Planning System.
+ *                      It contains all event handlers that control the user input and how bookings are added
+ *                      to a train.
+ *  Last modified:      07/12/18
+ *  Design patterns:    This class uses an instance of the TrainStoreSingleton class.
+ */
+
+using System;
 using System.Windows;
 using System.Windows.Controls;
 using Data;
@@ -13,8 +22,8 @@ namespace RailwayPlanningSystem
     /// </summary>
     public partial class AddBooking : Window
     {
-        TrainStoreSingleton trainStore = TrainStoreSingleton.Instance;
-        private string selectedTrainId;
+        private TrainStoreSingleton trainStore = TrainStoreSingleton.Instance;
+        private String selectedTrainId;
 
         public AddBooking()
         {
